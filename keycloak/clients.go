@@ -47,8 +47,8 @@ type ClientRepresentation struct {
 	ID                                 string                         `json:"id,omitempty"`
 	ImplicitFlowEnabled                bool                           `json:"implicitFlowEnabled,omitempty"`
 	Name                               string                         `json:"name,omitempty"`
-	NodeRegistrationTimeout            int32                          `json:"nodeRegistrationTimeout,omitempty"`
-	NotBefore                          int32                          `json:"notBefore,omitempty"`
+	NodeRegistrationTimeout            *UnixTime                      `json:"nodeRegistrationTimeout,omitempty"`
+	NotBefore                          *UnixTime                      `json:"notBefore,omitempty"`
 	OptionalClientScopes               []string                       `json:"optionalClientScopes,omitempty"`
 	Origin                             string                         `json:"origin,omitempty"`
 	Protocol                           string                         `json:"protocol,omitempty"`

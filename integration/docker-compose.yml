@@ -1,0 +1,26 @@
+version: "3"
+services:
+
+  keycloak-db:
+    image: postgres:9.6
+    volumes:
+      - ../build/database:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: changeme
+      POSTGRES_DB: keycloak
+
+  keycloak:
+    image: jboss/keycloak:4.0.0.Final
+    ports:
+      - 9090:8080
+    depends_on:
+      - keycloak-db
+    environment:
+      KEYCLOAK_USER: keycloak-admin
+      KEYCLOAK_PASSWORD: changeme
+      DB_DATABASE: keycloak
+      DB_USER: keycloak
+      DB_PASSWORD: changeme
+      DB_ADDR: keycloak-db
+      DB_VENDOR: postgres

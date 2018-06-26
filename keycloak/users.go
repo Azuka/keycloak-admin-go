@@ -8,31 +8,30 @@ package keycloak
 
 import (
 	"net/url"
-	"time"
 )
 
 // UserConsentRepresentation represents client consents
 type UserConsentRepresentation struct {
-	ClientID            string     `json:"clientId,omitempty"`
-	CreatedDate         *time.Time `json:"createdDate,omitempty"`
-	GrantedClientScopes []string   `json:"grantedClientScopes,omitempty"`
-	LastUpdatedDate     *time.Time `json:"lastUpdatedDate,omitempty"`
+	ClientID            string    `json:"clientId,omitempty"`
+	CreatedDate         *UnixTime `json:"createdDate,omitempty"`
+	GrantedClientScopes []string  `json:"grantedClientScopes,omitempty"`
+	LastUpdatedDate     *UnixTime `json:"lastUpdatedDate,omitempty"`
 }
 
 // CredentialRepresentation represents credentials for a user or client
 type CredentialRepresentation struct {
-	Algorithm         string     `json:"algorithm,omitempty"`
-	Counter           int32      `json:"counter,omitempty"`
-	CreatedDate       *time.Time `json:"createdDate,omitempty"`
-	Device            string     `json:"device,omitempty"`
-	Digits            int32      `json:"digits,omitempty"`
-	HashIterations    int32      `json:"hashIterations,omitempty"`
-	HashedSaltedValue string     `json:"hashedSaltedValue,omitempty"`
-	Period            int32      `json:"period,omitempty"`
-	Salt              string     `json:"salt,omitempty"`
-	Temporary         bool       `json:"temporary,omitempty"`
-	Type              string     `json:"type,omitempty"`
-	Value             string     `json:"value,omitempty"`
+	Algorithm         string    `json:"algorithm,omitempty"`
+	Counter           int32     `json:"counter,omitempty"`
+	CreatedDate       *UnixTime `json:"createdDate,omitempty"`
+	Device            string    `json:"device,omitempty"`
+	Digits            int32     `json:"digits,omitempty"`
+	HashIterations    int32     `json:"hashIterations,omitempty"`
+	HashedSaltedValue string    `json:"hashedSaltedValue,omitempty"`
+	Period            int32     `json:"period,omitempty"`
+	Salt              string    `json:"salt,omitempty"`
+	Temporary         bool      `json:"temporary,omitempty"`
+	Type              string    `json:"type,omitempty"`
+	Value             string    `json:"value,omitempty"`
 }
 
 // FederatedIdentityRepresentation represents a federated identity
@@ -48,7 +47,7 @@ type UserRepresentation struct {
 	Attributes             AttributeMap                      `json:"attributes,omitempty"`
 	ClientRoles            AttributeMap                      `json:"clientRoles,omitempty"`
 	ClientConsents         []UserConsentRepresentation       `json:"clientConsents,omitempty"`
-	CreatedTimestamp       *time.Time                        `json:"createdTimestamp,omitempty"`
+	CreatedTimestamp       *UnixTime                         `json:"createdTimestamp,omitempty"`
 	Credentials            []CredentialRepresentation        `json:"credentials,omitempty"`
 	DisableCredentialTypes []string                          `json:"disableCredentialTypes,omitempty"`
 	Email                  string                            `json:"email,omitempty"`
@@ -60,7 +59,7 @@ type UserRepresentation struct {
 	Groups                 []string                          `json:"groups,omitempty"`
 	ID                     string                            `json:"id,omitempty"`
 	LastName               string                            `json:"lastName,omitempty"`
-	NotBefore              *time.Time                        `json:"notBefore,omitempty"`
+	NotBefore              *UnixTime                         `json:"notBefore,omitempty"`
 	Origin                 string                            `json:"origin,omitempty"`
 	RealmRoles             []string                          `json:"realmRoles,omitempty"`
 	RequiredActions        []string                          `json:"requiredActions,omitempty"`

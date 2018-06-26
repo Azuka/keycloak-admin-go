@@ -10,7 +10,8 @@ ERROR_COLOR = \x1b[31;01m
 ## Helpers
 ################################################################
 PWD := $(shell pwd)
-GO_PACKAGES = $(shell go list ./... | grep -v vendor | grep -v mocks)
+GO_PACKAGES = $(shell go list ./... | grep -v vendor | grep -v integration)
+GO_INTEGRATION_PACKAGES = $(shell go list ./... | grep integration)
 GO_FILES = $(shell find . -name "*.go" | grep -v vendor | uniq)
 CI_TEST_REPORTS ?= /tmp/test-results
 
@@ -39,6 +40,7 @@ format:
 .PHONY: generate
 generate:
 	@echo "$(OK_COLOR)==> Generating code$(NO_COLOR)"
+	@rm -rf $(PWD)/keycloak/*_easyjson.go
 	@go generate ./...
 
 # Lint
@@ -53,6 +55,18 @@ lint:
 test: format lint
 	@echo "$(OK_COLOR)==> Testing $(NO_COLOR)"
 	go test -race -cover $(GO_PACKAGES)
+
+# Test integration
+.PHONY: integration
+integration:
+	@echo "$(OK_COLOR)==> Integration testing $(NO_COLOR)"
+	docker-compose -f $(PWD)/integration/docker-compose.yml up -d
+	go test -race $(GO_INTEGRATION_PACKAGES)
+	make integration-clean
+
+.PHONY: integration-clean
+integration-clean:
+	docker-compose -f $(PWD)/integration/docker-compose.yml down
 
 # Generate coverage
 .PHONY: coverage

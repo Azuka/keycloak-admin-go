@@ -52,16 +52,34 @@ func TestNewUserService(t *testing.T) {
 
 func (suite *userServiceTests) TestUserServiceCreateUser() {
 	response := httpmock.NewStringResponse(201, "")
-	response.Header.Add("Location", "https://keycloak.local/my-realm/users/my-awesome-id")
+	response.Header.Add("Location", "https://keycloak.local/realms/my-realm/users/my-awesome-id")
 	responder := httpmock.ResponderFromResponse(response)
 
-	httpmock.RegisterResponder("POST", "https://keycloak.local/my-realm/users", responder)
+	httpmock.RegisterResponder("POST", "https://keycloak.local/realms/my-realm/users", responder)
 
 	id, err := suite.userService.Create(context.TODO(), "my-realm", &UserRepresentation{
 		Username: "me",
 	})
 	suite.NoError(err)
 	suite.Equal("my-awesome-id", id)
+}
+
+func (suite *userServiceTests) TestUserServiceCreateUserFailure() {
+	response := httpmock.NewStringResponse(500, "")
+	responder := httpmock.ResponderFromResponse(response)
+
+	httpmock.RegisterResponder("POST", "https://keycloak.local/realms/my-realm/users", responder)
+
+	_, err := suite.userService.Create(context.TODO(), "my-realm", &UserRepresentation{
+		Username: "me",
+	})
+	suite.NotNil(err)
+
+	actualError, ok := err.(*Error)
+
+	suite.True(ok)
+	suite.NotNil(actualError)
+	suite.Equal(500, actualError.Code)
 }
 
 func TestUserServiceMethods(t *testing.T) {

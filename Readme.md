@@ -2,8 +2,15 @@
 
 Keycloak admin client in go
 
-## Roadmap
-- [ ] Add authentication integration tests
+## Local Development
+```shell
+make init
+make test
+make integration
+```
+
+## Wish List
+- [x] Add authentication integration tests
 - [ ] Attack Detection
 - [ ] Authentication Management
 - [ ] Client Attribute Certificate
@@ -23,7 +30,10 @@ Keycloak admin client in go
 - [ ] Roles (by ID)
 - [ ] Scope Mappings
 - [ ] User Storage Provider
-- [x] Users
+- [] Users
+  - [x] Get user
+  - [x] Search users
+  - [ ] Create user
 - [ ] Root
 
 ## Thanks to

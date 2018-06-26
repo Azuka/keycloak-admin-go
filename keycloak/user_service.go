@@ -20,18 +20,17 @@ func NewUserService(c *Client) *UserService {
 // Create creates a new user and returns the ID
 func (us *UserService) Create(ctx context.Context, realm string, user *UserRepresentation) (string, error) {
 	u := us.client.BaseURL
-	u.Path += "/{realm}/users"
+	u.Path += "/realms/{realm}/users"
 
-	response, err := us.client.newRequest().
+	response, err := us.client.newRequest(ctx).
 		SetPathParams(map[string]string{
 			"realm": realm,
 		}).
 		SetBody(user).
-		SetContext(ctx).
 		SetResult(user).
 		Post(u.String())
 
-	if err != nil {
+	if err = us.client.exec(response, err); err != nil {
 		return "", err
 	}
 
@@ -50,18 +49,52 @@ func (us *UserService) Create(ctx context.Context, realm string, user *UserRepre
 func (us *UserService) Get(ctx context.Context, realm string, userID string) (*UserRepresentation, error) {
 
 	u := us.client.BaseURL
-	u.Path += "/{realm}/users/{userID}"
+	u.Path += "/realms/{realm}/users/{userID}"
 
 	user := &UserRepresentation{}
 
-	_, err := us.client.newRequest().
+	response, err := us.client.newRequest(ctx).
 		SetPathParams(map[string]string{
 			"realm":  realm,
 			"userID": userID,
 		}).
-		SetContext(ctx).
 		SetResult(user).
 		Get(u.String())
 
-	return user, err
+	if err = us.client.exec(response, err); err != nil {
+		return nil, err
+	}
+
+	return user, nil
+}
+
+// Find returns users based on query params
+// Params:
+// - email
+// - first
+// - firstName
+// - lastName
+// - max
+// - search
+// - usename
+func (us *UserService) Find(ctx context.Context, realm string, params map[string]string) ([]UserRepresentation, error) {
+
+	u := us.client.BaseURL
+	u.Path += "/realms/{realm}/users"
+
+	user := []UserRepresentation{}
+
+	response, err := us.client.newRequest(ctx).
+		SetQueryParams(params).
+		SetPathParams(map[string]string{
+			"realm": realm,
+		}).
+		SetResult(&user).
+		Get(u.String())
+
+	if err = us.client.exec(response, err); err != nil {
+		return nil, err
+	}
+
+	return user, nil
 }

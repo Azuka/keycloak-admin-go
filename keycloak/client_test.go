@@ -7,7 +7,7 @@ import (
 	"net/url"
 	"testing"
 
-	"github.com/azuka/keycloak-admin-go"
+	"github.com/azuka/keycloak-admin-go/keycloak"
 	"github.com/stretchr/testify/assert"
 )
 

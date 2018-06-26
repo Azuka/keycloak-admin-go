@@ -8,8 +8,12 @@ import (
 
 	"strings"
 
+	"context"
+	"fmt"
 	"github.com/go-resty/resty"
 )
+
+const userAgent = "go/keycloak-admin"
 
 // Client is the API client for talking to keycloak admin
 type Client struct {
@@ -25,6 +29,7 @@ type Client struct {
 func NewClient(u url.URL, c *http.Client) *Client {
 
 	restClient := resty.NewWithClient(c)
+	restClient.SetRedirectPolicy(resty.DomainCheckRedirectPolicy(u.Hostname()))
 
 	// Strip out trailing slash
 	u.Path = strings.TrimRight(u.Path, "/")
@@ -39,7 +44,32 @@ func NewClient(u url.URL, c *http.Client) *Client {
 	return client
 }
 
+// Debug enables debugging for requests
+func (c *Client) Debug() {
+	c.restClient.SetDebug(true)
+}
+
 // newRequest creates a new request
-func (c *Client) newRequest() *resty.Request {
-	return c.restClient.R()
+func (c *Client) newRequest(ctx context.Context) *resty.Request {
+	return c.restClient.
+		R().
+		//SetError(&Error{}).
+		SetContext(ctx).
+		SetHeader("UserAgent", userAgent)
+}
+
+func (c *Client) exec(response *resty.Response, err error) error {
+	if err != nil {
+		return err
+	}
+
+	if response.StatusCode() < 400 {
+		return nil
+	}
+
+	return &Error{
+		Message: fmt.Sprintf("%s %s: %s", response.Request.Method, response.Request.URL, response.Status()),
+		Code:    response.StatusCode(),
+	}
+
 }
