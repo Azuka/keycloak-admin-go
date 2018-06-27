@@ -1,0 +1,41 @@
+# This file is a template, and might need editing before it works on your project.
+image: circleci/golang:1.10
+
+variables:
+  # Please edit to your GitLab project
+  REPO_NAME: github.com/azuka/keycloak-admin-go
+
+cache:
+  paths:
+    - /apt-cache
+    - /go/src/github.com
+    - /go/src/golang.org
+    - /go/src/google.golang.org
+    - /go/src/gopkg.in
+
+# The problem is that to be able to use go get, one needs to put
+# the repository in the $GOPATH. So for example if your gitlab domain
+# is gitlab.com, and that your repository is namespace/project, and
+# the default GOPATH being /go, then you'd need to have your
+# repository in /go/src/gitlab.com/namespace/project
+# Thus, making a symbolic link corrects this.
+before_script:
+  - mkdir -p $GOPATH/src/$(dirname $REPO_NAME)
+  - cp -r $CI_PROJECT_DIR $GOPATH/src/$REPO_NAME
+  - cd $GOPATH/src/$REPO_NAME
+  - make init-ci
+
+stages:
+    - test
+
+unit:
+    stage: test
+    script:
+      - cd $GOPATH/src/$REPO_NAME
+      - make test-ci
+
+lint:
+    stage: test
+    script:
+      - cd $GOPATH/src/$REPO_NAME
+      - make lint-ci

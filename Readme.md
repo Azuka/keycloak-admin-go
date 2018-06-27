@@ -1,6 +1,16 @@
 # keycloak-admin-go
 
-Keycloak admin client in go
+[![](https://godoc.org/github.com/azuka/keycloak-admin-go?status.svg)](http://godoc.org/github.com/azuka/keycloak-admin-go)
+
+
+Keycloak admin client in go.
+
+This is still highly unstable as more of the admin api endpoints and parameters are added.
+
+## Usage
+```shell
+go get github.com/azuka/keycloak-admin-go
+```
 
 ## Local Development
 ```shell
@@ -30,7 +40,7 @@ make integration
 - [ ] Roles (by ID)
 - [ ] Scope Mappings
 - [ ] User Storage Provider
-- [] Users
+- [ ] Users
   - [x] Get user
   - [x] Search users
   - [ ] Create user
@@ -39,4 +49,5 @@ make integration
 ## Thanks to
 - https://github.com/go-resty/resty: quick and dirty REST client
 - https://github.com/mailru/easyjson: faster JSON serialization
--
+- https://godoc.org/golang.org/x/oauth2: for the shamelessly copied authentication
+- https://github.com/fatih/gomodifytags: because I'm too lazy to type json struct tags

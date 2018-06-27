@@ -1,4 +1,5 @@
 // Package auth is copied almost verbatim from golang.org/x/oauth2/clientcredentials
+//
 // This is because the package above doesn't allow overwriting the grant_type key
 // TODO: Clean up and implement/reuse a true keycloak auth
 package auth
