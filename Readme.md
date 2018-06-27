@@ -1,6 +1,8 @@
 # keycloak-admin-go
 
 [![](https://godoc.org/github.com/azuka/keycloak-admin-go?status.svg)](http://godoc.org/github.com/azuka/keycloak-admin-go)
+[![pipeline status](https://gitlab.com/Azuka/keycloak-admin-go/badges/master/pipeline.svg)](https://gitlab.com/Azuka/keycloak-admin-go/commits/master)
+[![coverage report](https://gitlab.com/Azuka/keycloak-admin-go/badges/master/coverage.svg)](https://gitlab.com/Azuka/keycloak-admin-go/commits/master)
 
 
 Keycloak admin client in go.

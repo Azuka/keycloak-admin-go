@@ -81,7 +81,7 @@ coverage:
 test-ci:
 	@echo "$(OK_COLOR)==> Running ci test$(NO_COLOR)"
 	mkdir -p $(CI_TEST_REPORTS)
-	/bin/bash -c "set -euxo pipefail; go test -v -short -race -cover $(GO_PACKAGES) | go-junit-report > $(CI_TEST_REPORTS)/report.xml"
+	/bin/bash -c "set -euxo pipefail; go test -v -short -race -cover -coverprofile .testCoverage.txt $(GO_PACKAGES) | tee >(go-junit-report > $(CI_TEST_REPORTS)/report.xml)"
 
 # CI Lint
 .PHONY: lint-ci

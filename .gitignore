@@ -1,3 +1,4 @@
 /.idea
 /vendor
 /lint.json
+/.testCoverage.txt
