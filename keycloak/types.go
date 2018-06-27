@@ -15,7 +15,7 @@ type UnixTime time.Time
 
 // MarshalJSON lets UnixTime implement the json.Marshaler interface
 func (t UnixTime) MarshalJSON() ([]byte, error) {
-	return []byte(strconv.FormatInt(time.Time(t).Unix(), 10)), nil
+	return []byte(strconv.FormatInt(time.Time(t).UnixNano() / int64(time.Millisecond), 10)), nil
 }
 
 // UnmarshalJSON lets UnixTime implement the json.Unmarshaler interface
@@ -26,7 +26,7 @@ func (t *UnixTime) UnmarshalJSON(s []byte) error {
 	if err != nil {
 		return err
 	}
-	*(*time.Time)(t) = time.Unix(q/1000, 0)
+	*(*time.Time)(t) = time.Unix(0, q * int64(time.Millisecond))
 	return nil
 }
 
