@@ -1,5 +1,7 @@
 // Package keycloak contains a client and relevant data structs for interacting
-// with the Keycloak Admin REST API: https://www.keycloak.org/docs-api/4.0/rest-api/index.html
+// with the Keycloak Admin REST API
+//
+// For mapping, see https://www.keycloak.org/docs-api/4.0/rest-api/index.html
 package keycloak
 
 import (
@@ -31,6 +33,9 @@ func NewClient(u url.URL, c *http.Client) *Client {
 	restClient := resty.NewWithClient(c)
 	restClient.SetRedirectPolicy(resty.DomainCheckRedirectPolicy(u.Hostname()))
 
+	// Setup error handling for non <= 399 codes
+	restClient.OnAfterResponse(HandleResponse)
+
 	// Strip out trailing slash
 	u.Path = strings.TrimRight(u.Path, "/")
 
@@ -58,11 +63,8 @@ func (c *Client) newRequest(ctx context.Context) *resty.Request {
 		SetHeader("UserAgent", userAgent)
 }
 
-func (c *Client) exec(response *resty.Response, err error) error {
-	if err != nil {
-		return err
-	}
-
+// HandleResponse handles
+func HandleResponse(i *resty.Client, response *resty.Response) error {
 	if response.StatusCode() < 400 {
 		return nil
 	}
@@ -71,5 +73,4 @@ func (c *Client) exec(response *resty.Response, err error) error {
 		Message: fmt.Sprintf("%s %s: %s", response.Request.Method, response.Request.URL, response.Status()),
 		Code:    response.StatusCode(),
 	}
-
 }

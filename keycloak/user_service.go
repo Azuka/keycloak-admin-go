@@ -30,7 +30,7 @@ func (us *UserService) Create(ctx context.Context, realm string, user *UserRepre
 		SetResult(user).
 		Post(u.String())
 
-	if err = us.client.exec(response, err); err != nil {
+	if err != nil {
 		return "", err
 	}
 
@@ -53,7 +53,7 @@ func (us *UserService) Get(ctx context.Context, realm string, userID string) (*U
 
 	user := &UserRepresentation{}
 
-	response, err := us.client.newRequest(ctx).
+	_, err := us.client.newRequest(ctx).
 		SetPathParams(map[string]string{
 			"realm":  realm,
 			"userID": userID,
@@ -61,7 +61,7 @@ func (us *UserService) Get(ctx context.Context, realm string, userID string) (*U
 		SetResult(user).
 		Get(u.String())
 
-	if err = us.client.exec(response, err); err != nil {
+	if err != nil {
 		return nil, err
 	}
 
@@ -84,7 +84,7 @@ func (us *UserService) Find(ctx context.Context, realm string, params map[string
 
 	user := []UserRepresentation{}
 
-	response, err := us.client.newRequest(ctx).
+	_, err := us.client.newRequest(ctx).
 		SetQueryParams(params).
 		SetPathParams(map[string]string{
 			"realm": realm,
@@ -92,7 +92,7 @@ func (us *UserService) Find(ctx context.Context, realm string, params map[string
 		SetResult(&user).
 		Get(u.String())
 
-	if err = us.client.exec(response, err); err != nil {
+	if err != nil {
 		return nil, err
 	}
 

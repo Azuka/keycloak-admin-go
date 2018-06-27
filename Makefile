@@ -94,3 +94,10 @@ lint-ci:
 qt:
 	@echo "$(OK_COLOR)==> Running quick test$(NO_COLOR)"
 	go test -short $(GO_PACKAGES)
+
+.PHONY: local-ci
+local-ci:
+	@echo "$(OK_COLOR)==> Running CI locally. Did you run brew install gitlab-runner?$(NO_COLOR)"
+	brew services start gitlab-runner
+	gitlab-runner exec docker unit
+	gitlab-runner exec docker lint

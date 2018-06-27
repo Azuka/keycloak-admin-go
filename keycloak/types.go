@@ -10,6 +10,7 @@ import (
 type AttributeMap map[string]interface{}
 
 // UnixTime is an alias for a date time from Keycloak
+// which comes in as an int32
 type UnixTime time.Time
 
 // MarshalJSON lets UnixTime implement the json.Marshaler interface
