@@ -18,6 +18,7 @@ func NewUserService(c *Client) *UserService {
 }
 
 // Create creates a new user and returns the ID
+// Response is a 201 with a location redirect
 func (us *UserService) Create(ctx context.Context, realm string, user *UserRepresentation) (string, error) {
 	u := us.client.BaseURL
 	u.Path += "/realms/{realm}/users"
@@ -76,13 +77,13 @@ func (us *UserService) Get(ctx context.Context, realm string, userID string) (*U
 // - lastName
 // - max
 // - search
-// - usename
+// - userName
 func (us *UserService) Find(ctx context.Context, realm string, params map[string]string) ([]UserRepresentation, error) {
 
 	u := us.client.BaseURL
 	u.Path += "/realms/{realm}/users"
 
-	user := []UserRepresentation{}
+	var user []UserRepresentation
 
 	_, err := us.client.newRequest(ctx).
 		SetQueryParams(params).
@@ -97,4 +98,23 @@ func (us *UserService) Find(ctx context.Context, realm string, params map[string
 	}
 
 	return user, nil
+}
+
+// Update user information
+// Response is a 204: No Content
+func (us *UserService) Update(ctx context.Context, realm string, user *UserRepresentation) error {
+
+	u := us.client.BaseURL
+	u.Path += "/realms/{realm}/users/{userID}"
+
+	_, err := us.client.newRequest(ctx).
+		SetPathParams(map[string]string{
+			"realm":  realm,
+			"userID": user.ID,
+		}).
+		SetBody(user).
+		Put(u.String())
+
+	return err
+
 }

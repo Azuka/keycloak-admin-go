@@ -1,4 +1,4 @@
-package keycloak_test
+package keycloak
 
 import (
 	"context"
@@ -7,14 +7,13 @@ import (
 	"net/url"
 	"testing"
 
-	"github.com/azuka/keycloak-admin-go/keycloak"
 	"github.com/stretchr/testify/assert"
 )
 
 func ExampleNewClient() {
 	u, _ := url.Parse("http://localhost/auth/admin")
-	c := keycloak.NewClient(*u, http.DefaultClient)
-	userID, _ := c.Users.Create(context.Background(), "myRealm", &keycloak.UserRepresentation{
+	c := NewClient(*u, http.DefaultClient)
+	userID, _ := c.Users.Create(context.Background(), "myRealm", &UserRepresentation{
 		Username: "hello-world",
 	})
 	fmt.Println("UserID: ", userID)
@@ -26,10 +25,19 @@ func TestNewClient(t *testing.T) {
 
 	url, _ := url.Parse("http://localhost/keycloak/auth/admin/")
 
-	client := keycloak.NewClient(*url, http.DefaultClient)
+	client := NewClient(*url, http.DefaultClient)
 
 	a.NotNil(client)
 	a.NotNil(client)
 	a.NotNil(client.Users)
+	a.False(client.restClient.Debug)
 	a.Equal("/keycloak/auth/admin", client.BaseURL.Path)
+}
+
+func TestNewClientDebug(t *testing.T) {
+	a := assert.New(t)
+
+	client := NewClient(url.URL{}, http.DefaultClient)
+	client.Debug()
+	a.True(client.restClient.Debug)
 }

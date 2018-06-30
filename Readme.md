@@ -1,6 +1,6 @@
 # keycloak-admin-go
 
-[![](https://godoc.org/github.com/azuka/keycloak-admin-go?status.svg)](http://godoc.org/github.com/azuka/keycloak-admin-go)
+[![](https://godoc.org/github.com/azuka/keycloak-admin-go/keycloak?status.svg)](http://godoc.org/github.com/azuka/keycloak-admin-go/keycloak)
 [![pipeline status](https://gitlab.com/Azuka/keycloak-admin-go/badges/master/pipeline.svg)](https://gitlab.com/Azuka/keycloak-admin-go/commits/master)
 [![coverage report](https://gitlab.com/Azuka/keycloak-admin-go/badges/master/coverage.svg)](https://gitlab.com/Azuka/keycloak-admin-go/commits/master)
 
@@ -46,6 +46,8 @@ make integration
   - [x] Get user
   - [x] Search users
   - [ ] Create user
+  - [ ] Update user
+    - [x] Profile information
 - [ ] Root
 
 ## Thanks to

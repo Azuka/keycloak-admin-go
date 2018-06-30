@@ -40,6 +40,8 @@ func getHTTPClient(ctx context.Context) *http.Client {
 		},
 	}
 
+	http.DefaultClient.Timeout = time.Second * 5
+
 	return config.Client(ctx)
 }
 
