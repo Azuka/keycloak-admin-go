@@ -33,6 +33,7 @@ unit:
     script:
       - cd $GOPATH/src/$REPO_NAME
       - make test-ci
+      - env | sort
 
 lint:
     stage: test

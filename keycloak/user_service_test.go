@@ -82,6 +82,20 @@ func (suite *userServiceTests) TestUserServiceCreateUserFailure() {
 	suite.Equal(500, actualError.Code)
 }
 
+func (suite *userServiceTests) TestUserServiceUpdateUser() {
+	response := httpmock.NewStringResponse(204, "")
+	response.Header.Add("Location", "https://keycloak.local/realms/my-realm/users/my-awesome-id")
+	responder := httpmock.ResponderFromResponse(response)
+
+	httpmock.RegisterResponder("PUT", "https://keycloak.local/realms/my-realm/users/abc", responder)
+
+	err := suite.userService.Update(context.TODO(), "my-realm", &UserRepresentation{
+		Username: "me",
+		ID:       "abc",
+	})
+	suite.NoError(err)
+}
+
 func TestUserServiceMethods(t *testing.T) {
 	suite.Run(t, &userServiceTests{})
 }
