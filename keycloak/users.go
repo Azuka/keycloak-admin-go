@@ -2,6 +2,8 @@
 //go:generate gomodifytags -file $GOFILE -struct UserConsentRepresentation -add-options json=omitempty -add-tags json -w -transform camelcase
 //go:generate gomodifytags -file $GOFILE -struct CredentialRepresentation -add-options json=omitempty -add-tags json -w -transform camelcase
 //go:generate gomodifytags -file $GOFILE -struct FederatedIdentityRepresentation -add-options json=omitempty -add-tags json -w -transform camelcase
+//go:generate gomodifytags -file $GOFILE -struct UserSessionRepresentation -add-options json=omitempty -add-tags json -w -transform camelcase
+//go:generate gomodifytags -file $GOFILE -struct GroupRepresentation -add-options json=omitempty -add-tags json -w -transform camelcase
 //go:generate easyjson -all $GOFILE
 
 package keycloak
@@ -53,7 +55,7 @@ type UserRepresentation struct {
 	Email                  string                            `json:"email,omitempty"`
 	EmailVerified          bool                              `json:"emailVerified,omitempty"`
 	Enabled                bool                              `json:"enabled,omitempty"`
-	FederatedIDentities    []FederatedIdentityRepresentation `json:"federatedIdentities,omitempty"`
+	FederatedIdentities    []FederatedIdentityRepresentation `json:"federatedIdentities,omitempty"`
 	FederationLink         *url.URL                          `json:"federationLink,omitempty"`
 	FirstName              string                            `json:"firstName,omitempty"`
 	Groups                 []string                          `json:"groups,omitempty"`
@@ -66,4 +68,27 @@ type UserRepresentation struct {
 	Self                   string                            `json:"self,omitempty"`
 	ServiceAccountClientID string                            `json:"serviceAccountClientId,omitempty"`
 	Username               string                            `json:"username,omitempty"`
+}
+
+// UserSessionRepresentation is a single session for a user
+type UserSessionRepresentation struct {
+	Clients    AttributeMap `json:"clients,omitempty"`
+	ID         string       `json:"id,omitempty"`
+	IPAddress  string       `json:"ipAddress,omitempty"`
+	LastAccess *UnixTime    `json:"lastAccess,omitempty"`
+	Start      *UnixTime    `json:"start,omitempty"`
+	UserID     string       `json:"userID,omitempty"`
+	UserName   string       `json:"userName,omitempty"`
+}
+
+// GroupRepresentation represents a single user group in a realm
+type GroupRepresentation struct {
+	Access      AttributeMap          `json:"access,omitempty"`
+	Attributes  AttributeMap          `json:"attributes,omitempty"`
+	ClientRoles AttributeMap          `json:"clientRoles,omitempty"`
+	ID          string                `json:"id,omitempty"`
+	Name        string                `json:"name,omitempty"`
+	Path        string                `json:"path,omitempty"`
+	RealmRoles  []string              `json:"realmRoles,omitempty"`
+	SubGroups   []GroupRepresentation `json:"subGroups,omitempty"`
 }

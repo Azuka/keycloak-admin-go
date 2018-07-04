@@ -3,7 +3,7 @@
 [![](https://godoc.org/github.com/azuka/keycloak-admin-go/keycloak?status.svg)](http://godoc.org/github.com/azuka/keycloak-admin-go/keycloak)
 [![pipeline status](https://gitlab.com/Azuka/keycloak-admin-go/badges/master/pipeline.svg)](https://gitlab.com/Azuka/keycloak-admin-go/commits/master)
 [![coverage report](https://gitlab.com/Azuka/keycloak-admin-go/badges/master/coverage.svg)](https://gitlab.com/Azuka/keycloak-admin-go/commits/master)
-
+[![Go Report Card](https://goreportcard.com/badge/github.com/azuka/keycloak-admin-go)](https://goreportcard.com/report/github.com/azuka/keycloak-admin-go)
 
 Keycloak admin client in go.
 
@@ -45,9 +45,11 @@ make integration
 - [ ] Users
   - [x] Get user
   - [x] Search users
-  - [ ] Create user
-  - [ ] Update user
+  - [x] Create user
+  - [x] Update user
     - [x] Profile information
+    - [x] Groups
+    - [x] Sessions, Consents
 - [ ] Root
 
 ## Thanks to
