@@ -1,9 +1,9 @@
 # keycloak-admin-go
 
-[![](https://godoc.org/github.com/azuka/keycloak-admin-go/keycloak?status.svg)](http://godoc.org/github.com/azuka/keycloak-admin-go/keycloak)
+[![](https://godoc.org/github.com/Azuka/keycloak-admin-go/keycloak?status.svg)](http://godoc.org/github.com/Azuka/keycloak-admin-go/keycloak)
 [![pipeline status](https://gitlab.com/Azuka/keycloak-admin-go/badges/master/pipeline.svg)](https://gitlab.com/Azuka/keycloak-admin-go/commits/master)
 [![coverage report](https://gitlab.com/Azuka/keycloak-admin-go/badges/master/coverage.svg)](https://gitlab.com/Azuka/keycloak-admin-go/commits/master)
-[![Go Report Card](https://goreportcard.com/badge/github.com/azuka/keycloak-admin-go)](https://goreportcard.com/report/github.com/azuka/keycloak-admin-go)
+[![Go Report Card](https://goreportcard.com/badge/github.com/Azuka/keycloak-admin-go)](https://goreportcard.com/report/github.com/Azuka/keycloak-admin-go)
 
 Keycloak admin client in go.
 
@@ -11,7 +11,7 @@ This is still highly unstable as more of the admin api endpoints and parameters 
 
 ## Usage
 ```shell
-go get github.com/azuka/keycloak-admin-go
+go get -u github.com/Azuka/keycloak-admin-go/...
 ```
 
 ## Local Development

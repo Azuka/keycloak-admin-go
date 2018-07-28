@@ -3,7 +3,7 @@ image: circleci/golang:1.10
 
 variables:
   # Please edit to your GitLab project
-  REPO_NAME: github.com/azuka/keycloak-admin-go
+  REPO_NAME: github.com/Azuka/keycloak-admin-go
 
 cache:
   paths:

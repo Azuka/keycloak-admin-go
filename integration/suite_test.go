@@ -8,8 +8,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/azuka/keycloak-admin-go/auth"
-	"github.com/azuka/keycloak-admin-go/keycloak"
+	"github.com/Azuka/keycloak-admin-go/auth"
+	"github.com/Azuka/keycloak-admin-go/keycloak"
 	"github.com/cenkalti/backoff"
 	"github.com/stretchr/testify/suite"
 )

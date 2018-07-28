@@ -2,7 +2,7 @@ package auth_test
 
 import (
 	"context"
-	"github.com/azuka/keycloak-admin-go/auth"
+	"github.com/Azuka/keycloak-admin-go/auth"
 	"net/url"
 )
 
