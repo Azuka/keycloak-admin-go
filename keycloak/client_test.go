@@ -31,7 +31,6 @@ func TestNewClient(t *testing.T) {
 	a.NotNil(client)
 	a.NotNil(client.Users)
 	a.False(client.restClient.Debug)
-	a.Equal("/keycloak/auth/admin", client.BaseURL.Path)
 }
 
 func TestNewClientDebug(t *testing.T) {

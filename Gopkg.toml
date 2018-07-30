@@ -27,16 +27,16 @@
 
 [[constraint]]
   name = "github.com/go-resty/resty"
-  version = "1.6.0"
+  version = "1.7.0"
 
 [[constraint]]
   branch = "master"
   name = "github.com/mailru/easyjson"
 
-[prune]
-  go-tests = true
-  unused-packages = true
-
 [[constraint]]
   branch = "v1"
   name = "gopkg.in/jarcoal/httpmock.v1"
+
+[prune]
+  go-tests = true
+  unused-packages = true
