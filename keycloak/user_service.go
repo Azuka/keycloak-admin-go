@@ -101,6 +101,7 @@ func (us *UserService) Get(ctx context.Context, realm string, userID string) (*U
 // Response is a 204: No Content
 func (us *UserService) Update(ctx context.Context, realm string, user *UserRepresentation) error {
 
+	// nolint: goconst
 	path := "/realms/{realm}/users/{id}"
 
 	_, err := us.client.newRequest(ctx).
@@ -119,6 +120,7 @@ func (us *UserService) Update(ctx context.Context, realm string, user *UserRepre
 // Response is a 204: No Content
 func (us *UserService) Delete(ctx context.Context, realm string, userID string) error {
 
+	// nolint: goconst
 	path := "/realms/{realm}/users/{id}"
 
 	_, err := us.client.newRequest(ctx).
@@ -134,6 +136,7 @@ func (us *UserService) Delete(ctx context.Context, realm string, userID string) 
 // Impersonate user
 func (us *UserService) Impersonate(ctx context.Context, realm string, userID string) (AttributeMap, error) {
 
+	// nolint: goconst
 	path := "/{realm}/users/{id}/impersonation"
 
 	a := AttributeMap{}
@@ -152,6 +155,7 @@ func (us *UserService) Impersonate(ctx context.Context, realm string, userID str
 // Count gets user count in a realm
 func (us *UserService) Count(ctx context.Context, realm string) (uint32, error) {
 
+	// nolint: goconst
 	path := "/realms/{realm}/users/count"
 
 	var result uint32
@@ -169,6 +173,7 @@ func (us *UserService) Count(ctx context.Context, realm string) (uint32, error) 
 // GetGroups gets the groups a realm user belongs to
 func (us *UserService) GetGroups(ctx context.Context, realm string, userID string) ([]GroupRepresentation, error) {
 
+	// nolint: goconst
 	path := "/{realm}/users/{id}/groups"
 
 	var groups []GroupRepresentation
@@ -187,6 +192,7 @@ func (us *UserService) GetGroups(ctx context.Context, realm string, userID strin
 // GetConsents gets consents granted by the user
 func (us *UserService) GetConsents(ctx context.Context, realm string, userID string) (AttributeMap, error) {
 
+	// nolint: goconst
 	path := "/{realm}/users/{id}/consents"
 
 	var consents AttributeMap
@@ -205,6 +211,7 @@ func (us *UserService) GetConsents(ctx context.Context, realm string, userID str
 // RevokeClientConsents revokes consent and offline tokens for particular client from user
 func (us *UserService) RevokeClientConsents(ctx context.Context, realm string, userID string, clientID string) error {
 
+	// nolint: goconst
 	path := "/{realm}/users/{id}/consents/{client}"
 
 	_, err := us.client.newRequest(ctx).
@@ -221,6 +228,7 @@ func (us *UserService) RevokeClientConsents(ctx context.Context, realm string, u
 // DisableCredentials disables credentials of certain types for a user
 func (us *UserService) DisableCredentials(ctx context.Context, realm string, userID string, credentialTypes []string) error {
 
+	// nolint: goconst
 	path := "/{realm}/users/{id}/disable-credential-types"
 
 	_, err := us.client.newRequest(ctx).
@@ -236,6 +244,7 @@ func (us *UserService) DisableCredentials(ctx context.Context, realm string, use
 // AddGroup adds a user to a group
 func (us *UserService) AddGroup(ctx context.Context, realm string, userID string, groupID string) error {
 
+	// nolint: goconst
 	path := "/{realm}/users/{id}/groups/{groupId}"
 
 	_, err := us.client.newRequest(ctx).
@@ -252,6 +261,7 @@ func (us *UserService) AddGroup(ctx context.Context, realm string, userID string
 // RemoveGroup removes a user from a group
 func (us *UserService) RemoveGroup(ctx context.Context, realm string, userID string, groupID string) error {
 
+	// nolint: goconst
 	path := "/{realm}/users/{id}/groups/{groupId}"
 
 	_, err := us.client.newRequest(ctx).
@@ -283,6 +293,7 @@ func (us *UserService) Logout(ctx context.Context, realm string, userID string) 
 // GetSessions for user
 func (us *UserService) GetSessions(ctx context.Context, realm string, userID string) ([]UserSessionRepresentation, error) {
 
+	// nolint: goconst
 	path := "/{realm}/users/{id}/sessions"
 
 	var sessions []UserSessionRepresentation
@@ -301,6 +312,7 @@ func (us *UserService) GetSessions(ctx context.Context, realm string, userID str
 // GetOfflineSessions for particular client and user
 func (us *UserService) GetOfflineSessions(ctx context.Context, realm string, userID string, clientID string) ([]UserSessionRepresentation, error) {
 
+	// nolint: goconst
 	path := "/{realm}/users/{id}/offline-sessions/{clientId}"
 
 	var sessions []UserSessionRepresentation
@@ -320,6 +332,7 @@ func (us *UserService) GetOfflineSessions(ctx context.Context, realm string, use
 // ResetPassword for user
 func (us *UserService) ResetPassword(ctx context.Context, realm string, userID string, tempPassword *CredentialRepresentation) error {
 
+	// nolint: goconst
 	path := "/{realm}/users/{id}/reset-password"
 
 	_, err := us.client.newRequest(ctx).

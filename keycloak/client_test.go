@@ -17,7 +17,6 @@ func ExampleNewClient() {
 		Username: "hello-world",
 	})
 	fmt.Println("UserID: ", userID)
-	// Output: UserID:
 }
 
 func TestNewClient(t *testing.T) {

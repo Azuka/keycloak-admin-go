@@ -78,10 +78,13 @@ coverage:
 
 # CI test
 .PHONY: test-ci
+#code coverage regex for Gitlab: ^total:(\s+)\(statements\)(\s+)(\d+(?:\.\d+)?%)
 test-ci:
 	@echo "$(OK_COLOR)==> Running ci test$(NO_COLOR)"
 	mkdir -p $(CI_TEST_REPORTS)
-	/bin/bash -c "set -euxo pipefail; go test -v -short -race -cover -coverprofile .testCoverage.txt $(GO_PACKAGES) | tee >(go-junit-report > $(CI_TEST_REPORTS)/report.xml)"
+	/bin/bash -c "set -euxo pipefail; \
+	    go test -v -short -race -cover -coverprofile .testCoverage.txt $(GO_PACKAGES) | tee >(go-junit-report > $(CI_TEST_REPORTS)/report.xml); \
+	    sed '/_easyjson.go/d' .testCoverage.txt > .testCoverage.txt.bak; mv .testCoverage.txt.bak .testCoverage.txt; go tool cover -func=.testCoverage.txt"
 
 # CI Lint
 .PHONY: lint-ci
