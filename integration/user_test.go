@@ -1,5 +1,10 @@
 package integration_test
 
+import (
+	"github.com/Azuka/keycloak-admin-go/keycloak"
+	"github.com/satori/go.uuid"
+)
+
 func (suite *integrationTester) TestUserFetch() {
 	users, err := suite.client.Users.Find(suite.ctx, keycloakAdminRealm, map[string]string{
 		"username": keycloakAdmin,
@@ -14,5 +19,20 @@ func (suite *integrationTester) TestUserFetch() {
 	user.EmailVerified = true
 
 	err = suite.client.Users.Update(suite.ctx, keycloakAdminRealm, &user)
+	suite.NoError(err)
+}
+
+func (suite *integrationTester) TestUserCreate() {
+
+	randString := uuid.NewV4()
+
+	user := &keycloak.UserRepresentation{
+		Username: randString.String(),
+		Email:    randString.String() + "@example.com",
+	}
+
+	id, err := suite.client.Users.Create(suite.ctx, keycloakAdminRealm, user)
+
+	suite.NotEmpty(id)
 	suite.NoError(err)
 }

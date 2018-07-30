@@ -8,10 +8,9 @@ import (
 	"net/http"
 	"net/url"
 
-	"strings"
-
 	"context"
 	"fmt"
+	"github.com/davecgh/go-spew/spew"
 	"github.com/go-resty/resty"
 )
 
@@ -31,13 +30,6 @@ type Client struct {
 func NewClient(u url.URL, c *http.Client) *Client {
 
 	restClient := resty.NewWithClient(c)
-	restClient.SetRedirectPolicy(resty.DomainCheckRedirectPolicy(u.Hostname()))
-
-	// Setup error handling for non <= 399 codes
-	restClient.OnAfterResponse(HandleResponse)
-
-	// Strip out trailing slash
-	u.Path = strings.TrimRight(u.Path, "/")
 
 	client := &Client{
 		BaseURL:    u,
@@ -56,9 +48,19 @@ func (c *Client) Debug() {
 
 // newRequest creates a new request
 func (c *Client) newRequest(ctx context.Context) *resty.Request {
+
+	if c.restClient == nil {
+		c.restClient = resty.NewWithClient(http.DefaultClient)
+	}
+
 	return c.restClient.
+		// Set base url per request
+		SetHostURL(c.BaseURL.String()).
+		// Set redirect policy based on host name
+		SetRedirectPolicy(resty.DomainCheckRedirectPolicy(c.BaseURL.Hostname())).
+		// Setup error handling for non <= 399 codes
+		OnAfterResponse(HandleResponse).
 		R().
-		//SetError(&Error{}).
 		SetContext(ctx).
 		SetHeader("UserAgent", userAgent)
 }
@@ -68,6 +70,8 @@ func HandleResponse(i *resty.Client, response *resty.Response) error {
 	if response.StatusCode() < 400 {
 		return nil
 	}
+
+	spew.Dump(response)
 
 	return &Error{
 		Message: fmt.Sprintf("%s %s: %s", response.Request.Method, response.Request.URL, response.Status()),

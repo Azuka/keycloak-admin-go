@@ -28,8 +28,7 @@ func NewUserService(c *Client) *UserService {
 // - userName
 func (us *UserService) Find(ctx context.Context, realm string, params map[string]string) ([]UserRepresentation, error) {
 
-	u := us.client.BaseURL
-	u.Path += "/realms/{realm}/users"
+	path := "/realms/{realm}/users"
 
 	var user []UserRepresentation
 
@@ -39,7 +38,7 @@ func (us *UserService) Find(ctx context.Context, realm string, params map[string
 			"realm": realm,
 		}).
 		SetResult(&user).
-		Get(u.String())
+		Get(path)
 
 	if err != nil {
 		return nil, err
@@ -51,16 +50,14 @@ func (us *UserService) Find(ctx context.Context, realm string, params map[string
 // Create creates a new user and returns the ID
 // Response is a 201 with a location redirect
 func (us *UserService) Create(ctx context.Context, realm string, user *UserRepresentation) (string, error) {
-	u := us.client.BaseURL
-	u.Path += "/realms/{realm}/users"
+	path := "/realms/{realm}/users"
 
 	response, err := us.client.newRequest(ctx).
 		SetPathParams(map[string]string{
 			"realm": realm,
 		}).
 		SetBody(user).
-		SetResult(user).
-		Post(u.String())
+		Post(path)
 
 	if err != nil {
 		return "", err
@@ -80,9 +77,8 @@ func (us *UserService) Create(ctx context.Context, realm string, user *UserRepre
 // Get returns a user in a realm
 func (us *UserService) Get(ctx context.Context, realm string, userID string) (*UserRepresentation, error) {
 
-	u := us.client.BaseURL
 	// nolint: goconst
-	u.Path += "/realms/{realm}/users/{id}"
+	path := "/realms/{realm}/users/{id}"
 
 	user := &UserRepresentation{}
 
@@ -92,7 +88,7 @@ func (us *UserService) Get(ctx context.Context, realm string, userID string) (*U
 			"id":    userID,
 		}).
 		SetResult(user).
-		Get(u.String())
+		Get(path)
 
 	if err != nil {
 		return nil, err
@@ -105,9 +101,7 @@ func (us *UserService) Get(ctx context.Context, realm string, userID string) (*U
 // Response is a 204: No Content
 func (us *UserService) Update(ctx context.Context, realm string, user *UserRepresentation) error {
 
-	u := us.client.BaseURL
-	// nolint: goconst
-	u.Path += "/realms/{realm}/users/{id}"
+	path := "/realms/{realm}/users/{id}"
 
 	_, err := us.client.newRequest(ctx).
 		SetPathParams(map[string]string{
@@ -115,7 +109,7 @@ func (us *UserService) Update(ctx context.Context, realm string, user *UserRepre
 			"id":    user.ID,
 		}).
 		SetBody(user).
-		Put(u.String())
+		Put(path)
 
 	return err
 
@@ -125,16 +119,14 @@ func (us *UserService) Update(ctx context.Context, realm string, user *UserRepre
 // Response is a 204: No Content
 func (us *UserService) Delete(ctx context.Context, realm string, userID string) error {
 
-	u := us.client.BaseURL
-	// nolint: goconst
-	u.Path += "/realms/{realm}/users/{id}"
+	path := "/realms/{realm}/users/{id}"
 
 	_, err := us.client.newRequest(ctx).
 		SetPathParams(map[string]string{
 			"realm": realm,
 			"id":    userID,
 		}).
-		Delete(u.String())
+		Delete(path)
 
 	return err
 }
@@ -142,8 +134,7 @@ func (us *UserService) Delete(ctx context.Context, realm string, userID string) 
 // Impersonate user
 func (us *UserService) Impersonate(ctx context.Context, realm string, userID string) (AttributeMap, error) {
 
-	u := us.client.BaseURL
-	u.Path += "/{realm}/users/{id}/impersonation"
+	path := "/{realm}/users/{id}/impersonation"
 
 	a := AttributeMap{}
 
@@ -153,7 +144,7 @@ func (us *UserService) Impersonate(ctx context.Context, realm string, userID str
 			"id":    userID,
 		}).
 		SetResult(&a).
-		Post(u.String())
+		Post(path)
 
 	return a, err
 }
@@ -161,8 +152,7 @@ func (us *UserService) Impersonate(ctx context.Context, realm string, userID str
 // Count gets user count in a realm
 func (us *UserService) Count(ctx context.Context, realm string) (uint32, error) {
 
-	u := us.client.BaseURL
-	u.Path += "/realms/{realm}/users/count"
+	path := "/realms/{realm}/users/count"
 
 	var result uint32
 
@@ -171,7 +161,7 @@ func (us *UserService) Count(ctx context.Context, realm string) (uint32, error) 
 			"realm": realm,
 		}).
 		SetResult(&result).
-		Get(u.String())
+		Get(path)
 
 	return result, err
 }
@@ -179,8 +169,7 @@ func (us *UserService) Count(ctx context.Context, realm string) (uint32, error) 
 // GetGroups gets the groups a realm user belongs to
 func (us *UserService) GetGroups(ctx context.Context, realm string, userID string) ([]GroupRepresentation, error) {
 
-	u := us.client.BaseURL
-	u.Path += "/{realm}/users/{id}/groups"
+	path := "/{realm}/users/{id}/groups"
 
 	var groups []GroupRepresentation
 
@@ -190,7 +179,7 @@ func (us *UserService) GetGroups(ctx context.Context, realm string, userID strin
 			"id":    userID,
 		}).
 		SetResult(&groups).
-		Get(u.String())
+		Get(path)
 
 	return groups, err
 }
@@ -198,8 +187,7 @@ func (us *UserService) GetGroups(ctx context.Context, realm string, userID strin
 // GetConsents gets consents granted by the user
 func (us *UserService) GetConsents(ctx context.Context, realm string, userID string) (AttributeMap, error) {
 
-	u := us.client.BaseURL
-	u.Path += "/{realm}/users/{id}/consents"
+	path := "/{realm}/users/{id}/consents"
 
 	var consents AttributeMap
 
@@ -209,7 +197,7 @@ func (us *UserService) GetConsents(ctx context.Context, realm string, userID str
 			"id":    userID,
 		}).
 		SetResult(&consents).
-		Get(u.String())
+		Get(path)
 
 	return consents, err
 }
@@ -217,8 +205,7 @@ func (us *UserService) GetConsents(ctx context.Context, realm string, userID str
 // RevokeClientConsents revokes consent and offline tokens for particular client from user
 func (us *UserService) RevokeClientConsents(ctx context.Context, realm string, userID string, clientID string) error {
 
-	u := us.client.BaseURL
-	u.Path += "/{realm}/users/{id}/consents/{client}"
+	path := "/{realm}/users/{id}/consents/{client}"
 
 	_, err := us.client.newRequest(ctx).
 		SetPathParams(map[string]string{
@@ -226,7 +213,7 @@ func (us *UserService) RevokeClientConsents(ctx context.Context, realm string, u
 			"id":     userID,
 			"client": clientID,
 		}).
-		Delete(u.String())
+		Delete(path)
 
 	return err
 }
@@ -234,15 +221,14 @@ func (us *UserService) RevokeClientConsents(ctx context.Context, realm string, u
 // DisableCredentials disables credentials of certain types for a user
 func (us *UserService) DisableCredentials(ctx context.Context, realm string, userID string, credentialTypes []string) error {
 
-	u := us.client.BaseURL
-	u.Path += "/{realm}/users/{id}/disable-credential-types"
+	path := "/{realm}/users/{id}/disable-credential-types"
 
 	_, err := us.client.newRequest(ctx).
 		SetPathParams(map[string]string{
 			"realm": realm,
 			"id":    userID,
 		}).
-		Put(u.String())
+		Put(path)
 
 	return err
 }
@@ -250,8 +236,7 @@ func (us *UserService) DisableCredentials(ctx context.Context, realm string, use
 // AddGroup adds a user to a group
 func (us *UserService) AddGroup(ctx context.Context, realm string, userID string, groupID string) error {
 
-	u := us.client.BaseURL
-	u.Path += "/{realm}/users/{id}/groups/{groupId}"
+	path := "/{realm}/users/{id}/groups/{groupId}"
 
 	_, err := us.client.newRequest(ctx).
 		SetPathParams(map[string]string{
@@ -259,7 +244,7 @@ func (us *UserService) AddGroup(ctx context.Context, realm string, userID string
 			"id":      userID,
 			"groupId": groupID,
 		}).
-		Put(u.String())
+		Put(path)
 
 	return err
 }
@@ -267,8 +252,7 @@ func (us *UserService) AddGroup(ctx context.Context, realm string, userID string
 // RemoveGroup removes a user from a group
 func (us *UserService) RemoveGroup(ctx context.Context, realm string, userID string, groupID string) error {
 
-	u := us.client.BaseURL
-	u.Path += "/{realm}/users/{id}/groups/{groupId}"
+	path := "/{realm}/users/{id}/groups/{groupId}"
 
 	_, err := us.client.newRequest(ctx).
 		SetPathParams(map[string]string{
@@ -276,7 +260,7 @@ func (us *UserService) RemoveGroup(ctx context.Context, realm string, userID str
 			"id":      userID,
 			"groupId": groupID,
 		}).
-		Delete(u.String())
+		Delete(path)
 
 	return err
 }
@@ -284,15 +268,14 @@ func (us *UserService) RemoveGroup(ctx context.Context, realm string, userID str
 // Logout revokes all user sessions
 func (us *UserService) Logout(ctx context.Context, realm string, userID string) error {
 
-	u := us.client.BaseURL
-	u.Path += "/{realm}/users/{id}/logout"
+	path := "/{realm}/users/{id}/logout"
 
 	_, err := us.client.newRequest(ctx).
 		SetPathParams(map[string]string{
 			"realm": realm,
 			"id":    userID,
 		}).
-		Post(u.String())
+		Post(path)
 
 	return err
 }
@@ -300,8 +283,7 @@ func (us *UserService) Logout(ctx context.Context, realm string, userID string) 
 // GetSessions for user
 func (us *UserService) GetSessions(ctx context.Context, realm string, userID string) ([]UserSessionRepresentation, error) {
 
-	u := us.client.BaseURL
-	u.Path += "/{realm}/users/{id}/sessions"
+	path := "/{realm}/users/{id}/sessions"
 
 	var sessions []UserSessionRepresentation
 
@@ -311,7 +293,7 @@ func (us *UserService) GetSessions(ctx context.Context, realm string, userID str
 			"id":    userID,
 		}).
 		SetResult(&sessions).
-		Get(u.String())
+		Get(path)
 
 	return sessions, err
 }
@@ -319,8 +301,7 @@ func (us *UserService) GetSessions(ctx context.Context, realm string, userID str
 // GetOfflineSessions for particular client and user
 func (us *UserService) GetOfflineSessions(ctx context.Context, realm string, userID string, clientID string) ([]UserSessionRepresentation, error) {
 
-	u := us.client.BaseURL
-	u.Path += "/{realm}/users/{id}/offline-sessions/{clientId}"
+	path := "/{realm}/users/{id}/offline-sessions/{clientId}"
 
 	var sessions []UserSessionRepresentation
 
@@ -331,7 +312,7 @@ func (us *UserService) GetOfflineSessions(ctx context.Context, realm string, use
 			"client": clientID,
 		}).
 		SetResult(&sessions).
-		Get(u.String())
+		Get(path)
 
 	return sessions, err
 }
@@ -339,8 +320,7 @@ func (us *UserService) GetOfflineSessions(ctx context.Context, realm string, use
 // ResetPassword for user
 func (us *UserService) ResetPassword(ctx context.Context, realm string, userID string, tempPassword *CredentialRepresentation) error {
 
-	u := us.client.BaseURL
-	u.Path += "/{realm}/users/{id}/reset-password"
+	path := "/{realm}/users/{id}/reset-password"
 
 	_, err := us.client.newRequest(ctx).
 		SetPathParams(map[string]string{
@@ -348,7 +328,7 @@ func (us *UserService) ResetPassword(ctx context.Context, realm string, userID s
 			"id":    userID,
 		}).
 		SetBody(tempPassword).
-		Put(u.String())
+		Put(path)
 
 	return err
 }

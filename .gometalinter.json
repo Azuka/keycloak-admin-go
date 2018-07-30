@@ -6,7 +6,6 @@
     "vet",
     "vetshadow",
     "golint",
-    "goconst",
     "gosimple",
     "misspell"
   ],
