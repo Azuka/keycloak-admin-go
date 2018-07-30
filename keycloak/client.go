@@ -10,7 +10,7 @@ import (
 
 	"context"
 	"fmt"
-	"github.com/davecgh/go-spew/spew"
+
 	"github.com/go-resty/resty"
 )
 
@@ -59,19 +59,17 @@ func (c *Client) newRequest(ctx context.Context) *resty.Request {
 		// Set redirect policy based on host name
 		SetRedirectPolicy(resty.DomainCheckRedirectPolicy(c.BaseURL.Hostname())).
 		// Setup error handling for non <= 399 codes
-		OnAfterResponse(HandleResponse).
+		OnAfterResponse(handleResponse).
 		R().
 		SetContext(ctx).
 		SetHeader("UserAgent", userAgent)
 }
 
-// HandleResponse handles
-func HandleResponse(i *resty.Client, response *resty.Response) error {
+// handleResponse handles 400+ http error codes
+func handleResponse(i *resty.Client, response *resty.Response) error {
 	if response.StatusCode() < 400 {
 		return nil
 	}
-
-	spew.Dump(response)
 
 	return &Error{
 		Message: fmt.Sprintf("%s %s: %s", response.Request.Method, response.Request.URL, response.Status()),

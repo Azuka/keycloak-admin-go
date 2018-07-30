@@ -17,7 +17,7 @@ var (
 	_ easyjson.Marshaler
 )
 
-func easyjson5c8673aaDecodeGithubComAzukaKeycloakAdminGoKeycloak(in *jlexer.Lexer, out *ScopeRepresentation) {
+func easyjson5c8673aaDecodeGithubComAzukaKeycloakAdminGoKeycloakModels(in *jlexer.Lexer, out *ScopeRepresentation) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -104,7 +104,7 @@ func easyjson5c8673aaDecodeGithubComAzukaKeycloakAdminGoKeycloak(in *jlexer.Lexe
 		in.Consumed()
 	}
 }
-func easyjson5c8673aaEncodeGithubComAzukaKeycloakAdminGoKeycloak(out *jwriter.Writer, in ScopeRepresentation) {
+func easyjson5c8673aaEncodeGithubComAzukaKeycloakAdminGoKeycloakModels(out *jwriter.Writer, in ScopeRepresentation) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -192,27 +192,27 @@ func easyjson5c8673aaEncodeGithubComAzukaKeycloakAdminGoKeycloak(out *jwriter.Wr
 // MarshalJSON supports json.Marshaler interface
 func (v ScopeRepresentation) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson5c8673aaEncodeGithubComAzukaKeycloakAdminGoKeycloak(&w, v)
+	easyjson5c8673aaEncodeGithubComAzukaKeycloakAdminGoKeycloakModels(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v ScopeRepresentation) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson5c8673aaEncodeGithubComAzukaKeycloakAdminGoKeycloak(w, v)
+	easyjson5c8673aaEncodeGithubComAzukaKeycloakAdminGoKeycloakModels(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *ScopeRepresentation) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson5c8673aaDecodeGithubComAzukaKeycloakAdminGoKeycloak(&r, v)
+	easyjson5c8673aaDecodeGithubComAzukaKeycloakAdminGoKeycloakModels(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *ScopeRepresentation) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson5c8673aaDecodeGithubComAzukaKeycloakAdminGoKeycloak(l, v)
+	easyjson5c8673aaDecodeGithubComAzukaKeycloakAdminGoKeycloakModels(l, v)
 }
-func easyjson5c8673aaDecodeGithubComAzukaKeycloakAdminGoKeycloak1(in *jlexer.Lexer, out *ResourceServerRepresentation) {
+func easyjson5c8673aaDecodeGithubComAzukaKeycloakAdminGoKeycloakModels1(in *jlexer.Lexer, out *ResourceServerRepresentation) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -326,7 +326,7 @@ func easyjson5c8673aaDecodeGithubComAzukaKeycloakAdminGoKeycloak1(in *jlexer.Lex
 		in.Consumed()
 	}
 }
-func easyjson5c8673aaEncodeGithubComAzukaKeycloakAdminGoKeycloak1(out *jwriter.Writer, in ResourceServerRepresentation) {
+func easyjson5c8673aaEncodeGithubComAzukaKeycloakAdminGoKeycloakModels1(out *jwriter.Writer, in ResourceServerRepresentation) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -443,27 +443,27 @@ func easyjson5c8673aaEncodeGithubComAzukaKeycloakAdminGoKeycloak1(out *jwriter.W
 // MarshalJSON supports json.Marshaler interface
 func (v ResourceServerRepresentation) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson5c8673aaEncodeGithubComAzukaKeycloakAdminGoKeycloak1(&w, v)
+	easyjson5c8673aaEncodeGithubComAzukaKeycloakAdminGoKeycloakModels1(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v ResourceServerRepresentation) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson5c8673aaEncodeGithubComAzukaKeycloakAdminGoKeycloak1(w, v)
+	easyjson5c8673aaEncodeGithubComAzukaKeycloakAdminGoKeycloakModels1(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *ResourceServerRepresentation) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson5c8673aaDecodeGithubComAzukaKeycloakAdminGoKeycloak1(&r, v)
+	easyjson5c8673aaDecodeGithubComAzukaKeycloakAdminGoKeycloakModels1(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *ResourceServerRepresentation) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson5c8673aaDecodeGithubComAzukaKeycloakAdminGoKeycloak1(l, v)
+	easyjson5c8673aaDecodeGithubComAzukaKeycloakAdminGoKeycloakModels1(l, v)
 }
-func easyjson5c8673aaDecodeGithubComAzukaKeycloakAdminGoKeycloak2(in *jlexer.Lexer, out *ResourceRepresentation) {
+func easyjson5c8673aaDecodeGithubComAzukaKeycloakAdminGoKeycloakModels2(in *jlexer.Lexer, out *ResourceRepresentation) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -557,7 +557,7 @@ func easyjson5c8673aaDecodeGithubComAzukaKeycloakAdminGoKeycloak2(in *jlexer.Lex
 		in.Consumed()
 	}
 }
-func easyjson5c8673aaEncodeGithubComAzukaKeycloakAdminGoKeycloak2(out *jwriter.Writer, in ResourceRepresentation) {
+func easyjson5c8673aaEncodeGithubComAzukaKeycloakAdminGoKeycloakModels2(out *jwriter.Writer, in ResourceRepresentation) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -686,27 +686,27 @@ func easyjson5c8673aaEncodeGithubComAzukaKeycloakAdminGoKeycloak2(out *jwriter.W
 // MarshalJSON supports json.Marshaler interface
 func (v ResourceRepresentation) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson5c8673aaEncodeGithubComAzukaKeycloakAdminGoKeycloak2(&w, v)
+	easyjson5c8673aaEncodeGithubComAzukaKeycloakAdminGoKeycloakModels2(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v ResourceRepresentation) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson5c8673aaEncodeGithubComAzukaKeycloakAdminGoKeycloak2(w, v)
+	easyjson5c8673aaEncodeGithubComAzukaKeycloakAdminGoKeycloakModels2(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *ResourceRepresentation) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson5c8673aaDecodeGithubComAzukaKeycloakAdminGoKeycloak2(&r, v)
+	easyjson5c8673aaDecodeGithubComAzukaKeycloakAdminGoKeycloakModels2(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *ResourceRepresentation) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson5c8673aaDecodeGithubComAzukaKeycloakAdminGoKeycloak2(l, v)
+	easyjson5c8673aaDecodeGithubComAzukaKeycloakAdminGoKeycloakModels2(l, v)
 }
-func easyjson5c8673aaDecodeGithubComAzukaKeycloakAdminGoKeycloak3(in *jlexer.Lexer, out *ProtocolMapperRepresentation) {
+func easyjson5c8673aaDecodeGithubComAzukaKeycloakAdminGoKeycloakModels3(in *jlexer.Lexer, out *ProtocolMapperRepresentation) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -769,7 +769,7 @@ func easyjson5c8673aaDecodeGithubComAzukaKeycloakAdminGoKeycloak3(in *jlexer.Lex
 		in.Consumed()
 	}
 }
-func easyjson5c8673aaEncodeGithubComAzukaKeycloakAdminGoKeycloak3(out *jwriter.Writer, in ProtocolMapperRepresentation) {
+func easyjson5c8673aaEncodeGithubComAzukaKeycloakAdminGoKeycloakModels3(out *jwriter.Writer, in ProtocolMapperRepresentation) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -849,27 +849,27 @@ func easyjson5c8673aaEncodeGithubComAzukaKeycloakAdminGoKeycloak3(out *jwriter.W
 // MarshalJSON supports json.Marshaler interface
 func (v ProtocolMapperRepresentation) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson5c8673aaEncodeGithubComAzukaKeycloakAdminGoKeycloak3(&w, v)
+	easyjson5c8673aaEncodeGithubComAzukaKeycloakAdminGoKeycloakModels3(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v ProtocolMapperRepresentation) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson5c8673aaEncodeGithubComAzukaKeycloakAdminGoKeycloak3(w, v)
+	easyjson5c8673aaEncodeGithubComAzukaKeycloakAdminGoKeycloakModels3(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *ProtocolMapperRepresentation) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson5c8673aaDecodeGithubComAzukaKeycloakAdminGoKeycloak3(&r, v)
+	easyjson5c8673aaDecodeGithubComAzukaKeycloakAdminGoKeycloakModels3(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *ProtocolMapperRepresentation) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson5c8673aaDecodeGithubComAzukaKeycloakAdminGoKeycloak3(l, v)
+	easyjson5c8673aaDecodeGithubComAzukaKeycloakAdminGoKeycloakModels3(l, v)
 }
-func easyjson5c8673aaDecodeGithubComAzukaKeycloakAdminGoKeycloak4(in *jlexer.Lexer, out *PolicyRepresentation) {
+func easyjson5c8673aaDecodeGithubComAzukaKeycloakAdminGoKeycloakModels4(in *jlexer.Lexer, out *PolicyRepresentation) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -1007,7 +1007,7 @@ func easyjson5c8673aaDecodeGithubComAzukaKeycloakAdminGoKeycloak4(in *jlexer.Lex
 		in.Consumed()
 	}
 }
-func easyjson5c8673aaEncodeGithubComAzukaKeycloakAdminGoKeycloak4(out *jwriter.Writer, in PolicyRepresentation) {
+func easyjson5c8673aaEncodeGithubComAzukaKeycloakAdminGoKeycloakModels4(out *jwriter.Writer, in PolicyRepresentation) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -1174,27 +1174,27 @@ func easyjson5c8673aaEncodeGithubComAzukaKeycloakAdminGoKeycloak4(out *jwriter.W
 // MarshalJSON supports json.Marshaler interface
 func (v PolicyRepresentation) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson5c8673aaEncodeGithubComAzukaKeycloakAdminGoKeycloak4(&w, v)
+	easyjson5c8673aaEncodeGithubComAzukaKeycloakAdminGoKeycloakModels4(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v PolicyRepresentation) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson5c8673aaEncodeGithubComAzukaKeycloakAdminGoKeycloak4(w, v)
+	easyjson5c8673aaEncodeGithubComAzukaKeycloakAdminGoKeycloakModels4(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *PolicyRepresentation) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson5c8673aaDecodeGithubComAzukaKeycloakAdminGoKeycloak4(&r, v)
+	easyjson5c8673aaDecodeGithubComAzukaKeycloakAdminGoKeycloakModels4(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *PolicyRepresentation) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson5c8673aaDecodeGithubComAzukaKeycloakAdminGoKeycloak4(l, v)
+	easyjson5c8673aaDecodeGithubComAzukaKeycloakAdminGoKeycloakModels4(l, v)
 }
-func easyjson5c8673aaDecodeGithubComAzukaKeycloakAdminGoKeycloak5(in *jlexer.Lexer, out *ClientRepresentation) {
+func easyjson5c8673aaDecodeGithubComAzukaKeycloakAdminGoKeycloakModels5(in *jlexer.Lexer, out *ClientRepresentation) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -1527,7 +1527,7 @@ func easyjson5c8673aaDecodeGithubComAzukaKeycloakAdminGoKeycloak5(in *jlexer.Lex
 		in.Consumed()
 	}
 }
-func easyjson5c8673aaEncodeGithubComAzukaKeycloakAdminGoKeycloak5(out *jwriter.Writer, in ClientRepresentation) {
+func easyjson5c8673aaEncodeGithubComAzukaKeycloakAdminGoKeycloakModels5(out *jwriter.Writer, in ClientRepresentation) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -2021,23 +2021,23 @@ func easyjson5c8673aaEncodeGithubComAzukaKeycloakAdminGoKeycloak5(out *jwriter.W
 // MarshalJSON supports json.Marshaler interface
 func (v ClientRepresentation) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson5c8673aaEncodeGithubComAzukaKeycloakAdminGoKeycloak5(&w, v)
+	easyjson5c8673aaEncodeGithubComAzukaKeycloakAdminGoKeycloakModels5(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v ClientRepresentation) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson5c8673aaEncodeGithubComAzukaKeycloakAdminGoKeycloak5(w, v)
+	easyjson5c8673aaEncodeGithubComAzukaKeycloakAdminGoKeycloakModels5(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *ClientRepresentation) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson5c8673aaDecodeGithubComAzukaKeycloakAdminGoKeycloak5(&r, v)
+	easyjson5c8673aaDecodeGithubComAzukaKeycloakAdminGoKeycloakModels5(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *ClientRepresentation) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson5c8673aaDecodeGithubComAzukaKeycloakAdminGoKeycloak5(l, v)
+	easyjson5c8673aaDecodeGithubComAzukaKeycloakAdminGoKeycloakModels5(l, v)
 }

@@ -28,7 +28,7 @@ func (suite *userServiceTests) SetupSuite() {
 			Path:   "",
 			Host:   "keycloak.local",
 		},
-		restClient: resty.New().OnAfterResponse(HandleResponse),
+		restClient: resty.New().OnAfterResponse(handleResponse),
 	}
 	c.Debug()
 	suite.userService = NewUserService(c)
