@@ -31,7 +31,7 @@ type CredentialRepresentation struct {
 	HashedSaltedValue string    `json:"hashedSaltedValue,omitempty"`
 	Period            int32     `json:"period,omitempty"`
 	Salt              string    `json:"salt,omitempty"`
-	Temporary         bool      `json:"temporary,omitempty"`
+	Temporary         *bool     `json:"temporary,omitempty"`
 	Type              string    `json:"type,omitempty"`
 	Value             string    `json:"value,omitempty"`
 }
@@ -53,8 +53,8 @@ type UserRepresentation struct {
 	Credentials            []CredentialRepresentation        `json:"credentials,omitempty"`
 	DisableCredentialTypes []string                          `json:"disableCredentialTypes,omitempty"`
 	Email                  string                            `json:"email,omitempty"`
-	EmailVerified          bool                              `json:"emailVerified,omitempty"`
-	Enabled                bool                              `json:"enabled,omitempty"`
+	EmailVerified          *bool                             `json:"emailVerified,omitempty"`
+	Enabled                *bool                             `json:"enabled,omitempty"`
 	FederatedIdentities    []FederatedIdentityRepresentation `json:"federatedIdentities,omitempty"`
 	FederationLink         *url.URL                          `json:"federationLink,omitempty"`
 	FirstName              string                            `json:"firstName,omitempty"`

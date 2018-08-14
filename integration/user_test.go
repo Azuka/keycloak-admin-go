@@ -13,10 +13,11 @@ func (suite *integrationTester) TestUserFetch() {
 	suite.NoError(err)
 	suite.Len(users, 1)
 	suite.Equal(keycloakAdmin, users[0].Username)
-	suite.True(users[0].Enabled)
+	suite.True(*users[0].Enabled)
 
 	user := users[0]
-	user.EmailVerified = true
+	t := true
+	user.EmailVerified = &t
 
 	err = suite.client.Users.Update(suite.ctx, keycloakAdminRealm, &user)
 	suite.NoError(err)
