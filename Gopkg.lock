@@ -2,86 +2,165 @@
 
 
 [[projects]]
+  digest = "1:2209584c0f7c9b68c23374e659357ab546e1b70eec2761f03280f69a8fd23d77"
   name = "github.com/cenkalti/backoff"
   packages = ["."]
+  pruneopts = "UT"
   revision = "2ea60e5f094469f9e65adb9cd103795b73ae743e"
   version = "v2.0.0"
 
 [[projects]]
+  digest = "1:a2c1d0e43bd3baaa071d1b9ed72c27d78169b2b269f71c105ac4ba34b1be4a39"
   name = "github.com/davecgh/go-spew"
   packages = ["spew"]
+  pruneopts = "UT"
   revision = "346938d642f2ec3594ed81d874461961cd0faa76"
   version = "v1.1.0"
 
 [[projects]]
+  digest = "1:2ff22b45e9aa8f80ea4a4687f6f9d714a31f1b6c074a223671ae7ce837d4389c"
   name = "github.com/go-resty/resty"
   packages = ["."]
+  pruneopts = "UT"
   revision = "fccc498aed22c31ff3768bcac00795f94149a21d"
   version = "v1.7.0"
 
 [[projects]]
+  digest = "1:15042ad3498153684d09f393bbaec6b216c8eec6d61f63dff711de7d64ed8861"
   name = "github.com/golang/protobuf"
   packages = ["proto"]
+  pruneopts = "UT"
   revision = "b4deda0973fb4c70b50d226b1af49f3da59f5265"
   version = "v1.1.0"
 
 [[projects]]
   branch = "master"
+  digest = "1:4429b79947e9af3ccf562cdde4ca61934c7e229726a5afd6527151a91f636a5d"
   name = "github.com/mailru/easyjson"
-  packages = [".","buffer","jlexer","jwriter"]
+  packages = [
+    ".",
+    "buffer",
+    "jlexer",
+    "jwriter",
+  ]
+  pruneopts = "UT"
   revision = "d5012789d6659eeed305f54c1b1542e7b65829e6"
 
 [[projects]]
+  digest = "1:0028cb19b2e4c3112225cd871870f2d9cf49b9b4276531f03438a88e94be86fe"
   name = "github.com/pmezard/go-difflib"
   packages = ["difflib"]
+  pruneopts = "UT"
   revision = "792786c7400a136282c1664665ae0a8db921c6c2"
   version = "v1.0.0"
 
 [[projects]]
+  digest = "1:274f67cb6fed9588ea2521ecdac05a6d62a8c51c074c1fccc6a49a40ba80e925"
   name = "github.com/satori/go.uuid"
   packages = ["."]
+  pruneopts = "UT"
   revision = "f58768cc1a7a7e77a3bd49e98cdd21419399b6a3"
   version = "v1.2.0"
 
 [[projects]]
+  digest = "1:5110e3d4f130772fd39e6ce8208ad1955b242ccfcc8ad9d158857250579c82f4"
   name = "github.com/stretchr/testify"
-  packages = ["assert","require","suite"]
+  packages = [
+    "assert",
+    "require",
+    "suite",
+  ]
+  pruneopts = "UT"
   revision = "f35b8ab0b5a2cef36673838d662e249dd9c94686"
   version = "v1.2.2"
 
 [[projects]]
   branch = "master"
+  digest = "1:eab31099394d4bae3da2810d726bb38165e16368244e3ce76fe07d27a3a51fc9"
   name = "golang.org/x/net"
-  packages = ["context","context/ctxhttp","idna","publicsuffix"]
+  packages = [
+    "context",
+    "context/ctxhttp",
+    "idna",
+    "publicsuffix",
+  ]
+  pruneopts = "UT"
   revision = "c4299a1a0d8524c11563db160fbf9bddbceadb21"
 
 [[projects]]
   branch = "master"
+  digest = "1:af19f6e6c369bf51ef226e989034cd88a45083173c02ac4d7ab74c9a90d356b7"
   name = "golang.org/x/oauth2"
-  packages = [".","internal"]
+  packages = [
+    ".",
+    "internal",
+  ]
+  pruneopts = "UT"
   revision = "3d292e4d0cdc3a0113e6d207bb137145ef1de42f"
 
 [[projects]]
+  digest = "1:a2ab62866c75542dd18d2b069fec854577a20211d7c0ea6ae746072a1dccdd18"
   name = "golang.org/x/text"
-  packages = ["collate","collate/build","internal/colltab","internal/gen","internal/tag","internal/triegen","internal/ucd","language","secure/bidirule","transform","unicode/bidi","unicode/cldr","unicode/norm","unicode/rangetable"]
+  packages = [
+    "collate",
+    "collate/build",
+    "internal/colltab",
+    "internal/gen",
+    "internal/tag",
+    "internal/triegen",
+    "internal/ucd",
+    "language",
+    "secure/bidirule",
+    "transform",
+    "unicode/bidi",
+    "unicode/cldr",
+    "unicode/norm",
+    "unicode/rangetable",
+  ]
+  pruneopts = "UT"
   revision = "f21a4dfb5e38f5895301dc265a8def02365cc3d0"
   version = "v0.3.0"
 
 [[projects]]
+  digest = "1:328b5e4f197d928c444a51a75385f4b978915c0e75521f0ad6a3db976c97a7d3"
   name = "google.golang.org/appengine"
-  packages = ["internal","internal/base","internal/datastore","internal/log","internal/remote_api","internal/urlfetch","urlfetch"]
+  packages = [
+    "internal",
+    "internal/base",
+    "internal/datastore",
+    "internal/log",
+    "internal/remote_api",
+    "internal/urlfetch",
+    "urlfetch",
+  ]
+  pruneopts = "UT"
   revision = "b1f26356af11148e710935ed1ac8a7f5702c7612"
   version = "v1.1.0"
 
 [[projects]]
   branch = "v1"
+  digest = "1:23fc86a644517c24115801c487921dbca64199a17b4c4bd057dcd97e59605684"
   name = "gopkg.in/jarcoal/httpmock.v1"
   packages = ["."]
+  pruneopts = "UT"
   revision = "8007e27cdb3239fcfc95c1274d7d8cbcc68b7d52"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "8f6d8e3e2981d991c21fc69fcea14da93fff6621066c1e7d495d5a3646d90611"
+  input-imports = [
+    "github.com/cenkalti/backoff",
+    "github.com/go-resty/resty",
+    "github.com/mailru/easyjson",
+    "github.com/mailru/easyjson/jlexer",
+    "github.com/mailru/easyjson/jwriter",
+    "github.com/satori/go.uuid",
+    "github.com/stretchr/testify/assert",
+    "github.com/stretchr/testify/suite",
+    "golang.org/x/net/context",
+    "golang.org/x/net/context/ctxhttp",
+    "golang.org/x/oauth2",
+    "gopkg.in/jarcoal/httpmock.v1",
+  ]
   solver-name = "gps-cdcl"
   solver-version = 1

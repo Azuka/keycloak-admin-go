@@ -137,7 +137,7 @@ func (us *UserService) Delete(ctx context.Context, realm string, userID string) 
 func (us *UserService) Impersonate(ctx context.Context, realm string, userID string) (AttributeMap, error) {
 
 	// nolint: goconst
-	path := "/{realm}/users/{id}/impersonation"
+	path := "/realms/{realm}/users/{id}/impersonation"
 
 	a := AttributeMap{}
 
@@ -174,7 +174,7 @@ func (us *UserService) Count(ctx context.Context, realm string) (uint32, error) 
 func (us *UserService) GetGroups(ctx context.Context, realm string, userID string) ([]GroupRepresentation, error) {
 
 	// nolint: goconst
-	path := "/{realm}/users/{id}/groups"
+	path := "/realms/{realm}/users/{id}/groups"
 
 	var groups []GroupRepresentation
 
@@ -193,7 +193,7 @@ func (us *UserService) GetGroups(ctx context.Context, realm string, userID strin
 func (us *UserService) GetConsents(ctx context.Context, realm string, userID string) (AttributeMap, error) {
 
 	// nolint: goconst
-	path := "/{realm}/users/{id}/consents"
+	path := "/realms/{realm}/users/{id}/consents"
 
 	var consents AttributeMap
 
@@ -212,7 +212,7 @@ func (us *UserService) GetConsents(ctx context.Context, realm string, userID str
 func (us *UserService) RevokeClientConsents(ctx context.Context, realm string, userID string, clientID string) error {
 
 	// nolint: goconst
-	path := "/{realm}/users/{id}/consents/{client}"
+	path := "/realms/{realm}/users/{id}/consents/{client}"
 
 	_, err := us.client.newRequest(ctx).
 		SetPathParams(map[string]string{
@@ -229,7 +229,7 @@ func (us *UserService) RevokeClientConsents(ctx context.Context, realm string, u
 func (us *UserService) DisableCredentials(ctx context.Context, realm string, userID string, credentialTypes []string) error {
 
 	// nolint: goconst
-	path := "/{realm}/users/{id}/disable-credential-types"
+	path := "/realms/{realm}/users/{id}/disable-credential-types"
 
 	_, err := us.client.newRequest(ctx).
 		SetPathParams(map[string]string{
@@ -245,7 +245,7 @@ func (us *UserService) DisableCredentials(ctx context.Context, realm string, use
 func (us *UserService) AddGroup(ctx context.Context, realm string, userID string, groupID string) error {
 
 	// nolint: goconst
-	path := "/{realm}/users/{id}/groups/{groupId}"
+	path := "/realms/{realm}/users/{id}/groups/{groupId}"
 
 	_, err := us.client.newRequest(ctx).
 		SetPathParams(map[string]string{
@@ -262,7 +262,7 @@ func (us *UserService) AddGroup(ctx context.Context, realm string, userID string
 func (us *UserService) RemoveGroup(ctx context.Context, realm string, userID string, groupID string) error {
 
 	// nolint: goconst
-	path := "/{realm}/users/{id}/groups/{groupId}"
+	path := "/realms/{realm}/users/{id}/groups/{groupId}"
 
 	_, err := us.client.newRequest(ctx).
 		SetPathParams(map[string]string{
@@ -278,7 +278,7 @@ func (us *UserService) RemoveGroup(ctx context.Context, realm string, userID str
 // Logout revokes all user sessions
 func (us *UserService) Logout(ctx context.Context, realm string, userID string) error {
 
-	path := "/{realm}/users/{id}/logout"
+	path := "/realms/{realm}/users/{id}/logout"
 
 	_, err := us.client.newRequest(ctx).
 		SetPathParams(map[string]string{
@@ -294,7 +294,7 @@ func (us *UserService) Logout(ctx context.Context, realm string, userID string) 
 func (us *UserService) GetSessions(ctx context.Context, realm string, userID string) ([]UserSessionRepresentation, error) {
 
 	// nolint: goconst
-	path := "/{realm}/users/{id}/sessions"
+	path := "/realms/{realm}/users/{id}/sessions"
 
 	var sessions []UserSessionRepresentation
 
@@ -313,7 +313,7 @@ func (us *UserService) GetSessions(ctx context.Context, realm string, userID str
 func (us *UserService) GetOfflineSessions(ctx context.Context, realm string, userID string, clientID string) ([]UserSessionRepresentation, error) {
 
 	// nolint: goconst
-	path := "/{realm}/users/{id}/offline-sessions/{clientId}"
+	path := "/realms/{realm}/users/{id}/offline-sessions/{clientId}"
 
 	var sessions []UserSessionRepresentation
 
@@ -333,7 +333,7 @@ func (us *UserService) GetOfflineSessions(ctx context.Context, realm string, use
 func (us *UserService) ResetPassword(ctx context.Context, realm string, userID string, tempPassword *CredentialRepresentation) error {
 
 	// nolint: goconst
-	path := "/{realm}/users/{id}/reset-password"
+	path := "/realms/{realm}/users/{id}/reset-password"
 
 	_, err := us.client.newRequest(ctx).
 		SetPathParams(map[string]string{
