@@ -37,6 +37,12 @@ make integration
 - [ ] Key
 - [ ] Protocol Mappers
 - [ ] Realms Admin
+  - [x] Get realm
+  - [~] Import realm
+  - [ ] Update realm
+  - [x] Delete realm
+  - [ ] Get admin events
+  - [ ] Delete admin events
 - [ ] Role Mapper
 - [ ] Roles
 - [ ] Roles (by ID)

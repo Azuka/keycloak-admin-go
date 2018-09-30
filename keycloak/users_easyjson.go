@@ -339,7 +339,9 @@ func easyjson84c0690eDecodeGithubComAzukaKeycloakAdminGoKeycloak1(in *jlexer.Lex
 				}
 				for !in.IsDelim(']') {
 					var v6 UserConsentRepresentation
-					(v6).UnmarshalEasyJSON(in)
+					if data := in.Raw(); in.Ok() {
+						in.AddError((v6).UnmarshalJSON(data))
+					}
 					out.ClientConsents = append(out.ClientConsents, v6)
 					in.WantComma()
 				}
@@ -374,7 +376,9 @@ func easyjson84c0690eDecodeGithubComAzukaKeycloakAdminGoKeycloak1(in *jlexer.Lex
 				}
 				for !in.IsDelim(']') {
 					var v7 CredentialRepresentation
-					(v7).UnmarshalEasyJSON(in)
+					if data := in.Raw(); in.Ok() {
+						in.AddError((v7).UnmarshalJSON(data))
+					}
 					out.Credentials = append(out.Credentials, v7)
 					in.WantComma()
 				}
@@ -442,7 +446,9 @@ func easyjson84c0690eDecodeGithubComAzukaKeycloakAdminGoKeycloak1(in *jlexer.Lex
 				}
 				for !in.IsDelim(']') {
 					var v9 FederatedIdentityRepresentation
-					(v9).UnmarshalEasyJSON(in)
+					if data := in.Raw(); in.Ok() {
+						in.AddError((v9).UnmarshalJSON(data))
+					}
 					out.FederatedIdentities = append(out.FederatedIdentities, v9)
 					in.WantComma()
 				}
@@ -671,7 +677,7 @@ func easyjson84c0690eEncodeGithubComAzukaKeycloakAdminGoKeycloak1(out *jwriter.W
 				if v16 > 0 {
 					out.RawByte(',')
 				}
-				(v17).MarshalEasyJSON(out)
+				out.Raw((v17).MarshalJSON())
 			}
 			out.RawByte(']')
 		}
@@ -700,7 +706,7 @@ func easyjson84c0690eEncodeGithubComAzukaKeycloakAdminGoKeycloak1(out *jwriter.W
 				if v18 > 0 {
 					out.RawByte(',')
 				}
-				(v19).MarshalEasyJSON(out)
+				out.Raw((v19).MarshalJSON())
 			}
 			out.RawByte(']')
 		}
@@ -768,7 +774,7 @@ func easyjson84c0690eEncodeGithubComAzukaKeycloakAdminGoKeycloak1(out *jwriter.W
 				if v22 > 0 {
 					out.RawByte(',')
 				}
-				(v23).MarshalEasyJSON(out)
+				out.Raw((v23).MarshalJSON())
 			}
 			out.RawByte(']')
 		}
@@ -1436,7 +1442,9 @@ func easyjson84c0690eDecodeGithubComAzukaKeycloakAdminGoKeycloak3(in *jlexer.Lex
 				}
 				for !in.IsDelim(']') {
 					var v37 GroupRepresentation
-					(v37).UnmarshalEasyJSON(in)
+					if data := in.Raw(); in.Ok() {
+						in.AddError((v37).UnmarshalJSON(data))
+					}
 					out.SubGroups = append(out.SubGroups, v37)
 					in.WantComma()
 				}
@@ -1609,7 +1617,7 @@ func easyjson84c0690eEncodeGithubComAzukaKeycloakAdminGoKeycloak3(out *jwriter.W
 				if v43 > 0 {
 					out.RawByte(',')
 				}
-				(v44).MarshalEasyJSON(out)
+				out.Raw((v44).MarshalJSON())
 			}
 			out.RawByte(']')
 		}
