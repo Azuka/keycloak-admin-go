@@ -148,88 +148,88 @@ type ClientScopeRepresentation struct {
 
 // IdentityProviderMapperRepresentation Identity Provider Mapper
 type IdentityProviderMapperRepresentation struct {
-	Config                 AttributeMap `json:"config,ommitempty,omitempty"`
-	ID                     string       `json:"id,ommitempty,omitempty"`
-	IdentityProviderAlias  string       `json:"identityProviderAlias,ommitempty,omitempty"`
-	IdentityProviderMapper string       `json:"identityProviderMapper,ommitempty,omitempty"`
-	Name                   string       `json:"name,ommitempty,omitempty"`
+	Config                 AttributeMap `json:"config,omitempty"`
+	ID                     string       `json:"id,omitempty"`
+	IdentityProviderAlias  string       `json:"identityProviderAlias,omitempty"`
+	IdentityProviderMapper string       `json:"identityProviderMapper,omitempty"`
+	Name                   string       `json:"name,omitempty"`
 }
 
 // IdentityProviderRepresentation Identity Provider
 type IdentityProviderRepresentation struct {
-	AddReadTokenRoleOnCreate  *bool        `json:"addReadTokenRoleOnCreate,ommitempty,omitempty"`
-	Alias                     string       `json:"alias,ommitempty,omitempty"`
-	Config                    AttributeMap `json:"config,ommitempty,omitempty"`
-	DisplayName               string       `json:"displayName,ommitempty,omitempty"`
-	Enabled                   *bool        `json:"enabled,ommitempty,omitempty"`
-	FirstBrokerLoginFlowAlias string       `json:"firstBrokerLoginFlowAlias,ommitempty,omitempty"`
-	InternalID                string       `json:"internalID,ommitempty,omitempty"`
-	LinkOnly                  *bool        `json:"linkOnly,ommitempty,omitempty"`
-	PostBrokerLoginFlowAlias  string       `json:"postBrokerLoginFlowAlias,ommitempty,omitempty"`
-	ProviderID                string       `json:"providerID,ommitempty,omitempty"`
-	StoreToken                *bool        `json:"storeToken,ommitempty,omitempty"`
-	TrustEmail                *bool        `json:"trustEmail,ommitempty,omitempty"`
+	AddReadTokenRoleOnCreate  *bool        `json:"addReadTokenRoleOnCreate,omitempty"`
+	Alias                     string       `json:"alias,omitempty"`
+	Config                    AttributeMap `json:"config,omitempty"`
+	DisplayName               string       `json:"displayName,omitempty"`
+	Enabled                   *bool        `json:"enabled,omitempty"`
+	FirstBrokerLoginFlowAlias string       `json:"firstBrokerLoginFlowAlias,omitempty"`
+	InternalID                string       `json:"internalID,omitempty"`
+	LinkOnly                  *bool        `json:"linkOnly,omitempty"`
+	PostBrokerLoginFlowAlias  string       `json:"postBrokerLoginFlowAlias,omitempty"`
+	ProviderID                string       `json:"providerID,omitempty"`
+	StoreToken                *bool        `json:"storeToken,omitempty"`
+	TrustEmail                *bool        `json:"trustEmail,omitempty"`
 }
 
 // RequiredActionProviderRepresentation Required Action Provider
 type RequiredActionProviderRepresentation struct {
-	Alias         string       `json:"alias,ommitempty,omitempty"`
-	Config        AttributeMap `json:"config,ommitempty,omitempty"`
-	DefaultAction *bool        `json:"defaultAction,ommitempty,omitempty"`
-	Enabled       *bool        `json:"enabled,ommitempty,omitempty"`
-	Name          string       `json:"name,ommitempty,omitempty"`
-	ProviderID    string       `json:"providerID,ommitempty,omitempty"`
+	Alias         string       `json:"alias,omitempty"`
+	Config        AttributeMap `json:"config,omitempty"`
+	DefaultAction *bool        `json:"defaultAction,omitempty"`
+	Enabled       *bool        `json:"enabled,omitempty"`
+	Name          string       `json:"name,omitempty"`
+	ProviderID    string       `json:"providerID,omitempty"`
 }
 
 // RolesRepresentation Roles Representation
 type RolesRepresentation struct {
-	Client AttributeMap         `json:"client,ommitempty"`
-	Realm  []RoleRepresentation `json:"realm,ommitempty"`
+	Client AttributeMap         `json:"client,omitempty"`
+	Realm  []RoleRepresentation `json:"realm,omitempty"`
 }
 
 // RoleRepresentation Role
 type RoleRepresentation struct {
-	ClientRole  *bool          `json:"clientRole,ommitempty,omitempty"`
-	Composite   *bool          `json:"composite,ommitempty,omitempty"`
-	Composites  RoleComposites `json:"composites,ommitempty,omitempty"`
-	ContainerID string         `json:"containerID,ommitempty,omitempty"`
-	Description string         `json:"description,ommitempty,omitempty"`
-	ID          string         `json:"id,ommitempty,omitempty"`
-	Name        string         `json:"name,ommitempty,omitempty"`
+	ClientRole  *bool          `json:"clientRole,omitempty"`
+	Composite   *bool          `json:"composite,omitempty"`
+	Composites  RoleComposites `json:"composites,omitempty"`
+	ContainerID string         `json:"containerID,omitempty"`
+	Description string         `json:"description,omitempty"`
+	ID          string         `json:"id,omitempty"`
+	Name        string         `json:"name,omitempty"`
 }
 
 // RoleComposites known in keycloak as a "RoleRepresentations-Composites" in
 // in the source it is just an inner-class.
 type RoleComposites struct {
-	Client AttributeMap `json:"client,ommitempty,omitempty"`
-	Realm  []string     `json:"realm,ommitempty,omitempty"`
+	Client AttributeMap `json:"client,omitempty"`
+	Realm  []string     `json:"realm,omitempty"`
 }
 
 // ScopeMappingRepresentation Scope Mapping
 type ScopeMappingRepresentation struct {
-	Client      string   `json:"client,ommitempty,omitempty"`
-	ClientScope string   `json:"clientScope,ommitempty,omitempty"`
-	Roles       []string `json:"roles,ommitempty,omitempty"`
-	Self        string   `json:"self,ommitempty,omitempty"`
+	Client      string   `json:"client,omitempty"`
+	ClientScope string   `json:"clientScope,omitempty"`
+	Roles       []string `json:"roles,omitempty"`
+	Self        string   `json:"self,omitempty"`
 }
 
 // UserFederationMapperRepresentation User Federation
 type UserFederationMapperRepresentation struct {
-	Config                        AttributeMap `json:"config,ommitempty,omitempty"`
-	FederationMapperType          string       `json:"federationMapperType,ommitempty,omitempty"`
-	FederationProviderDisplayName string       `json:"federationProviderDisplayName,ommitempty,omitempty"`
-	ID                            string       `json:"id,ommitempty,omitempty"`
-	Name                          string       `json:"name,ommitempty,omitempty"`
+	Config                        AttributeMap `json:"config,omitempty"`
+	FederationMapperType          string       `json:"federationMapperType,omitempty"`
+	FederationProviderDisplayName string       `json:"federationProviderDisplayName,omitempty"`
+	ID                            string       `json:"id,omitempty"`
+	Name                          string       `json:"name,omitempty"`
 }
 
 // UserFederationProviderRepresentation User federation provider
 type UserFederationProviderRepresentation struct {
-	ChangedSyncPeriod int32        `json:"changedSyncPeriod,ommitempty,omitempty"`
-	Config            AttributeMap `json:"config,ommitempty,omitempty"`
-	DisplayName       string       `json:"displayName,ommitempty,omitempty"`
-	FullSyncPeriod    int32        `json:"fullSyncPeriod,ommitempty,omitempty"`
-	ID                string       `json:"id,ommitempty,omitempty"`
-	LastSync          int          `json:"lastSync,ommitempty,omitempty"`
-	Priority          int32        `json:"priority,ommitempty,omitempty"`
-	ProviderName      string       `json:"providerName,ommitempty,omitempty"`
+	ChangedSyncPeriod int32        `json:"changedSyncPeriod,omitempty"`
+	Config            AttributeMap `json:"config,omitempty"`
+	DisplayName       string       `json:"displayName,omitempty"`
+	FullSyncPeriod    int32        `json:"fullSyncPeriod,omitempty"`
+	ID                string       `json:"id,omitempty"`
+	LastSync          int          `json:"lastSync,omitempty"`
+	Priority          int32        `json:"priority,omitempty"`
+	ProviderName      string       `json:"providerName,omitempty"`
 }

@@ -17,7 +17,7 @@ var (
 	_ easyjson.Marshaler
 )
 
-func easyjson79a3de99DecodeGithubComAzukaKeycloakAdminGoKeycloak(in *jlexer.Lexer, out *MultivaluedHashMap) {
+func easyjson6601e8cdDecodeGithubComAzukaKeycloakAdminGoKeycloak(in *jlexer.Lexer, out *MultivaluedHashMap) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -52,7 +52,7 @@ func easyjson79a3de99DecodeGithubComAzukaKeycloakAdminGoKeycloak(in *jlexer.Lexe
 		in.Consumed()
 	}
 }
-func easyjson79a3de99EncodeGithubComAzukaKeycloakAdminGoKeycloak(out *jwriter.Writer, in MultivaluedHashMap) {
+func easyjson6601e8cdEncodeGithubComAzukaKeycloakAdminGoKeycloak(out *jwriter.Writer, in MultivaluedHashMap) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -92,23 +92,23 @@ func easyjson79a3de99EncodeGithubComAzukaKeycloakAdminGoKeycloak(out *jwriter.Wr
 // MarshalJSON supports json.Marshaler interface
 func (v MultivaluedHashMap) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson79a3de99EncodeGithubComAzukaKeycloakAdminGoKeycloak(&w, v)
+	easyjson6601e8cdEncodeGithubComAzukaKeycloakAdminGoKeycloak(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v MultivaluedHashMap) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson79a3de99EncodeGithubComAzukaKeycloakAdminGoKeycloak(w, v)
+	easyjson6601e8cdEncodeGithubComAzukaKeycloakAdminGoKeycloak(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *MultivaluedHashMap) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson79a3de99DecodeGithubComAzukaKeycloakAdminGoKeycloak(&r, v)
+	easyjson6601e8cdDecodeGithubComAzukaKeycloakAdminGoKeycloak(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *MultivaluedHashMap) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson79a3de99DecodeGithubComAzukaKeycloakAdminGoKeycloak(l, v)
+	easyjson6601e8cdDecodeGithubComAzukaKeycloakAdminGoKeycloak(l, v)
 }

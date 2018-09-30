@@ -13,28 +13,28 @@ func (suite *integrationTester) TestRealmFetch() {
 }
 
 func (suite *integrationTester) TestRealmDelete() {
-	realmID := uuid.NewV4().String()
-	realmName := uuid.NewV4().String()
+	realmID, _ := uuid.NewV4()
+	realmName, _ := uuid.NewV4()
 
 	newRealm := &keycloak.RealmRepresentation{
-		ID:    realmID,
-		Realm: realmName,
+		ID:    realmID.String(),
+		Realm: realmName.String(),
 	}
 
 	err := suite.client.Realm.Create(suite.ctx, newRealm)
 	suite.NoError(err)
 
-	err = suite.client.Realm.Delete(suite.ctx, realmName)
+	err = suite.client.Realm.Delete(suite.ctx, realmName.String())
 	suite.NoError(err)
 }
 
 func (suite *integrationTester) TestRealmCreate() {
-	realmID := uuid.NewV4().String()
-	realmName := uuid.NewV4().String()
+	realmID, _ := uuid.NewV4()
+	realmName, _ := uuid.NewV4()
 	t := func() *bool { b := true; return &b }()
 	newRealm := &keycloak.RealmRepresentation{
-		ID:                                  realmID,
-		Realm:                               realmName,
+		ID:                                  realmID.String(),
+		Realm:                               realmName.String(),
 		AccessCodeLifespan:                  1,
 		AccessCodeLifespanLogin:             2,
 		AccessCodeLifespanUserAction:        3,
@@ -53,7 +53,7 @@ func (suite *integrationTester) TestRealmCreate() {
 	err := suite.client.Realm.Create(suite.ctx, newRealm)
 	suite.NoError(err)
 
-	actualRealm, err := suite.client.Realm.Get(suite.ctx, realmName)
+	actualRealm, err := suite.client.Realm.Get(suite.ctx, realmName.String())
 	suite.NoError(err)
 	suite.NotNil(actualRealm)
 	suite.Equal(actualRealm.ID, newRealm.ID)

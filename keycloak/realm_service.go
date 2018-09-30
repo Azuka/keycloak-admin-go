@@ -1,9 +1,6 @@
 package keycloak
 
-import (
-	"context"
-	"fmt"
-)
+import "context"
 
 // RealmService interacts with all realm resources
 type RealmService service
@@ -42,17 +39,15 @@ func (rs *RealmService) Get(ctx context.Context, realm string) (*RealmRepresenta
 // Create realm with realm, known in Keycloak as import
 func (rs *RealmService) Create(ctx context.Context, realm *RealmRepresentation) error {
 	path := "/realms"
-	response, err := rs.client.newRequest(ctx).
+	_, err := rs.client.newRequest(ctx).
 		SetBody(realm).
 		Post(path)
 
 	if err != nil {
-		fmt.Printf("\nResponse: %v", response.String())
 		return err
 	}
 
-	fmt.Printf("\nResponse: %v", response.Body())
-	return err
+	return nil
 }
 
 // Delete realm with realm name (not id!)

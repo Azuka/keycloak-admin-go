@@ -61,9 +61,7 @@ func easyjson5c8673aaDecodeGithubComAzukaKeycloakAdminGoKeycloak(in *jlexer.Lexe
 				}
 				for !in.IsDelim(']') {
 					var v1 PolicyRepresentation
-					if data := in.Raw(); in.Ok() {
-						in.AddError((v1).UnmarshalJSON(data))
-					}
+					(v1).UnmarshalEasyJSON(in)
 					out.Policies = append(out.Policies, v1)
 					in.WantComma()
 				}
@@ -86,9 +84,7 @@ func easyjson5c8673aaDecodeGithubComAzukaKeycloakAdminGoKeycloak(in *jlexer.Lexe
 				}
 				for !in.IsDelim(']') {
 					var v2 ResourceRepresentation
-					if data := in.Raw(); in.Ok() {
-						in.AddError((v2).UnmarshalJSON(data))
-					}
+					(v2).UnmarshalEasyJSON(in)
 					out.Resources = append(out.Resources, v2)
 					in.WantComma()
 				}
@@ -162,7 +158,7 @@ func easyjson5c8673aaEncodeGithubComAzukaKeycloakAdminGoKeycloak(out *jwriter.Wr
 				if v3 > 0 {
 					out.RawByte(',')
 				}
-				out.Raw((v4).MarshalJSON())
+				(v4).MarshalEasyJSON(out)
 			}
 			out.RawByte(']')
 		}
@@ -181,7 +177,7 @@ func easyjson5c8673aaEncodeGithubComAzukaKeycloakAdminGoKeycloak(out *jwriter.Wr
 				if v5 > 0 {
 					out.RawByte(',')
 				}
-				out.Raw((v6).MarshalJSON())
+				(v6).MarshalEasyJSON(out)
 			}
 			out.RawByte(']')
 		}
@@ -264,9 +260,7 @@ func easyjson5c8673aaDecodeGithubComAzukaKeycloakAdminGoKeycloak1(in *jlexer.Lex
 				}
 				for !in.IsDelim(']') {
 					var v7 PolicyRepresentation
-					if data := in.Raw(); in.Ok() {
-						in.AddError((v7).UnmarshalJSON(data))
-					}
+					(v7).UnmarshalEasyJSON(in)
 					out.Policies = append(out.Policies, v7)
 					in.WantComma()
 				}
@@ -291,9 +285,7 @@ func easyjson5c8673aaDecodeGithubComAzukaKeycloakAdminGoKeycloak1(in *jlexer.Lex
 				}
 				for !in.IsDelim(']') {
 					var v8 ResourceRepresentation
-					if data := in.Raw(); in.Ok() {
-						in.AddError((v8).UnmarshalJSON(data))
-					}
+					(v8).UnmarshalEasyJSON(in)
 					out.Resources = append(out.Resources, v8)
 					in.WantComma()
 				}
@@ -316,9 +308,7 @@ func easyjson5c8673aaDecodeGithubComAzukaKeycloakAdminGoKeycloak1(in *jlexer.Lex
 				}
 				for !in.IsDelim(']') {
 					var v9 ScopeRepresentation
-					if data := in.Raw(); in.Ok() {
-						in.AddError((v9).UnmarshalJSON(data))
-					}
+					(v9).UnmarshalEasyJSON(in)
 					out.Scopes = append(out.Scopes, v9)
 					in.WantComma()
 				}
@@ -392,7 +382,7 @@ func easyjson5c8673aaEncodeGithubComAzukaKeycloakAdminGoKeycloak1(out *jwriter.W
 				if v10 > 0 {
 					out.RawByte(',')
 				}
-				out.Raw((v11).MarshalJSON())
+				(v11).MarshalEasyJSON(out)
 			}
 			out.RawByte(']')
 		}
@@ -421,7 +411,7 @@ func easyjson5c8673aaEncodeGithubComAzukaKeycloakAdminGoKeycloak1(out *jwriter.W
 				if v12 > 0 {
 					out.RawByte(',')
 				}
-				out.Raw((v13).MarshalJSON())
+				(v13).MarshalEasyJSON(out)
 			}
 			out.RawByte(']')
 		}
@@ -440,7 +430,7 @@ func easyjson5c8673aaEncodeGithubComAzukaKeycloakAdminGoKeycloak1(out *jwriter.W
 				if v14 > 0 {
 					out.RawByte(',')
 				}
-				out.Raw((v15).MarshalJSON())
+				(v15).MarshalEasyJSON(out)
 			}
 			out.RawByte(']')
 		}
@@ -551,9 +541,7 @@ func easyjson5c8673aaDecodeGithubComAzukaKeycloakAdminGoKeycloak2(in *jlexer.Lex
 				}
 				for !in.IsDelim(']') {
 					var v17 ScopeRepresentation
-					if data := in.Raw(); in.Ok() {
-						in.AddError((v17).UnmarshalJSON(data))
-					}
+					(v17).UnmarshalEasyJSON(in)
 					out.Scopes = append(out.Scopes, v17)
 					in.WantComma()
 				}
@@ -671,7 +659,7 @@ func easyjson5c8673aaEncodeGithubComAzukaKeycloakAdminGoKeycloak2(out *jwriter.W
 				if v19 > 0 {
 					out.RawByte(',')
 				}
-				out.Raw((v20).MarshalJSON())
+				(v20).MarshalEasyJSON(out)
 			}
 			out.RawByte(']')
 		}
@@ -1303,9 +1291,7 @@ func easyjson5c8673aaDecodeGithubComAzukaKeycloakAdminGoKeycloak5(in *jlexer.Lex
 				if out.AuthorizationSettings == nil {
 					out.AuthorizationSettings = new(ResourceServerRepresentation)
 				}
-				if data := in.Raw(); in.Ok() {
-					in.AddError((*out.AuthorizationSettings).UnmarshalJSON(data))
-				}
+				(*out.AuthorizationSettings).UnmarshalEasyJSON(in)
 			}
 		case "baseURL":
 			out.BaseURL = string(in.String())
@@ -1503,9 +1489,7 @@ func easyjson5c8673aaDecodeGithubComAzukaKeycloakAdminGoKeycloak5(in *jlexer.Lex
 				}
 				for !in.IsDelim(']') {
 					var v39 ProtocolMapperRepresentation
-					if data := in.Raw(); in.Ok() {
-						in.AddError((v39).UnmarshalJSON(data))
-					}
+					(v39).UnmarshalEasyJSON(in)
 					out.ProtocolMappers = append(out.ProtocolMappers, v39)
 					in.WantComma()
 				}
@@ -1741,7 +1725,7 @@ func easyjson5c8673aaEncodeGithubComAzukaKeycloakAdminGoKeycloak5(out *jwriter.W
 		} else {
 			out.RawString(prefix)
 		}
-		out.Raw((*in.AuthorizationSettings).MarshalJSON())
+		(*in.AuthorizationSettings).MarshalEasyJSON(out)
 	}
 	if in.BaseURL != "" {
 		const prefix string = ",\"baseURL\":"
@@ -1984,7 +1968,7 @@ func easyjson5c8673aaEncodeGithubComAzukaKeycloakAdminGoKeycloak5(out *jwriter.W
 				if v51 > 0 {
 					out.RawByte(',')
 				}
-				out.Raw((v52).MarshalJSON())
+				(v52).MarshalEasyJSON(out)
 			}
 			out.RawByte(']')
 		}

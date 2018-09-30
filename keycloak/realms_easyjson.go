@@ -579,9 +579,7 @@ func easyjson4c59d78cDecodeGithubComAzukaKeycloakAdminGoKeycloak3(in *jlexer.Lex
 				}
 				for !in.IsDelim(']') {
 					var v9 RoleRepresentation
-					if data := in.Raw(); in.Ok() {
-						in.AddError((v9).UnmarshalJSON(data))
-					}
+					(v9).UnmarshalEasyJSON(in)
 					out.Realm = append(out.Realm, v9)
 					in.WantComma()
 				}
@@ -601,7 +599,7 @@ func easyjson4c59d78cEncodeGithubComAzukaKeycloakAdminGoKeycloak3(out *jwriter.W
 	out.RawByte('{')
 	first := true
 	_ = first
-	{
+	if len(in.Client) != 0 {
 		const prefix string = ",\"client\":"
 		if first {
 			first = false
@@ -609,9 +607,7 @@ func easyjson4c59d78cEncodeGithubComAzukaKeycloakAdminGoKeycloak3(out *jwriter.W
 		} else {
 			out.RawString(prefix)
 		}
-		if in.Client == nil && (out.Flags&jwriter.NilMapAsEmpty) == 0 {
-			out.RawString(`null`)
-		} else {
+		{
 			out.RawByte('{')
 			v10First := true
 			for v10Name, v10Value := range in.Client {
@@ -633,7 +629,7 @@ func easyjson4c59d78cEncodeGithubComAzukaKeycloakAdminGoKeycloak3(out *jwriter.W
 			out.RawByte('}')
 		}
 	}
-	{
+	if len(in.Realm) != 0 {
 		const prefix string = ",\"realm\":"
 		if first {
 			first = false
@@ -641,15 +637,13 @@ func easyjson4c59d78cEncodeGithubComAzukaKeycloakAdminGoKeycloak3(out *jwriter.W
 		} else {
 			out.RawString(prefix)
 		}
-		if in.Realm == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v11, v12 := range in.Realm {
 				if v11 > 0 {
 					out.RawByte(',')
 				}
-				out.Raw((v12).MarshalJSON())
+				(v12).MarshalEasyJSON(out)
 			}
 			out.RawByte(']')
 		}
@@ -720,9 +714,7 @@ func easyjson4c59d78cDecodeGithubComAzukaKeycloakAdminGoKeycloak4(in *jlexer.Lex
 				*out.Composite = bool(in.Bool())
 			}
 		case "composites":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.Composites).UnmarshalJSON(data))
-			}
+			(out.Composites).UnmarshalEasyJSON(in)
 		case "containerID":
 			out.ContainerID = string(in.String())
 		case "description":
@@ -773,7 +765,7 @@ func easyjson4c59d78cEncodeGithubComAzukaKeycloakAdminGoKeycloak4(out *jwriter.W
 		} else {
 			out.RawString(prefix)
 		}
-		out.Raw((in.Composites).MarshalJSON())
+		(in.Composites).MarshalEasyJSON(out)
 	}
 	if in.ContainerID != "" {
 		const prefix string = ",\"containerID\":"
@@ -1289,9 +1281,7 @@ func easyjson4c59d78cDecodeGithubComAzukaKeycloakAdminGoKeycloak7(in *jlexer.Lex
 				}
 				for !in.IsDelim(']') {
 					var v21 AuthenticationFlowRepresentation
-					if data := in.Raw(); in.Ok() {
-						in.AddError((v21).UnmarshalJSON(data))
-					}
+					(v21).UnmarshalEasyJSON(in)
 					out.AuthenticationFlows = append(out.AuthenticationFlows, v21)
 					in.WantComma()
 				}
@@ -1314,9 +1304,7 @@ func easyjson4c59d78cDecodeGithubComAzukaKeycloakAdminGoKeycloak7(in *jlexer.Lex
 				}
 				for !in.IsDelim(']') {
 					var v22 AuthenticatorConfigRepresentation
-					if data := in.Raw(); in.Ok() {
-						in.AddError((v22).UnmarshalJSON(data))
-					}
+					(v22).UnmarshalEasyJSON(in)
 					out.AuthenticatorConfig = append(out.AuthenticatorConfig, v22)
 					in.WantComma()
 				}
@@ -1405,9 +1393,7 @@ func easyjson4c59d78cDecodeGithubComAzukaKeycloakAdminGoKeycloak7(in *jlexer.Lex
 				}
 				for !in.IsDelim(']') {
 					var v25 ClientScopeRepresentation
-					if data := in.Raw(); in.Ok() {
-						in.AddError((v25).UnmarshalJSON(data))
-					}
+					(v25).UnmarshalEasyJSON(in)
 					out.ClientScopes = append(out.ClientScopes, v25)
 					in.WantComma()
 				}
@@ -1430,9 +1416,7 @@ func easyjson4c59d78cDecodeGithubComAzukaKeycloakAdminGoKeycloak7(in *jlexer.Lex
 				}
 				for !in.IsDelim(']') {
 					var v26 ClientRepresentation
-					if data := in.Raw(); in.Ok() {
-						in.AddError((v26).UnmarshalJSON(data))
-					}
+					(v26).UnmarshalEasyJSON(in)
 					out.Clients = append(out.Clients, v26)
 					in.WantComma()
 				}
@@ -1699,9 +1683,7 @@ func easyjson4c59d78cDecodeGithubComAzukaKeycloakAdminGoKeycloak7(in *jlexer.Lex
 				}
 				for !in.IsDelim(']') {
 					var v35 IdentityProviderMapperRepresentation
-					if data := in.Raw(); in.Ok() {
-						in.AddError((v35).UnmarshalJSON(data))
-					}
+					(v35).UnmarshalEasyJSON(in)
 					out.IdentityProviderMappers = append(out.IdentityProviderMappers, v35)
 					in.WantComma()
 				}
@@ -1724,9 +1706,7 @@ func easyjson4c59d78cDecodeGithubComAzukaKeycloakAdminGoKeycloak7(in *jlexer.Lex
 				}
 				for !in.IsDelim(']') {
 					var v36 IdentityProviderRepresentation
-					if data := in.Raw(); in.Ok() {
-						in.AddError((v36).UnmarshalJSON(data))
-					}
+					(v36).UnmarshalEasyJSON(in)
 					out.IdentityProviders = append(out.IdentityProviders, v36)
 					in.WantComma()
 				}
@@ -1828,9 +1808,7 @@ func easyjson4c59d78cDecodeGithubComAzukaKeycloakAdminGoKeycloak7(in *jlexer.Lex
 				}
 				for !in.IsDelim(']') {
 					var v38 ProtocolMapperRepresentation
-					if data := in.Raw(); in.Ok() {
-						in.AddError((v38).UnmarshalJSON(data))
-					}
+					(v38).UnmarshalEasyJSON(in)
 					out.ProtocolMappers = append(out.ProtocolMappers, v38)
 					in.WantComma()
 				}
@@ -1891,9 +1869,7 @@ func easyjson4c59d78cDecodeGithubComAzukaKeycloakAdminGoKeycloak7(in *jlexer.Lex
 				}
 				for !in.IsDelim(']') {
 					var v39 RequiredActionProviderRepresentation
-					if data := in.Raw(); in.Ok() {
-						in.AddError((v39).UnmarshalJSON(data))
-					}
+					(v39).UnmarshalEasyJSON(in)
 					out.RequiredActions = append(out.RequiredActions, v39)
 					in.WantComma()
 				}
@@ -1922,9 +1898,7 @@ func easyjson4c59d78cDecodeGithubComAzukaKeycloakAdminGoKeycloak7(in *jlexer.Lex
 				*out.RevokeRefreshToken = bool(in.Bool())
 			}
 		case "roles":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.Roles).UnmarshalJSON(data))
-			}
+			(out.Roles).UnmarshalEasyJSON(in)
 		case "scopeMappings":
 			if in.IsNull() {
 				in.Skip()
@@ -1942,9 +1916,7 @@ func easyjson4c59d78cDecodeGithubComAzukaKeycloakAdminGoKeycloak7(in *jlexer.Lex
 				}
 				for !in.IsDelim(']') {
 					var v40 ScopeMappingRepresentation
-					if data := in.Raw(); in.Ok() {
-						in.AddError((v40).UnmarshalJSON(data))
-					}
+					(v40).UnmarshalEasyJSON(in)
 					out.ScopeMappings = append(out.ScopeMappings, v40)
 					in.WantComma()
 				}
@@ -2022,9 +1994,7 @@ func easyjson4c59d78cDecodeGithubComAzukaKeycloakAdminGoKeycloak7(in *jlexer.Lex
 				}
 				for !in.IsDelim(']') {
 					var v43 UserFederationMapperRepresentation
-					if data := in.Raw(); in.Ok() {
-						in.AddError((v43).UnmarshalJSON(data))
-					}
+					(v43).UnmarshalEasyJSON(in)
 					out.UserFederationMappers = append(out.UserFederationMappers, v43)
 					in.WantComma()
 				}
@@ -2047,9 +2017,7 @@ func easyjson4c59d78cDecodeGithubComAzukaKeycloakAdminGoKeycloak7(in *jlexer.Lex
 				}
 				for !in.IsDelim(']') {
 					var v44 UserFederationProviderRepresentation
-					if data := in.Raw(); in.Ok() {
-						in.AddError((v44).UnmarshalJSON(data))
-					}
+					(v44).UnmarshalEasyJSON(in)
 					out.UserFederationProviders = append(out.UserFederationProviders, v44)
 					in.WantComma()
 				}
@@ -2268,7 +2236,7 @@ func easyjson4c59d78cEncodeGithubComAzukaKeycloakAdminGoKeycloak7(out *jwriter.W
 				if v47 > 0 {
 					out.RawByte(',')
 				}
-				out.Raw((v48).MarshalJSON())
+				(v48).MarshalEasyJSON(out)
 			}
 			out.RawByte(']')
 		}
@@ -2287,7 +2255,7 @@ func easyjson4c59d78cEncodeGithubComAzukaKeycloakAdminGoKeycloak7(out *jwriter.W
 				if v49 > 0 {
 					out.RawByte(',')
 				}
-				out.Raw((v50).MarshalJSON())
+				(v50).MarshalEasyJSON(out)
 			}
 			out.RawByte(']')
 		}
@@ -2396,7 +2364,7 @@ func easyjson4c59d78cEncodeGithubComAzukaKeycloakAdminGoKeycloak7(out *jwriter.W
 				if v53 > 0 {
 					out.RawByte(',')
 				}
-				out.Raw((v54).MarshalJSON())
+				(v54).MarshalEasyJSON(out)
 			}
 			out.RawByte(']')
 		}
@@ -2415,7 +2383,7 @@ func easyjson4c59d78cEncodeGithubComAzukaKeycloakAdminGoKeycloak7(out *jwriter.W
 				if v55 > 0 {
 					out.RawByte(',')
 				}
-				out.Raw((v56).MarshalJSON())
+				(v56).MarshalEasyJSON(out)
 			}
 			out.RawByte(']')
 		}
@@ -2726,7 +2694,7 @@ func easyjson4c59d78cEncodeGithubComAzukaKeycloakAdminGoKeycloak7(out *jwriter.W
 				if v73 > 0 {
 					out.RawByte(',')
 				}
-				out.Raw((v74).MarshalJSON())
+				(v74).MarshalEasyJSON(out)
 			}
 			out.RawByte(']')
 		}
@@ -2745,7 +2713,7 @@ func easyjson4c59d78cEncodeGithubComAzukaKeycloakAdminGoKeycloak7(out *jwriter.W
 				if v75 > 0 {
 					out.RawByte(',')
 				}
-				out.Raw((v76).MarshalJSON())
+				(v76).MarshalEasyJSON(out)
 			}
 			out.RawByte(']')
 		}
@@ -2943,7 +2911,7 @@ func easyjson4c59d78cEncodeGithubComAzukaKeycloakAdminGoKeycloak7(out *jwriter.W
 				if v79 > 0 {
 					out.RawByte(',')
 				}
-				out.Raw((v80).MarshalJSON())
+				(v80).MarshalEasyJSON(out)
 			}
 			out.RawByte(']')
 		}
@@ -3032,7 +3000,7 @@ func easyjson4c59d78cEncodeGithubComAzukaKeycloakAdminGoKeycloak7(out *jwriter.W
 				if v81 > 0 {
 					out.RawByte(',')
 				}
-				out.Raw((v82).MarshalJSON())
+				(v82).MarshalEasyJSON(out)
 			}
 			out.RawByte(']')
 		}
@@ -3075,7 +3043,7 @@ func easyjson4c59d78cEncodeGithubComAzukaKeycloakAdminGoKeycloak7(out *jwriter.W
 		} else {
 			out.RawString(prefix)
 		}
-		out.Raw((in.Roles).MarshalJSON())
+		(in.Roles).MarshalEasyJSON(out)
 	}
 	if len(in.ScopeMappings) != 0 {
 		const prefix string = ",\"scopeMappings\":"
@@ -3091,7 +3059,7 @@ func easyjson4c59d78cEncodeGithubComAzukaKeycloakAdminGoKeycloak7(out *jwriter.W
 				if v83 > 0 {
 					out.RawByte(',')
 				}
-				out.Raw((v84).MarshalJSON())
+				(v84).MarshalEasyJSON(out)
 			}
 			out.RawByte(']')
 		}
@@ -3189,7 +3157,7 @@ func easyjson4c59d78cEncodeGithubComAzukaKeycloakAdminGoKeycloak7(out *jwriter.W
 				if v88 > 0 {
 					out.RawByte(',')
 				}
-				out.Raw((v89).MarshalJSON())
+				(v89).MarshalEasyJSON(out)
 			}
 			out.RawByte(']')
 		}
@@ -3208,7 +3176,7 @@ func easyjson4c59d78cEncodeGithubComAzukaKeycloakAdminGoKeycloak7(out *jwriter.W
 				if v90 > 0 {
 					out.RawByte(',')
 				}
-				out.Raw((v91).MarshalJSON())
+				(v91).MarshalEasyJSON(out)
 			}
 			out.RawByte(']')
 		}
@@ -5490,9 +5458,7 @@ func easyjson4c59d78cDecodeGithubComAzukaKeycloakAdminGoKeycloak16(in *jlexer.Le
 				}
 				for !in.IsDelim(']') {
 					var v141 ProtocolMapperRepresentation
-					if data := in.Raw(); in.Ok() {
-						in.AddError((v141).UnmarshalJSON(data))
-					}
+					(v141).UnmarshalEasyJSON(in)
 					out.ProtocolMappers = append(out.ProtocolMappers, v141)
 					in.WantComma()
 				}
@@ -5596,7 +5562,7 @@ func easyjson4c59d78cEncodeGithubComAzukaKeycloakAdminGoKeycloak16(out *jwriter.
 				if v143 > 0 {
 					out.RawByte(',')
 				}
-				out.Raw((v144).MarshalJSON())
+				(v144).MarshalEasyJSON(out)
 			}
 			out.RawByte(']')
 		}
@@ -5804,9 +5770,7 @@ func easyjson4c59d78cDecodeGithubComAzukaKeycloakAdminGoKeycloak18(in *jlexer.Le
 				}
 				for !in.IsDelim(']') {
 					var v147 AuthenticationExecutionExportRepresentation
-					if data := in.Raw(); in.Ok() {
-						in.AddError((v147).UnmarshalJSON(data))
-					}
+					(v147).UnmarshalEasyJSON(in)
 					out.AuthenticationExecutions = append(out.AuthenticationExecutions, v147)
 					in.WantComma()
 				}
@@ -5876,7 +5840,7 @@ func easyjson4c59d78cEncodeGithubComAzukaKeycloakAdminGoKeycloak18(out *jwriter.
 				if v148 > 0 {
 					out.RawByte(',')
 				}
-				out.Raw((v149).MarshalJSON())
+				(v149).MarshalEasyJSON(out)
 			}
 			out.RawByte(']')
 		}

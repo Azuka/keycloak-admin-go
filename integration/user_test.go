@@ -25,7 +25,7 @@ func (suite *integrationTester) TestUserFetch() {
 
 func (suite *integrationTester) TestUserCreate() {
 
-	randString := uuid.NewV4()
+	randString, _ := uuid.NewV4()
 
 	user := &keycloak.UserRepresentation{
 		Username: randString.String(),

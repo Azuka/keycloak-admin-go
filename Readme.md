@@ -41,7 +41,7 @@ make integration
 - [ ] Protocol Mappers
 - [ ] Realms Admin
   - [x] Get realm
-  - [~] Import realm
+  - [ ] Import realm
   - [ ] Update realm
   - [x] Delete realm
   - [ ] Get admin events
