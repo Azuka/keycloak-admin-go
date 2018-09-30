@@ -2,7 +2,6 @@ package integration_test
 
 import (
 	"github.com/Azuka/keycloak-admin-go/keycloak"
-	"github.com/satori/go.uuid"
 )
 
 func (suite *integrationTester) TestRealmFetch() {
@@ -13,28 +12,28 @@ func (suite *integrationTester) TestRealmFetch() {
 }
 
 func (suite *integrationTester) TestRealmDelete() {
-	realmID, _ := uuid.NewV4()
-	realmName, _ := uuid.NewV4()
+	realmID := pseudoRandString()
+	realmName := pseudoRandString()
 
 	newRealm := &keycloak.RealmRepresentation{
-		ID:    realmID.String(),
-		Realm: realmName.String(),
+		ID:    realmID,
+		Realm: realmName,
 	}
 
 	err := suite.client.Realm.Create(suite.ctx, newRealm)
 	suite.NoError(err)
 
-	err = suite.client.Realm.Delete(suite.ctx, realmName.String())
+	err = suite.client.Realm.Delete(suite.ctx, realmName)
 	suite.NoError(err)
 }
 
 func (suite *integrationTester) TestRealmCreate() {
-	realmID, _ := uuid.NewV4()
-	realmName, _ := uuid.NewV4()
+	realmID := pseudoRandString()
+	realmName := pseudoRandString()
 	t := func() *bool { b := true; return &b }()
 	newRealm := &keycloak.RealmRepresentation{
-		ID:                                  realmID.String(),
-		Realm:                               realmName.String(),
+		ID:                                  realmID,
+		Realm:                               realmName,
 		AccessCodeLifespan:                  1,
 		AccessCodeLifespanLogin:             2,
 		AccessCodeLifespanUserAction:        3,
@@ -53,7 +52,7 @@ func (suite *integrationTester) TestRealmCreate() {
 	err := suite.client.Realm.Create(suite.ctx, newRealm)
 	suite.NoError(err)
 
-	actualRealm, err := suite.client.Realm.Get(suite.ctx, realmName.String())
+	actualRealm, err := suite.client.Realm.Get(suite.ctx, realmName)
 	suite.NoError(err)
 	suite.NotNil(actualRealm)
 	suite.Equal(actualRealm.ID, newRealm.ID)
