@@ -43,11 +43,7 @@ func (rs *RealmService) Create(ctx context.Context, realm *RealmRepresentation) 
 		SetBody(realm).
 		Post(path)
 
-	if err != nil {
-		return err
-	}
-
-	return nil
+	return err
 }
 
 // Delete realm with realm name (not id!)
@@ -63,8 +59,5 @@ func (rs *RealmService) Delete(ctx context.Context, realm string) error {
 		SetResult(realm).
 		Delete(path)
 
-	if err != nil {
-		return err
-	}
-	return nil
+	return err
 }
