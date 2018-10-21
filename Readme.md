@@ -4,6 +4,7 @@
 [![pipeline status](https://gitlab.com/Azuka/keycloak-admin-go/badges/master/pipeline.svg)](https://gitlab.com/Azuka/keycloak-admin-go/commits/master)
 [![coverage report](https://gitlab.com/Azuka/keycloak-admin-go/badges/master/coverage.svg)](https://gitlab.com/Azuka/keycloak-admin-go/commits/master)
 [![Go Report Card](https://goreportcard.com/badge/github.com/Azuka/keycloak-admin-go)](https://goreportcard.com/report/github.com/Azuka/keycloak-admin-go)
+[![CircleCI](https://circleci.com/gh/Azuka/keycloak-admin-go.svg?style=svg)](https://circleci.com/gh/Azuka/keycloak-admin-go)
 
 Keycloak admin client in go.
 
@@ -20,6 +21,8 @@ make init
 make test
 make integration
 ```
+### Local CI
+- Install CircleCI locally: https://circleci.com/docs/2.0/local-cli
 
 ## Wish List
 - [x] Add authentication integration tests
@@ -53,7 +56,7 @@ make integration
 - [ ] Root
 
 ## Thanks to
-- https://github.com/go-resty/resty: quick and dirty REST client
+- https://gopkg.in/resty.v1: quick and dirty REST client
 - https://github.com/mailru/easyjson: faster JSON serialization
 - https://godoc.org/golang.org/x/oauth2: for the shamelessly copied authentication
 - https://github.com/fatih/gomodifytags: because I'm too lazy to type json struct tags
