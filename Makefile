@@ -19,10 +19,9 @@ CI_TEST_REPORTS ?= /tmp/test-results
 .PHONY: init-ci
 init-ci:
 	@echo "$(OK_COLOR)==> Installing minimal build requirements$(NO_COLOR)"
-	go get -u github.com/alecthomas/gometalinter
-	gometalinter --install
+	dep ensure -v
+	curl -L https://git.io/vp6lP | sh
 	go get -u github.com/jstemmer/go-junit-report
-	dep ensure
 
 .PHONY: init
 init: init-ci
@@ -86,6 +85,14 @@ test-ci:
 	    go test -v -short -race -cover -coverprofile .testCoverage.txt $(GO_PACKAGES) | tee >(go-junit-report > $(CI_TEST_REPORTS)/report.xml); \
 	    sed '/_easyjson.go/d' .testCoverage.txt > .testCoverage.txt.bak; mv .testCoverage.txt.bak .testCoverage.txt; go tool cover -func=.testCoverage.txt"
 
+# CircleCI test
+.PHONY: test-circle
+test-circle:
+	@echo "$(OK_COLOR)==> Running circle test$(NO_COLOR)"
+	mkdir -p $(CI_TEST_REPORTS)
+	/bin/bash -c "set -euxo pipefail; \
+	    go test -v -short -race -cover $(GO_PACKAGES) | tee >(go-junit-report > $(CI_TEST_REPORTS)/report.xml)"
+
 # CI Lint
 .PHONY: lint-ci
 lint-ci:
@@ -100,7 +107,10 @@ qt:
 
 .PHONY: local-ci
 local-ci:
-	@echo "$(OK_COLOR)==> Running CI locally. Did you run brew install gitlab-runner?$(NO_COLOR)"
+	@echo "$(OK_COLOR)==> Running CI locally. Did you run brew install gitlab-runner and CircleCI?$(NO_COLOR)"
+	circleci local execute --job go-1.9
+	circleci local execute --job go-1.10
+	circleci local execute --job go-1.11
 	brew services start gitlab-runner
 	gitlab-runner exec docker unit
 	gitlab-runner exec docker lint

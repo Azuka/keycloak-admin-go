@@ -5,10 +5,10 @@ import (
 	"net/url"
 	"testing"
 
-	"github.com/go-resty/resty"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 	"gopkg.in/jarcoal/httpmock.v1"
+	"gopkg.in/resty.v1"
 )
 
 func ExampleNewUserService() {
