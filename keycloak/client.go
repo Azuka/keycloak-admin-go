@@ -11,7 +11,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/go-resty/resty"
+	"gopkg.in/resty.v1"
 )
 
 const userAgent = "go/keycloak-admin"

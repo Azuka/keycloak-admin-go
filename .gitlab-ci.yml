@@ -1,8 +1,6 @@
-# This file is a template, and might need editing before it works on your project.
-image: circleci/golang:1.10
+image: circleci/golang:1.11
 
 variables:
-  # Please edit to your GitLab project
   REPO_NAME: github.com/Azuka/keycloak-admin-go
 
 cache:
@@ -33,10 +31,3 @@ unit:
     script:
       - cd $GOPATH/src/$REPO_NAME
       - make test-ci
-      - env | sort
-
-lint:
-    stage: test
-    script:
-      - cd $GOPATH/src/$REPO_NAME
-      - make lint-ci

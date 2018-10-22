@@ -1,0 +1,45 @@
+# Golang CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-go/ for more details
+references:
+  # Common configuration for all jobs
+  defaults: &defaults
+    docker:
+      - image: circleci/golang:1.9
+    working_directory: /go/src/github.com/Azuka/keycloak-admin-go
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: |
+            make init-ci
+      - run:
+          name: Lint and run tests
+          command: |
+            PATH="$(pwd)/bin:$PATH" make lint
+            make test-circle
+      - store_test_results:
+          path: /tmp/test-results
+
+version: 2
+jobs:
+  go-1.9:
+    <<: *defaults
+    docker:
+      - image: circleci/golang:1.9
+  go-1.10:
+    <<: *defaults
+    docker:
+      - image: circleci/golang:1.10
+  go-1.11:
+    <<: *defaults
+    docker:
+      - image: circleci/golang:1.11
+
+workflows:
+  version: 2
+  test-all-go-versions:
+    jobs:
+    - go-1.9
+    - go-1.10
+    - go-1.11
