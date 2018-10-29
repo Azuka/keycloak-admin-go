@@ -23,6 +23,9 @@ func (us *GroupService) GetAll(ctx context.Context, realm string) ([]GroupRepres
 	var groups []GroupRepresentation
 
 	_, err := us.client.newRequest(ctx).
+		SetPathParams(map[string]string{
+			"realm": realm,
+		}).
 		SetResult(&groups).
 		Get(path)
 
