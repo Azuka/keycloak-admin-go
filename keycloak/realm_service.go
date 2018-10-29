@@ -1,11 +1,13 @@
 package keycloak
 
-import "context"
+import (
+	"context"
+)
 
-// RealmService interacts with all realm resources
+// UserService interacts with all user resources
 type RealmService service
 
-// NewRealmService returns a new user service for working with user resources
+// NewUserService returns a new user service for working with user resources
 // in a realm.
 func NewRealmService(c *Client) *RealmService {
 	return &RealmService{
@@ -31,9 +33,26 @@ func (rs *RealmService) Get(ctx context.Context, realm string) (*RealmRepresenta
 	if err != nil {
 		return nil, err
 	}
+	return rr, nil
+}
+
+// Get returns a user in a realm
+func (us *RealmService) GetAll(ctx context.Context) ([]RealmRepresentation, error) {
+
+	// nolint: goconst
+	path := "/realms"
+
+	var realms []RealmRepresentation
+
+	_, err := us.client.newRequest(ctx).
+		SetResult(&realms).
+		Get(path)
+
+	if err != nil {
+		return nil, err
+	}
 
 	return rr, nil
-
 }
 
 // Create realm with realm, known in Keycloak as import
@@ -60,4 +79,5 @@ func (rs *RealmService) Delete(ctx context.Context, realm string) error {
 		Delete(path)
 
 	return err
+	return realms, nil
 }

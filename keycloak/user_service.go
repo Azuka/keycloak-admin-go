@@ -109,7 +109,7 @@ func (us *UserService) GetAll(ctx context.Context, realm string) ([]UserRepresen
 		SetPathParams(map[string]string{
 			"realm": realm,
 		}).
-		SetResult(users).
+		SetResult(&users).
 		Get(path)
 
 	if err != nil {
