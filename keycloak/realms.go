@@ -14,7 +14,7 @@
 
 package keycloak
 
-// RealmRepresentation represents a realm
+// RealmRepresentation represents client consents
 type RealmRepresentation struct {
 	AccessCodeLifespan                  int                                    `json:"accessCodeLifespan,omitempty"`
 	AccessCodeLifespanLogin             int                                    `json:"accessCodeLifespanLogin,omitempty"`
