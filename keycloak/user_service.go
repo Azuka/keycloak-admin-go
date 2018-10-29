@@ -97,6 +97,28 @@ func (us *UserService) Get(ctx context.Context, realm string, userID string) (*U
 	return user, nil
 }
 
+// Get returns a user in a realm
+func (us *UserService) GetAll(ctx context.Context, realm string) ([]UserRepresentation, error) {
+
+	// nolint: goconst
+	path := "/realms/{realm}/users"
+
+	var users []UserRepresentation
+
+	_, err := us.client.newRequest(ctx).
+		SetPathParams(map[string]string{
+			"realm": realm,
+		}).
+		SetResult(users).
+		Get(path)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return users, nil
+}
+
 // Update user information
 // Response is a 204: No Content
 func (us *UserService) Update(ctx context.Context, realm string, user *UserRepresentation) error {
