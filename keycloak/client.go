@@ -25,6 +25,7 @@ type Client struct {
 	Users  *UserService
 	Realms *RealmService
 	Groups *GroupService
+	Roles  *RoleService
 }
 
 // NewClient creates a new client instance set to talk to the keycloak service
@@ -41,7 +42,7 @@ func NewClient(u url.URL, c *http.Client) *Client {
 	client.Users = NewUserService(client)
 	client.Realms = NewRealmService(client)
 	client.Groups = NewGroupService(client)
-
+	client.Roles = NewRoleService(client)
 	return client
 }
 
