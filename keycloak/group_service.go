@@ -38,36 +38,36 @@ func (us *GroupService) Get(ctx context.Context, realm string, groupId string) (
 }
 
 // Get returns a user in a realm
-func (us *GroupService) AddRole(ctx context.Context, realm string, groupId string, roleName string) error {
+func (us *GroupService) AddRole(ctx context.Context, realm string, groupId string, role RoleRepresentation) error {
 
 	// nolint: goconst
 	path := "/realms/{realm}/groups/{id}/role-mappings/realm"
-	addedRole := &RoleRepresentation{Name: roleName}
+	roles := &[]RoleRepresentation{role}
 
 	_, err := us.client.newRequest(ctx).
 		SetPathParams(map[string]string{
 			"realm": realm,
 			"id":    groupId,
 		}).
-		SetBody(addedRole).
-		Put(path)
+		SetBody(roles).
+		Post(path)
 
 	return err
 }
 
 // Get returns a user in a realm
-func (us *GroupService) DeleteRole(ctx context.Context, realm string, groupId string, roleName string) error {
+func (us *GroupService) DeleteRole(ctx context.Context, realm string, groupId string, role RoleRepresentation) error {
 
 	// nolint: goconst
 	path := "/realms/{realm}/groups/{id}/role-mappings/realm"
-	deletedRole := &RoleRepresentation{Name: roleName}
+	roles := &[]RoleRepresentation{role}
 
 	_, err := us.client.newRequest(ctx).
 		SetPathParams(map[string]string{
 			"realm": realm,
 			"id":    groupId,
 		}).
-		SetBody(deletedRole).
+		SetBody(roles).
 		Delete(path)
 
 	return err
