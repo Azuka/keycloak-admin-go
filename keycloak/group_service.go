@@ -38,6 +38,23 @@ func (us *GroupService) Get(ctx context.Context, realm string, groupId string) (
 }
 
 // Get returns a user in a realm
+func (us *GroupService) Put(ctx context.Context, realm string, groupId string, group *GroupRepresentation) error {
+
+	// nolint: goconst
+	path := "/realms/{realm}/groups/{id}"
+
+	_, err := us.client.newRequest(ctx).
+		SetPathParams(map[string]string{
+			"realm": realm,
+			"id":    groupId,
+		}).
+		SetBody(group).
+		Put(path)
+
+	return err
+}
+
+// Get returns a user in a realm
 func (us *GroupService) GetAllDetail(ctx context.Context, realm string) ([]GroupRepresentation, error) {
 
 	var result []GroupRepresentation
