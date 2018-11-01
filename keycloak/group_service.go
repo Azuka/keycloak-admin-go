@@ -53,7 +53,7 @@ func (us *GroupService) GetAllDetail(ctx context.Context, realm string) ([]Group
 			return nil, err
 		}
 
-		result = append(result, g)
+		result = append(result, *g)
 	}
 
 	return result, nil
