@@ -40,7 +40,7 @@ func (us *RoleService) GetAllMapping(ctx context.Context, realm string, groupId 
 func (us *RoleService) GetAll(ctx context.Context, realm string) ([]RoleRepresentation, error) {
 
 	// nolint: goconst
-	path := "/realms/{realm}/clients/admin-cli/roles"
+	path := "/realms/{realm}/roles"
 
 	var roles []RoleRepresentation
 
