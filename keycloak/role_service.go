@@ -14,19 +14,19 @@ func NewRoleService(c *Client) *RoleService {
 }
 
 // Get returns a user in a realm
-func (us *RoleService) GetAllMapping(ctx context.Context, realm string, groupId string) ([]MappingRepresentation, error) {
+func (us *RoleService) GetAllMapping(ctx context.Context, realm string, groupId string) (*MappingRepresentation, error) {
 
 	// nolint: goconst
 	path := "/realms/{realm}/groups/{id}/role-mappings"
 
-	var mappings []MappingRepresentation
+	mappings := &MappingRepresentation{}
 
 	_, err := us.client.newRequest(ctx).
 		SetPathParams(map[string]string{
 			"realm": realm,
 			"id":    groupId,
 		}).
-		SetResult(&mappings).
+		SetResult(mappings).
 		Get(path)
 
 	if err != nil {
