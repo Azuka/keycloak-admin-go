@@ -68,19 +68,16 @@ func (suite *integrationTester) SetupSuite() {
 	suite.client.Debug()
 
 	ctx, cancel := context.WithTimeout(context.Background(), time.Minute*2)
+	defer cancel()
 
 	go func() {
 		err := backoff.Retry(connect, backoff.WithContext(backoff.NewExponentialBackOff(), ctx))
 		if err != nil {
-			// Handle error.
-			cancel()
+			fmt.Println("error connecting: ", err)
 		}
 	}()
-}
 
-func (suite *integrationTester) SetupTest() {
-	r := <-suite.ready
-	suite.NotNil(r)
+	<-suite.ready
 }
 
 func TestKeycloakAdminIntegration(t *testing.T) {

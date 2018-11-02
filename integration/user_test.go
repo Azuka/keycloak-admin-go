@@ -2,7 +2,6 @@ package integration_test
 
 import (
 	"github.com/Azuka/keycloak-admin-go/keycloak"
-	"github.com/satori/go.uuid"
 )
 
 func (suite *integrationTester) TestUserFetch() {
@@ -25,11 +24,9 @@ func (suite *integrationTester) TestUserFetch() {
 
 func (suite *integrationTester) TestUserCreate() {
 
-	randString := uuid.NewV4()
-
 	user := &keycloak.UserRepresentation{
-		Username: randString.String(),
-		Email:    randString.String() + "@example.com",
+		Username: pseudoRandString(),
+		Email:    pseudoRandString() + "@example.com",
 	}
 
 	id, err := suite.client.Users.Create(suite.ctx, keycloakAdminRealm, user)
