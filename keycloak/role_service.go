@@ -36,6 +36,24 @@ func (us *RoleService) GetAllMapping(ctx context.Context, realm string, groupId 
 	return mappings, nil
 }
 
+// Create a new role in realm
+func (us *RoleService) CreateRole(ctx context.Context, realm string, roleName string, description string) error {
+
+	// nolint: goconst
+	path := "/realms/{realm}/roles"
+
+	role := RoleRepresentation{Name: roleName, Description: description}
+
+	_, err := us.client.newRequest(ctx).
+		SetPathParams(map[string]string{
+			"realm": realm,
+		}).
+		SetBody(&role).
+		Post(path)
+
+	return err
+}
+
 // Get returns a user in a realm
 func (us *RoleService) GetAll(ctx context.Context, realm string) ([]RoleRepresentation, error) {
 
