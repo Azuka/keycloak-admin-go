@@ -4,7 +4,6 @@
 //go:generate gomodifytags -file $GOFILE -struct ScopeRepresentation -add-options json=omitempty -add-tags json -w -transform camelcase
 //go:generate gomodifytags -file $GOFILE -struct ResourceRepresentation -add-options json=omitempty -add-tags json -w -transform camelcase
 //go:generate gomodifytags -file $GOFILE -struct ProtocolMapperRepresentation -add-options json=omitempty -add-tags json -w -transform camelcase
-//go:generate easyjson -all $GOFILE
 
 package keycloak
 

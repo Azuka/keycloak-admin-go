@@ -11,7 +11,6 @@
 //go:generate gomodifytags -file $GOFILE -struct ScopeMappingRepresentation -add-options json=omitempty -add-tags json -w -transform camelcase
 //go:generate gomodifytags -file $GOFILE -struct UserFederationMapperRepresentation -add-options json=omitempty -add-tags json -w -transform camelcase
 //go:generate gomodifytags -file $GOFILE -struct UserFederationProviderRepresentation -add-options json=omitempty -add-tags json -w -transform camelcase
-//go:generate easyjson -all $GOFILE
 
 package keycloak
 
