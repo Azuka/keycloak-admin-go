@@ -81,3 +81,49 @@ func (rs *RealmService) Delete(ctx context.Context, realm string) error {
 	return err
 	return realms, nil
 }
+
+// Get realm with realm name (not id!)
+func (rs *RealmService) Get(ctx context.Context, realm string) (*RealmRepresentation, error) {
+	path := "/realms/{realm}"
+
+	rr := &RealmRepresentation{}
+
+	_, err := rs.client.newRequest(ctx).
+		SetPathParams(map[string]string{
+			"realm": realm,
+		}).
+		SetResult(rr).
+		Get(path)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return rr, nil
+}
+
+// Create realm with realm, known in Keycloak as import
+func (rs *RealmService) Create(ctx context.Context, realm *RealmRepresentation) error {
+	path := "/realms"
+	_, err := rs.client.newRequest(ctx).
+		SetBody(realm).
+		Post(path)
+
+	return err
+}
+
+// Delete realm with realm name (not id!)
+func (rs *RealmService) Delete(ctx context.Context, realm string) error {
+
+	// nolint: goconst
+	path := "/realms/{realm}"
+
+	_, err := rs.client.newRequest(ctx).
+		SetPathParams(map[string]string{
+			"realm": realm,
+		}).
+		SetResult(realm).
+		Delete(path)
+
+	return err
+}
