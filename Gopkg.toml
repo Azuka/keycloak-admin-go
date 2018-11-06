@@ -30,10 +30,6 @@
   version = "1.7.0"
 
 [[constraint]]
-  branch = "master"
-  name = "github.com/mailru/easyjson"
-
-[[constraint]]
   branch = "v1"
   name = "gopkg.in/jarcoal/httpmock.v1"
 
