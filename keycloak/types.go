@@ -1,3 +1,5 @@
+//go:generate gomodifytags -file $GOFILE -struct MultivaluedHashMap -add-options json=omitempty -add-tags json -w -transform camelcase
+
 package keycloak
 
 import (
@@ -32,4 +34,12 @@ func (t *UnixTime) UnmarshalJSON(s []byte) error {
 
 func (t UnixTime) String() string {
 	return time.Time(t).String()
+}
+
+// MultivaluedHashMap multivalued map
+// easyjson:json
+type MultivaluedHashMap struct {
+	Empty      bool    `json:"empty,omitempty"`
+	LoadFactor float64 `json:"loadFactor,omitempty"`
+	Threshold  int32   `json:"threshold,omitempty"`
 }

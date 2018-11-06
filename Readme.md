@@ -40,6 +40,12 @@ make integration
 - [ ] Key
 - [ ] Protocol Mappers
 - [ ] Realms Admin
+  - [x] Get realm
+  - [ ] Import realm
+  - [ ] Update realm
+  - [x] Delete realm
+  - [ ] Get admin events
+  - [ ] Delete admin events
 - [ ] Role Mapper
 - [ ] Roles
 - [ ] Roles (by ID)
@@ -57,6 +63,5 @@ make integration
 
 ## Thanks to
 - https://gopkg.in/resty.v1: quick and dirty REST client
-- https://github.com/mailru/easyjson: faster JSON serialization
 - https://godoc.org/golang.org/x/oauth2: for the shamelessly copied authentication
 - https://github.com/fatih/gomodifytags: because I'm too lazy to type json struct tags

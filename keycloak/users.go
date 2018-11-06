@@ -4,7 +4,6 @@
 //go:generate gomodifytags -file $GOFILE -struct FederatedIdentityRepresentation -add-options json=omitempty -add-tags json -w -transform camelcase
 //go:generate gomodifytags -file $GOFILE -struct UserSessionRepresentation -add-options json=omitempty -add-tags json -w -transform camelcase
 //go:generate gomodifytags -file $GOFILE -struct GroupRepresentation -add-options json=omitempty -add-tags json -w -transform camelcase
-//go:generate easyjson -all $GOFILE
 
 package keycloak
 

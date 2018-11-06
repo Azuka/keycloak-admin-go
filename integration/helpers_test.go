@@ -17,5 +17,5 @@ func pseudoRandString() string {
 		prefix[i] = chars[rand.Intn(len(chars))]
 	}
 
-	return fmt.Sprintf("%s-%d", string(chars), time.Now().Unix())
+	return fmt.Sprintf("%s-%d", string(prefix), time.Now().Unix())
 }

@@ -39,7 +39,6 @@ format:
 .PHONY: generate
 generate:
 	@echo "$(OK_COLOR)==> Generating code$(NO_COLOR)"
-	@rm -rf $(PWD)/keycloak/*_easyjson.go
 	@go generate ./...
 
 # Lint
