@@ -9,13 +9,15 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+	"time"
 
 	"encoding/json"
+	"io"
+	"io/ioutil"
+
 	"golang.org/x/net/context"
 	"golang.org/x/net/context/ctxhttp"
 	"golang.org/x/oauth2"
-	"io"
-	"io/ioutil"
 )
 
 // Config describes a 2-legged OAuth2 flow, with both the
@@ -110,13 +112,24 @@ func (c *tokenSource) Token() (*oauth2.Token, error) {
 		return nil, fmt.Errorf("oauth2: cannot fetch token: %v\nResponse: %s", r.Status, body)
 	}
 
-	tk := &oauth2.Token{}
+	var tokenRes struct {
+		RefreshToken string `json:"refresh_token"`
+		AccessToken  string `json:"access_token"`
+		TokenType    string `json:"token_type"`
+		IDToken      string `json:"id_token"`
+		ExpiresIn    int64  `json:"expires_in"` // relative seconds from now
+	}
 
-	err = json.Unmarshal(body, tk)
-
+	err = json.Unmarshal(body, &tokenRes)
 	if err != nil {
 		return nil, err
 	}
 
+	tk := &oauth2.Token{
+		Expiry:       time.Now().Add(time.Second * time.Duration(tokenRes.ExpiresIn)),
+		AccessToken:  tokenRes.AccessToken,
+		RefreshToken: tokenRes.RefreshToken,
+		TokenType:    tokenRes.TokenType,
+	}
 	return tk.WithExtra(body), nil
 }
