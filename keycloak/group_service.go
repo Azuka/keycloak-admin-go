@@ -16,6 +16,50 @@ func NewGroupService(c *Client) *GroupService {
 }
 
 // Get returns a user in a realm
+func (us *GroupService) Create(ctx context.Context, realm string, groupName string) (*GroupRepresentation, error) {
+
+	// nolint: goconst
+	path := "/realms/{realm}/groups"
+	group := &GroupRepresentation{}
+	group.Name = groupName
+
+	_, err := us.client.newRequest(ctx).
+		SetPathParams(map[string]string{
+			"realm": realm,
+		}).
+		SetBody(group).
+		Post(path)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return group, nil
+}
+
+// Get returns a user in a realm
+func (us *GroupService) Delete(ctx context.Context, realm string, groupId string) (*GroupRepresentation, error) {
+
+	// nolint: goconst
+	path := "/realms/{realm}/groups/{groupId}"
+	group := &GroupRepresentation{}
+
+	_, err := us.client.newRequest(ctx).
+		SetPathParams(map[string]string{
+			"realm":   realm,
+			"groupId": groupId,
+		}).
+		SetBody(group).
+		Delete(path)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return group, nil
+}
+
+// Get returns a user in a realm
 func (us *GroupService) Get(ctx context.Context, realm string, groupId string) (*GroupRepresentation, error) {
 
 	// nolint: goconst

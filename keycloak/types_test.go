@@ -21,6 +21,16 @@ var timeMarshalCases = []struct {
 	},
 }
 
+func TestTimeUnmarshalFails(t *testing.T) {
+	a := assert.New(t)
+
+	var v2 UnixTime
+	v := "hogehoge"
+	err := json.Unmarshal([]byte(v), &v2)
+
+	a.Error(err)
+}
+
 func TestTimeMarshalUnmarshal(t *testing.T) {
 	a := assert.New(t)
 
