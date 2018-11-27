@@ -16,7 +16,7 @@ func NewGroupService(c *Client) *GroupService {
 }
 
 // Get returns a user in a realm
-func (us *GroupService) Create(ctx context.Context, realm string, groupName string) (*GroupRepresentation, error) {
+func (us *GroupService) Create(ctx context.Context, realm string, groupName string) error {
 
 	// nolint: goconst
 	path := "/realms/{realm}/groups"
@@ -31,14 +31,14 @@ func (us *GroupService) Create(ctx context.Context, realm string, groupName stri
 		Post(path)
 
 	if err != nil {
-		return nil, err
+		return err
 	}
 
-	return group, nil
+	return nil
 }
 
 // Get returns a user in a realm
-func (us *GroupService) Delete(ctx context.Context, realm string, groupId string) (*GroupRepresentation, error) {
+func (us *GroupService) Delete(ctx context.Context, realm string, groupId string) error {
 
 	// nolint: goconst
 	path := "/realms/{realm}/groups/{groupId}"
@@ -53,10 +53,10 @@ func (us *GroupService) Delete(ctx context.Context, realm string, groupId string
 		Delete(path)
 
 	if err != nil {
-		return nil, err
+		return err
 	}
 
-	return group, nil
+	return nil
 }
 
 // Get returns a user in a realm
