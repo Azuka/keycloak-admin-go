@@ -90,9 +90,12 @@ func (c *tokenSource) Token() (*oauth2.Token, error) {
 	}
 
 	req, err := http.NewRequest("POST", c.conf.TokenURL, strings.NewReader(v.Encode()))
-	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 	if err != nil {
 		return nil, err
+	}
+	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+	if c.conf.ClientID != "" {
+		req.SetBasicAuth(c.conf.ClientID, c.conf.ClientSecret)
 	}
 
 	r, err := ctxhttp.Do(c.ctx, c.conf.HTTPClient, req)
@@ -126,7 +129,7 @@ func (c *tokenSource) Token() (*oauth2.Token, error) {
 	}
 
 	tk := &oauth2.Token{
-		Expiry:       time.Now().Add(time.Second * time.Duration(tokenRes.ExpiresIn)),
+		Expiry:       time.Now().Add(5 * time.Minute),
 		AccessToken:  tokenRes.AccessToken,
 		RefreshToken: tokenRes.RefreshToken,
 		TokenType:    tokenRes.TokenType,
