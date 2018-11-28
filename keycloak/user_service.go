@@ -367,3 +367,39 @@ func (us *UserService) ResetPassword(ctx context.Context, realm string, userID s
 
 	return err
 }
+
+// Get returns a user in a realm
+func (us *UserService) AddRole(ctx context.Context, realm string, userId string, role RoleRepresentation) error {
+
+	// nolint: goconst
+	path := "/realms/{realm}/users/{id}/role-mappings/realm"
+	roles := &[]RoleRepresentation{role}
+
+	_, err := us.client.newRequest(ctx).
+		SetPathParams(map[string]string{
+			"realm": realm,
+			"id":    userId,
+		}).
+		SetBody(roles).
+		Post(path)
+
+	return err
+}
+
+// Get returns a user in a realm
+func (us *UserService) DeleteRole(ctx context.Context, realm string, userId string, role RoleRepresentation) error {
+
+	// nolint: goconst
+	path := "/realms/{realm}/users/{id}/role-mappings/realm"
+	roles := &[]RoleRepresentation{role}
+
+	_, err := us.client.newRequest(ctx).
+		SetPathParams(map[string]string{
+			"realm": realm,
+			"id":    userId,
+		}).
+		SetBody(roles).
+		Delete(path)
+
+	return err
+}
