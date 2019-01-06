@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+	"time"
 
 	"encoding/json"
 	"golang.org/x/net/context"
@@ -17,6 +18,8 @@ import (
 	"io"
 	"io/ioutil"
 )
+
+const expirationSkew = 5
 
 // Config describes a 2-legged OAuth2 flow, with both the
 // client application information and the server's endpoint URLs.
@@ -73,9 +76,9 @@ type tokenSource struct {
 	conf *Config
 }
 
-// Token refreshes the token by using a new client credentials request.
+// KeycloakToken refreshes the token by using a new request.
 // tokens received this way do not include a refresh token
-func (c *tokenSource) Token() (*oauth2.Token, error) {
+func (c *tokenSource) KeycloakToken() (*Token, error) {
 	v := url.Values{}
 	if len(c.conf.Scopes) > 0 {
 		v.Set("scope", strings.Join(c.conf.Scopes, " "))
@@ -99,18 +102,22 @@ func (c *tokenSource) Token() (*oauth2.Token, error) {
 		return nil, err
 	}
 
+	if r.Body == nil {
+		return nil, fmt.Errorf("oauth2: empty keycloak auth response")
+	}
+
 	// nolint: errcheck
 	defer r.Body.Close()
 
 	body, err := ioutil.ReadAll(io.LimitReader(r.Body, 1<<20))
 	if err != nil {
-		return nil, fmt.Errorf("oauth2: cannot fetch token: %v", err)
+		return nil, fmt.Errorf("oauth2: cannot fetch keycloak token: %v", err)
 	}
 	if code := r.StatusCode; code < 200 || code > 299 {
-		return nil, fmt.Errorf("oauth2: cannot fetch token: %v\nResponse: %s", r.Status, body)
+		return nil, fmt.Errorf("oauth2: cannot fetch keycloak token: %v\nResponse: %s", r.Status, body)
 	}
 
-	tk := &oauth2.Token{}
+	tk := &Token{}
 
 	err = json.Unmarshal(body, tk)
 
@@ -118,5 +125,19 @@ func (c *tokenSource) Token() (*oauth2.Token, error) {
 		return nil, err
 	}
 
-	return tk.WithExtra(body), nil
+	tk.Expiry = time.Now().Add(time.Second * time.Duration(tk.ExpiresIn-expirationSkew))
+
+	return tk, nil
+}
+
+// Token returns the oauth2.Token representation of the keycloak token
+func (c *tokenSource) Token() (*oauth2.Token, error) {
+
+	tkn, err := c.KeycloakToken()
+
+	if err != nil {
+		return nil, err
+	}
+
+	return tkn.Oauth2Token(), nil
 }
