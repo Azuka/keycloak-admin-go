@@ -6,9 +6,9 @@ import (
 
 func (suite *integrationTester) TestRealmFetch() {
 	realm, err := suite.client.Realm.Get(suite.ctx, keycloakAdminRealm)
-	suite.NotNil(realm)
-	suite.NoError(err)
-	suite.Equal(keycloakAdminRealm, realm.ID)
+	suite.NotNil(realm, suite.version)
+	suite.NoError(err, suite.version)
+	suite.Equal(keycloakAdminRealm, realm.ID, suite.version)
 }
 
 func (suite *integrationTester) TestRealmDelete() {
@@ -21,10 +21,10 @@ func (suite *integrationTester) TestRealmDelete() {
 	}
 
 	err := suite.client.Realm.Create(suite.ctx, newRealm)
-	suite.NoError(err)
+	suite.NoError(err, suite.version)
 
 	err = suite.client.Realm.Delete(suite.ctx, realmName)
-	suite.NoError(err)
+	suite.NoError(err, suite.version)
 }
 
 func (suite *integrationTester) TestRealmCreate() {
@@ -50,25 +50,25 @@ func (suite *integrationTester) TestRealmCreate() {
 	}
 
 	err := suite.client.Realm.Create(suite.ctx, newRealm)
-	suite.NoError(err)
+	suite.NoError(err, suite.version)
 
 	actualRealm, err := suite.client.Realm.Get(suite.ctx, realmName)
-	suite.NoError(err)
-	suite.NotNil(actualRealm)
-	suite.Equal(actualRealm.ID, newRealm.ID)
-	suite.Equal(actualRealm.Realm, newRealm.Realm)
+	suite.NoError(err, suite.version)
+	suite.NotNil(actualRealm, suite.version)
+	suite.Equal(actualRealm.ID, newRealm.ID, suite.version)
+	suite.Equal(actualRealm.Realm, newRealm.Realm, suite.version)
 
-	suite.Equal(actualRealm.AccessCodeLifespan, newRealm.AccessCodeLifespan)
-	suite.Equal(actualRealm.AccessCodeLifespanLogin, newRealm.AccessCodeLifespanLogin)
-	suite.Equal(actualRealm.AccessCodeLifespanUserAction, newRealm.AccessCodeLifespanUserAction)
-	suite.Equal(actualRealm.AccessTokenLifespan, newRealm.AccessTokenLifespan)
-	suite.Equal(actualRealm.AccessTokenLifespanForImplicitFlow, newRealm.AccessTokenLifespanForImplicitFlow)
-	suite.Equal(actualRealm.AccountTheme, newRealm.AccountTheme)
-	suite.Equal(actualRealm.ActionTokenGeneratedByAdminLifespan, newRealm.ActionTokenGeneratedByAdminLifespan)
-	suite.Equal(actualRealm.ActionTokenGeneratedByUserLifespan, newRealm.ActionTokenGeneratedByUserLifespan)
-	suite.Equal(actualRealm.AdminEventsDetailsEnabled, newRealm.AdminEventsDetailsEnabled)
-	suite.Equal(actualRealm.AdminEventsEnabled, newRealm.AdminEventsEnabled)
-	suite.Equal(actualRealm.AdminTheme, newRealm.AdminTheme)
-	suite.Equal(actualRealm.DisplayName, newRealm.DisplayName)
-	suite.Equal(actualRealm.DisplayNameHTML, newRealm.DisplayNameHTML)
+	suite.Equal(actualRealm.AccessCodeLifespan, newRealm.AccessCodeLifespan, suite.version)
+	suite.Equal(actualRealm.AccessCodeLifespanLogin, newRealm.AccessCodeLifespanLogin, suite.version)
+	suite.Equal(actualRealm.AccessCodeLifespanUserAction, newRealm.AccessCodeLifespanUserAction, suite.version)
+	suite.Equal(actualRealm.AccessTokenLifespan, newRealm.AccessTokenLifespan, suite.version)
+	suite.Equal(actualRealm.AccessTokenLifespanForImplicitFlow, newRealm.AccessTokenLifespanForImplicitFlow, suite.version)
+	suite.Equal(actualRealm.AccountTheme, newRealm.AccountTheme, suite.version)
+	suite.Equal(actualRealm.ActionTokenGeneratedByAdminLifespan, newRealm.ActionTokenGeneratedByAdminLifespan, suite.version)
+	suite.Equal(actualRealm.ActionTokenGeneratedByUserLifespan, newRealm.ActionTokenGeneratedByUserLifespan, suite.version)
+	suite.Equal(actualRealm.AdminEventsDetailsEnabled, newRealm.AdminEventsDetailsEnabled, suite.version)
+	suite.Equal(actualRealm.AdminEventsEnabled, newRealm.AdminEventsEnabled, suite.version)
+	suite.Equal(actualRealm.AdminTheme, newRealm.AdminTheme, suite.version)
+	suite.Equal(actualRealm.DisplayName, newRealm.DisplayName, suite.version)
+	suite.Equal(actualRealm.DisplayNameHTML, newRealm.DisplayNameHTML, suite.version)
 }
