@@ -12,23 +12,43 @@ import (
 	"time"
 
 	"encoding/json"
+	"io"
+	"io/ioutil"
+
 	"golang.org/x/net/context"
 	"golang.org/x/net/context/ctxhttp"
 	"golang.org/x/oauth2"
-	"io"
-	"io/ioutil"
 )
 
+const (
+	// ClientCredentialsGrant applies to client credentials
+	ClientCredentialsGrant = "client_credentials"
+
+	// PasswordGrant is for the password grant
+	PasswordGrant = "password"
+)
+
+// skew for token expiry
 const expirationSkew = 5
 
 // Config describes a 2-legged OAuth2 flow, with both the
 // client application information and the server's endpoint URLs.
 type Config struct {
-	// ClientID is the application's ID.
+	// ClientID is the application's ID. This should be set for both
+	// password and client credentials grants
 	ClientID string
 
 	// ClientSecret is the application's secret.
 	ClientSecret string
+
+	// Username is the username (if using the password grant).
+	Username string
+
+	// Password is user's password (if using the password grant).
+	Password string
+
+	// GrantType is the auth grant type
+	GrantType string
 
 	// TokenURL is the resource server's token endpoint
 	// URL. This is a constant specific to each server.
@@ -80,9 +100,33 @@ type tokenSource struct {
 // tokens received this way do not include a refresh token
 func (c *tokenSource) KeycloakToken() (*Token, error) {
 	v := url.Values{}
+
+	// Set scopes
 	if len(c.conf.Scopes) > 0 {
 		v.Set("scope", strings.Join(c.conf.Scopes, " "))
 	}
+
+	// Set client_id and client_secret
+	if c.conf.ClientID != "" {
+		v.Set("client_id", c.conf.ClientID)
+	}
+	if c.conf.ClientSecret != "" {
+		v.Set("client_secret", c.conf.ClientSecret)
+	}
+
+	// Set grant type
+	if c.conf.GrantType != "" {
+		v.Set("grant_type", c.conf.GrantType)
+	}
+
+	// Set username and password
+	if c.conf.Username != "" {
+		v.Set("username", c.conf.Username)
+	}
+	if c.conf.Password != "" {
+		v.Set("password", c.conf.Password)
+	}
+
 	for k, p := range c.conf.EndpointParams {
 		if _, ok := v[k]; ok {
 			return nil, fmt.Errorf("keycloak oauth2: cannot overwrite parameter %q", k)

@@ -5,6 +5,9 @@ import (
 	"time"
 )
 
+// raw value for storing keycloak token in oauth2 token
+const keycloakTokenKey = "keycloakTokenKey"
+
 // TokenSource builds on the existing oauth.TokenSource
 // with an additional method for fetching a raw keycloak token
 type TokenSource interface {
@@ -62,5 +65,16 @@ func (t *Token) Oauth2Token() *oauth2.Token {
 		Expiry:       t.Expiry,
 	}
 
-	return tkn.WithExtra(t)
+	return tkn.WithExtra(map[string]interface{}{
+		keycloakTokenKey: t,
+	})
+}
+
+// Extract extracts a keycloak token from an oauth one
+func Extract(o *oauth2.Token) *Token {
+	if tkn, ok := o.Extra(keycloakTokenKey).(*Token); ok {
+		return tkn
+	}
+
+	return nil
 }

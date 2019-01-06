@@ -35,14 +35,11 @@ type integrationTester struct {
 
 func (suite *integrationTester) httpClient() *http.Client {
 	config := auth.Config{
-		ClientID: keycloakAdminClientID,
-		TokenURL: suite.endpoint + "realms/" + keycloakAdminRealm + "/protocol/openid-connect/token",
-		EndpointParams: url.Values{
-			"username":   {keycloakAdmin},
-			"password":   {keycloakPassword},
-			"grant_type": {"password"},
-			"client_id":  {keycloakAdminClientID},
-		},
+		ClientID:  keycloakAdminClientID,
+		Username:  keycloakAdmin,
+		Password:  keycloakPassword,
+		GrantType: auth.PasswordGrant,
+		TokenURL:  suite.endpoint + "realms/" + keycloakAdminRealm + "/protocol/openid-connect/token",
 	}
 
 	http.DefaultClient.Timeout = time.Second * 5
@@ -71,14 +68,13 @@ func (suite *integrationTester) SetupSuite() {
 	suite.client = keycloak.NewClient(*u, suite.httpClient())
 	suite.client.Debug()
 
-	ctx, cancel := context.WithTimeout(context.Background(), time.Minute*2)
+	ctx, cancel := context.WithTimeout(context.Background(), time.Minute*10)
 	defer cancel()
 
 	go func() {
 		err := backoff.Retry(connect, backoff.WithContext(backoff.NewExponentialBackOff(), ctx))
 		if err != nil {
-			fmt.Println("error connecting: ", err)
-			close(suite.ready)
+			panic(fmt.Errorf("error connecting: %+v", err))
 		}
 	}()
 
