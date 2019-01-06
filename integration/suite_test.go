@@ -14,24 +14,29 @@ import (
 	"github.com/stretchr/testify/suite"
 )
 
-const keycloakEndpoint = "http://127.0.0.1:9090/auth/"
 const keycloakAdmin = "keycloak-admin"
 const keycloakPassword = "changeme"
 const keycloakAdminRealm = "master"
 const keycloakAdminClientID = "admin-cli"
 
+var keyCloakEndpoints = map[string]string{
+	"4.0.0": "http://127.0.0.1:9090/auth/",
+	"4.8.0": "http://127.0.0.1:9098/auth/",
+}
+
 type integrationTester struct {
 	ready chan struct{}
 	suite.Suite
-	client *keycloak.Client
-	ctx    context.Context
+	client   *keycloak.Client
+	ctx      context.Context
+	version  string
+	endpoint string
 }
 
-func getHTTPClient(ctx context.Context) *http.Client {
-
+func (suite *integrationTester) httpClient() *http.Client {
 	config := auth.Config{
 		ClientID: keycloakAdminClientID,
-		TokenURL: keycloakEndpoint + "realms/" + keycloakAdminRealm + "/protocol/openid-connect/token",
+		TokenURL: suite.endpoint + "realms/" + keycloakAdminRealm + "/protocol/openid-connect/token",
 		EndpointParams: url.Values{
 			"username":   {keycloakAdmin},
 			"password":   {keycloakPassword},
@@ -41,8 +46,7 @@ func getHTTPClient(ctx context.Context) *http.Client {
 	}
 
 	http.DefaultClient.Timeout = time.Second * 5
-
-	return config.Client(ctx)
+	return config.Client(suite.ctx)
 }
 
 func (suite *integrationTester) SetupSuite() {
@@ -50,7 +54,7 @@ func (suite *integrationTester) SetupSuite() {
 	suite.ctx = context.Background()
 
 	connect := func() error {
-		_, err := http.Get(keycloakEndpoint)
+		_, err := http.Get(suite.endpoint)
 
 		if err == nil {
 			close(suite.ready)
@@ -63,8 +67,8 @@ func (suite *integrationTester) SetupSuite() {
 	}
 
 	// Setup test client
-	u, _ := url.Parse(keycloakEndpoint + "admin")
-	suite.client = keycloak.NewClient(*u, getHTTPClient(suite.ctx))
+	u, _ := url.Parse(suite.endpoint + "admin")
+	suite.client = keycloak.NewClient(*u, suite.httpClient())
 	suite.client.Debug()
 
 	ctx, cancel := context.WithTimeout(context.Background(), time.Minute*2)
@@ -74,6 +78,7 @@ func (suite *integrationTester) SetupSuite() {
 		err := backoff.Retry(connect, backoff.WithContext(backoff.NewExponentialBackOff(), ctx))
 		if err != nil {
 			fmt.Println("error connecting: ", err)
+			close(suite.ready)
 		}
 	}()
 
@@ -81,5 +86,10 @@ func (suite *integrationTester) SetupSuite() {
 }
 
 func TestKeycloakAdminIntegration(t *testing.T) {
-	suite.Run(t, &integrationTester{})
+	for version, endpoint := range keyCloakEndpoints {
+		suite.Run(t, &integrationTester{
+			version:  version,
+			endpoint: endpoint,
+		})
+	}
 }

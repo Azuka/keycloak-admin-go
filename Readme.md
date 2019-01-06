@@ -20,6 +20,8 @@ go get -u github.com/Azuka/keycloak-admin-go/...
 make init
 make test
 make integration
+#optionally
+make integration-clean
 ```
 ### Local CI
 - Install CircleCI locally: https://circleci.com/docs/2.0/local-cli

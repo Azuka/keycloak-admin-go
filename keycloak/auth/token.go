@@ -5,6 +5,8 @@ import (
 	"time"
 )
 
+// TokenSource builds on the existing oauth.TokenSource
+// with an additional method for fetching a raw keycloak token
 type TokenSource interface {
 	oauth2.TokenSource
 
@@ -12,6 +14,7 @@ type TokenSource interface {
 	KeycloakToken() (*Token, error)
 }
 
+// Token is the token as received from keycloak
 type Token struct {
 	// AccessToken is the token that authorizes and authenticates
 	// the requests.
@@ -53,10 +56,10 @@ type Token struct {
 func (t *Token) Oauth2Token() *oauth2.Token {
 
 	tkn := &oauth2.Token{
-		AccessToken: t.AccessToken,
-		TokenType:   t.TokenType,
-		RefreshToken:   t.RefreshToken,
-		Expiry: t.Expiry,
+		AccessToken:  t.AccessToken,
+		TokenType:    t.TokenType,
+		RefreshToken: t.RefreshToken,
+		Expiry:       t.Expiry,
 	}
 
 	return tkn.WithExtra(t)

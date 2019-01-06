@@ -15,7 +15,6 @@ GO_INTEGRATION_PACKAGES = $(shell go list ./... | grep integration)
 GO_FILES = $(shell find . -name "*.go" | grep -v vendor | uniq)
 CI_TEST_REPORTS ?= /tmp/test-results
 
-
 .PHONY: init-ci
 init-ci:
 	@echo "$(OK_COLOR)==> Installing minimal build requirements$(NO_COLOR)"
@@ -55,16 +54,25 @@ test: format lint
 	go test -race -cover $(GO_PACKAGES)
 
 # Test integration
-.PHONY: integration
-integration:
-	@echo "$(OK_COLOR)==> Integration testing $(NO_COLOR)"
+.PHONY: integration-start
+integration-start:
 	docker-compose -f $(PWD)/integration/docker-compose.yml up -d
-	go test -race $(GO_INTEGRATION_PACKAGES)
-	make integration-clean
+
+.PHONY: integration
+integration: integration-start integration-test integration-stop
+
+.PHONY: integration-stop
+integration-stop:
+	docker-compose -f $(PWD)/integration/docker-compose.yml down
 
 .PHONY: integration-clean
 integration-clean:
-	docker-compose -f $(PWD)/integration/docker-compose.yml down
+	rm -rf $(PWD)/build/database
+
+.PHONY: integration-test
+integration-test:
+	@echo "$(OK_COLOR)==> Integration testing $(NO_COLOR)"
+	go test -race -v $(GO_INTEGRATION_PACKAGES)
 
 # Generate coverage
 .PHONY: coverage
