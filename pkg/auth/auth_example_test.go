@@ -3,7 +3,7 @@ package auth_test
 import (
 	"context"
 
-	"github.com/Azuka/keycloak-admin-go/keycloak/auth"
+	"github.com/Azuka/keycloak-admin-go/pkg/auth"
 )
 
 func ExampleConfig_Client() {

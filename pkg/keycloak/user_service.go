@@ -30,21 +30,21 @@ func (us *UserService) Find(ctx context.Context, realm string, params map[string
 
 	path := "/realms/{realm}/users"
 
-	var user []UserRepresentation
+	var users []UserRepresentation
 
 	_, err := us.client.newRequest(ctx).
 		SetQueryParams(params).
 		SetPathParams(map[string]string{
 			"realm": realm,
 		}).
-		SetResult(&user).
+		SetResult(&users).
 		Get(path)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return user, nil
+	return users, nil
 }
 
 // Create creates a new user and returns the ID

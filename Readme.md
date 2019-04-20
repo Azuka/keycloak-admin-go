@@ -1,6 +1,6 @@
 # keycloak-admin-go
 
-[![](https://godoc.org/github.com/Azuka/keycloak-admin-go/keycloak?status.svg)](http://godoc.org/github.com/Azuka/keycloak-admin-go/keycloak)
+[![](https://godoc.org/github.com/Azuka/keycloak-admin-go/pkg/keycloak?status.svg)](http://godoc.org/github.com/Azuka/keycloak-admin-go/pkg/keycloak)
 [![pipeline status](https://gitlab.com/Azuka/keycloak-admin-go/badges/master/pipeline.svg)](https://gitlab.com/Azuka/keycloak-admin-go/commits/master)
 [![coverage report](https://gitlab.com/Azuka/keycloak-admin-go/badges/master/coverage.svg)](https://gitlab.com/Azuka/keycloak-admin-go/commits/master)
 [![Go Report Card](https://goreportcard.com/badge/github.com/Azuka/keycloak-admin-go)](https://goreportcard.com/report/github.com/Azuka/keycloak-admin-go)
@@ -36,6 +36,10 @@ make integration-clean
 - [ ] Client Role Mappings
 - [ ] Client Scopes
 - [ ] Clients
+    - [x] Get clients
+    - [x] Create clients
+    - [ ] Update clients
+    - [ ] Delete clients
 - [ ] Component
 - [ ] Groups
 - [ ] Identity Providers
