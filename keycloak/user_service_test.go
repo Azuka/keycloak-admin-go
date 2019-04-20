@@ -13,7 +13,7 @@ import (
 
 func ExampleNewUserService() {
 	userService := NewUserService(&Client{})
-	userService.Create(context.TODO(), "my-realm", &UserRepresentation{})
+	_, _ = userService.Create(context.TODO(), "my-realm", &UserRepresentation{})
 }
 
 type userServiceTests struct {
@@ -80,7 +80,7 @@ func (suite *userServiceTests) TestUserServiceCreateUserFailure() {
 
 	suite.True(ok)
 	suite.NotNil(actualError)
-	//suite.Equal(500, actualError.Code)
+	suite.Equal(500, actualError.Code)
 }
 
 func (suite *userServiceTests) TestUserServiceUpdateUser() {

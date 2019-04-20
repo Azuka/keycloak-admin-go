@@ -19,7 +19,7 @@ CI_TEST_REPORTS ?= /tmp/test-results
 init-ci:
 	@echo "$(OK_COLOR)==> Installing minimal build requirements$(NO_COLOR)"
 	dep ensure -v
-	curl -L https://git.io/vp6lP | sh
+	curl -sfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh| sh
 	go get -u github.com/jstemmer/go-junit-report
 
 .PHONY: init
@@ -44,8 +44,7 @@ generate:
 .PHONY: lint
 lint:
 	@echo "$(OK_COLOR)==> Linting$(NO_COLOR)$(NO_COLOR)"
-	@go list -f '{{.Dir}}' ./... | grep -v 'vendor' | \
-	xargs gometalinter
+	./bin/golangci-lint run
 
 # Test
 .PHONY: test
@@ -104,7 +103,7 @@ test-circle:
 .PHONY: lint-ci
 lint-ci:
 	@echo "$(OK_COLOR)==> Running CI lint$(NO_COLOR)"
-	go list -f '{{.Dir}}' ./... | grep -v 'vendor' | xargs gometalinter --json > lint.json
+	/bin/golangci-lint run --out-format json > lint.json
 
 # Quick test for rapid dev-feedback cycles
 .PHONY: qt

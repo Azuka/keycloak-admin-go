@@ -1,0 +1,20 @@
+run:
+  skip-dirs:
+    - vendor$
+
+linters:
+  enable:
+    - deadcode
+    - unconvert
+    - errcheck
+    - vet
+    - vetshadow
+    - golint
+    - gosimple
+    - misspell
+
+issues:
+  exclude-rules:
+    - path: keycloak/service\.go
+      linters:
+        - structcheck
