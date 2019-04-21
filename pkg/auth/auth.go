@@ -7,6 +7,8 @@ import (
 	"path"
 	"time"
 
+	log "github.com/sirupsen/logrus"
+
 	"golang.org/x/oauth2"
 )
 
@@ -28,6 +30,9 @@ func (c *OAuth) PasswordCredentialsClient(username, password string) (*http.Clie
 	ctx := c.getContext()
 	token, err := config.PasswordCredentialsToken(ctx, username, password)
 	if err != nil {
+		log.WithFields(log.Fields{
+			"err": err,
+		}).Error("Authentication failed")
 		return nil, err
 	}
 	return config.Client(ctx, token), nil
