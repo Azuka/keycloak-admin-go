@@ -1,6 +1,6 @@
 # keycloak-admin-go
 
-[![](https://godoc.org/github.com/Azuka/keycloak-admin-go/keycloak?status.svg)](http://godoc.org/github.com/Azuka/keycloak-admin-go/keycloak)
+[![](https://godoc.org/github.com/Azuka/keycloak-admin-go/pkg/keycloak?status.svg)](http://godoc.org/github.com/Azuka/keycloak-admin-go/pkg/keycloak)
 [![pipeline status](https://gitlab.com/Azuka/keycloak-admin-go/badges/master/pipeline.svg)](https://gitlab.com/Azuka/keycloak-admin-go/commits/master)
 [![coverage report](https://gitlab.com/Azuka/keycloak-admin-go/badges/master/coverage.svg)](https://gitlab.com/Azuka/keycloak-admin-go/commits/master)
 [![Go Report Card](https://goreportcard.com/badge/github.com/Azuka/keycloak-admin-go)](https://goreportcard.com/report/github.com/Azuka/keycloak-admin-go)
@@ -27,7 +27,6 @@ make integration-clean
 - Install CircleCI locally: https://circleci.com/docs/2.0/local-cli
 
 ## Wish List
-- [x] Add authentication integration tests
 - [ ] Attack Detection
 - [ ] Authentication Management
 - [ ] Client Attribute Certificate
@@ -36,31 +35,44 @@ make integration-clean
 - [ ] Client Role Mappings
 - [ ] Client Scopes
 - [ ] Clients
+    - [x] Get clients
+    - [x] Create clients
+    - [ ] Update clients
+    - [ ] Delete clients
 - [ ] Component
-- [ ] Groups
+- [ ] Groups (needs integration/unit tests)
+    - [x] Create
+    - [x] Delete
+    - [x] Get
+    - [x] AddRole
+    - [x] DeleteRole
 - [ ] Identity Providers
 - [ ] Key
 - [ ] Protocol Mappers
 - [ ] Realms Admin
-  - [x] Get realm
-  - [ ] Import realm
-  - [ ] Update realm
-  - [x] Delete realm
-  - [ ] Get admin events
-  - [ ] Delete admin events
+    - [x] Get realm
+    - [x] Create realm
+    - [ ] Import realm
+    - [ ] Update realm
+    - [x] Delete realm
+    - [ ] Get admin events
+    - [ ] Delete admin events
 - [ ] Role Mapper
-- [ ] Roles
+- [ ] Roles (needs integration/unit tests)
+    - [x] Create
+    - [x] Get
+    - [x] GetMappings
 - [ ] Roles (by ID)
 - [ ] Scope Mappings
 - [ ] User Storage Provider
 - [ ] Users
-  - [x] Get user
-  - [x] Search users
-  - [x] Create user
-  - [x] Update user
-    - [x] Profile information
-    - [x] Groups
-    - [x] Sessions, Consents
+    - [x] Get user
+    - [x] Search users
+    - [x] Create user
+    - [x] Update user
+        - [x] Profile information
+        - [x] Groups
+        - [x] Sessions, Consents
 - [ ] Root
 
 ## Thanks to

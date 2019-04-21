@@ -4,18 +4,18 @@ services:
   keycloak-db:
     image: postgres:9.6
     volumes:
-      - ../build/database:/var/lib/postgresql/data
-      - ../build/create-multiple-postgresql-databases.sh:/docker-entrypoint-initdb.d/databases.sh
+      - ./build/database:/var/lib/postgresql/data
+      - ./build/create-multiple-postgresql-databases.sh:/docker-entrypoint-initdb.d/databases.sh
     environment:
       POSTGRES_USER: keycloak
       POSTGRES_PASSWORD: changeme
-      POSTGRES_MULTIPLE_DATABASES: '"keycloak-5.0.0"'
+      POSTGRES_MULTIPLE_DATABASES: '"keycloak-4.8.0","keycloak-5.0.0"'
 
   keycloak-5.0.0:
     image: jboss/keycloak:5.0.0
     restart: always
     ports:
-      - 9098:8080
+      - 9090:8080
     depends_on:
       - keycloak-db
     environment:

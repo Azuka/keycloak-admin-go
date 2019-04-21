@@ -1,4 +1,4 @@
-// Package keycloak contains a client and relevant data structs for interacting
+// package keycloak contains a client and relevant data structs for interacting
 // with the Keycloak Admin REST API
 //
 // For mapping, see https://www.keycloak.org/docs-api/4.0/rest-api/index.html
@@ -20,10 +20,6 @@ const userAgent = "go/keycloak-admin"
 type Client struct {
 	BaseURL    url.URL
 	restClient *resty.Client
-
-	// Services for working with various keycloak resources
-	Users *UserService
-	Realm *RealmService
 }
 
 // NewClient creates a new client instance set to talk to the keycloak service
@@ -36,9 +32,6 @@ func NewClient(u url.URL, c *http.Client) *Client {
 		BaseURL:    u,
 		restClient: restClient,
 	}
-
-	client.Users = NewUserService(client)
-	client.Realm = NewRealmService(client)
 
 	return client
 }

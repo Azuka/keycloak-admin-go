@@ -1,11 +1,11 @@
 package integration_test
 
 import (
-	"github.com/Azuka/keycloak-admin-go/keycloak"
+	"github.com/Azuka/keycloak-admin-go/pkg/keycloak"
 )
 
 func (suite *integrationTester) TestRealmFetch() {
-	realm, err := suite.client.Realm.Get(suite.ctx, keycloakAdminRealm)
+	realm, err := suite.client.Realms().Get(suite.ctx, keycloakAdminRealm)
 	suite.NotNil(realm, suite.version)
 	suite.NoError(err, suite.version)
 	suite.Equal(keycloakAdminRealm, realm.ID, suite.version)
@@ -20,10 +20,10 @@ func (suite *integrationTester) TestRealmDelete() {
 		Realm: realmName,
 	}
 
-	err := suite.client.Realm.Create(suite.ctx, newRealm)
+	err := suite.client.Realms().Create(suite.ctx, newRealm)
 	suite.NoError(err, suite.version)
 
-	err = suite.client.Realm.Delete(suite.ctx, realmName)
+	err = suite.client.Realms().Delete(suite.ctx, realmName)
 	suite.NoError(err, suite.version)
 }
 
@@ -49,10 +49,10 @@ func (suite *integrationTester) TestRealmCreate() {
 		DisplayNameHTML:                     "realmDisplayNameHTML",
 	}
 
-	err := suite.client.Realm.Create(suite.ctx, newRealm)
+	err := suite.client.Realms().Create(suite.ctx, newRealm)
 	suite.NoError(err, suite.version)
 
-	actualRealm, err := suite.client.Realm.Get(suite.ctx, realmName)
+	actualRealm, err := suite.client.Realms().Get(suite.ctx, realmName)
 	suite.NoError(err, suite.version)
 	suite.NotNil(actualRealm, suite.version)
 	suite.Equal(actualRealm.ID, newRealm.ID, suite.version)
