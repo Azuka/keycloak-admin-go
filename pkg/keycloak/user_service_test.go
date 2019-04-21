@@ -5,19 +5,13 @@ import (
 	"net/url"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 	"gopkg.in/jarcoal/httpmock.v1"
 	"gopkg.in/resty.v1"
 )
 
-func ExampleNewUserService() {
-	userService := NewUserService(&Client{})
-	_, _ = userService.Create(context.TODO(), "my-realm", &UserRepresentation{})
-}
-
 type userServiceTests struct {
-	userService *UserService
+	client *Client
 	suite.Suite
 }
 
@@ -31,24 +25,15 @@ func (suite *userServiceTests) SetupSuite() {
 		restClient: resty.New().OnAfterResponse(handleResponse),
 	}
 	c.Debug()
-	suite.userService = NewUserService(c)
+	suite.client = c
 }
 
 func (suite *userServiceTests) SetupTest() {
-	httpmock.ActivateNonDefault(suite.userService.client.restClient.GetClient())
+	httpmock.ActivateNonDefault(suite.client.restClient.GetClient())
 }
 
 func (suite *userServiceTests) TeardownTest() {
 	httpmock.DeactivateAndReset()
-}
-
-func TestNewUserService(t *testing.T) {
-	a := assert.New(t)
-	c := &Client{}
-	userService := NewUserService(c)
-
-	a.NotNil(userService)
-	a.Equal(c, userService.client)
 }
 
 func (suite *userServiceTests) TestUserServiceCreateUser() {
@@ -58,7 +43,7 @@ func (suite *userServiceTests) TestUserServiceCreateUser() {
 
 	httpmock.RegisterResponder("POST", "https://keycloak.local/realms/my-realm/users", responder)
 
-	id, err := suite.userService.Create(context.TODO(), "my-realm", &UserRepresentation{
+	id, err := suite.client.Users().Create(context.TODO(), "my-realm", &UserRepresentation{
 		Username: "me",
 	})
 	suite.NoError(err)
@@ -71,7 +56,7 @@ func (suite *userServiceTests) TestUserServiceCreateUserFailure() {
 
 	httpmock.RegisterResponder("POST", "https://keycloak.local/realms/my-realm/users", responder)
 
-	_, err := suite.userService.Create(context.TODO(), "my-realm", &UserRepresentation{
+	_, err := suite.client.Users().Create(context.TODO(), "my-realm", &UserRepresentation{
 		Username: "me",
 	})
 	suite.NotNil(err)
@@ -90,7 +75,7 @@ func (suite *userServiceTests) TestUserServiceUpdateUser() {
 
 	httpmock.RegisterResponder("PUT", "https://keycloak.local/realms/my-realm/users/abc", responder)
 
-	err := suite.userService.Update(context.TODO(), "my-realm", &UserRepresentation{
+	err := suite.client.Users().Update(context.TODO(), "my-realm", &UserRepresentation{
 		Username: "me",
 		ID:       "abc",
 	})

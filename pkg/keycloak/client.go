@@ -1,126 +1,73 @@
-//go:generate gomodifytags -file $GOFILE -struct ClientRepresentation -add-options json=omitempty -add-tags json -w -transform camelcase
-//go:generate gomodifytags -file $GOFILE -struct ResourceServerRepresentation -add-options json=omitempty -add-tags json -w -transform camelcase
-//go:generate gomodifytags -file $GOFILE -struct PolicyRepresentation -add-options json=omitempty -add-tags json -w -transform camelcase
-//go:generate gomodifytags -file $GOFILE -struct ScopeRepresentation -add-options json=omitempty -add-tags json -w -transform camelcase
-//go:generate gomodifytags -file $GOFILE -struct ResourceRepresentation -add-options json=omitempty -add-tags json -w -transform camelcase
-//go:generate gomodifytags -file $GOFILE -struct ProtocolMapperRepresentation -add-options json=omitempty -add-tags json -w -transform camelcase
-
+// package keycloak contains a client and relevant data structs for interacting
+// with the Keycloak Admin REST API
+//
+// For mapping, see https://www.keycloak.org/docs-api/4.0/rest-api/index.html
 package keycloak
 
-const (
-	// PolicyEnforcementModeEnforcing marks policy enforcement as enforcing
-	PolicyEnforcementModeEnforcing = "ENFORCING"
-	// PolicyEnforcementModePermissive marks policy enforcement as permissive
-	PolicyEnforcementModePermissive = "PERMISSIVE"
-	// PolicyEnforcementModeDisabled marks policy enforcement as disabled
-	PolicyEnforcementModeDisabled = "DISABLED"
+import (
+	"net/http"
+	"net/url"
 
-	// DecisionstrategyAffirmative sets decision strategy to affirmative
-	DecisionstrategyAffirmative = "AFFIRMATIVE"
-	// DecisionstrategyUnanimous sets decision strategy to unanimous
-	DecisionstrategyUnanimous = "UNANIMOUS"
-	// DecisionstrategyConsensus sets decision strategy to consensus
-	DecisionstrategyConsensus = "CONSENSUS"
+	"context"
+	"fmt"
+
+	"gopkg.in/resty.v1"
 )
 
-// ClientRepresentation represents a client's configuration in a realm
-type ClientRepresentation struct {
-	Access                             string                         `json:"access,omitempty"`
-	AdminURL                           string                         `json:"adminUrl,omitempty"`
-	Attributes                         AttributeMap                   `json:"attributes,omitempty"`
-	AuthenticationFlowBindingOverrides AttributeMap                   `json:"authenticationFlowBindingOverrides,omitempty"`
-	AuthorizationServicesEnabled       *bool                          `json:"authorizationServicesEnabled,omitempty"`
-	AuthorizationSettings              *ResourceServerRepresentation  `json:"authorizationSettings,omitempty"`
-	BaseURL                            string                         `json:"baseURL,omitempty"`
-	BearerOnly                         *bool                          `json:"bearerOnly,omitempty"`
-	ClientAuthenticatorType            string                         `json:"clientAuthenticatorType,omitempty"`
-	ClientID                           string                         `json:"clientID,omitempty"`
-	ConsentRequired                    *bool                          `json:"consentRequired,omitempty"`
-	DefaultClientScopes                []string                       `json:"defaultClientScopes,omitempty"`
-	DefaultRoles                       []string                       `json:"defaultRoles,omitempty"`
-	Description                        string                         `json:"description,omitempty"`
-	DirectAccessGrantsEnabled          *bool                          `json:"directAccessGrantsEnabled,omitempty"`
-	Enabled                            *bool                          `json:"enabled,omitempty"`
-	FrontChannelLogout                 *bool                          `json:"frontChannelLogout,omitempty"`
-	FullScopeAllowed                   *bool                          `json:"fullScopeAllowed,omitempty"`
-	ID                                 string                         `json:"id,omitempty"`
-	ImplicitFlowEnabled                *bool                          `json:"implicitFlowEnabled,omitempty"`
-	Name                               string                         `json:"name,omitempty"`
-	NodeRegistrationTimeout            *UnixTime                      `json:"nodeRegistrationTimeout,omitempty"`
-	NotBefore                          *UnixTime                      `json:"notBefore,omitempty"`
-	OptionalClientScopes               []string                       `json:"optionalClientScopes,omitempty"`
-	Origin                             string                         `json:"origin,omitempty"`
-	Protocol                           string                         `json:"protocol,omitempty"`
-	ProtocolMappers                    []ProtocolMapperRepresentation `json:"protocolMappers,omitempty"`
-	PublicClient                       *bool                          `json:"publicClient,omitempty"`
-	RedirectURIs                       []string                       `json:"redirectURIs,omitempty"`
-	RegisteredNodes                    AttributeMap                   `json:"registeredNodes,omitempty"`
-	RegistrationAccessToken            string                         `json:"registrationAccessToken,omitempty"`
-	RootURL                            string                         `json:"rootURL,omitempty"`
-	Secret                             string                         `json:"secret,omitempty"`
-	ServiceAccountsEnabled             *bool                          `json:"serviceAccountsEnabled,omitempty"`
-	StandardFlowEnabled                *bool                          `json:"standardFlowEnabled,omitempty"`
-	SurrogateAuthRequired              *bool                          `json:"surrogateAuthRequired,omitempty"`
-	WebOrigins                         []string                       `json:"webOrigins,omitempty"`
+const userAgent = "go/keycloak-admin"
+
+// Client is the API client for talking to keycloak admin
+type Client struct {
+	BaseURL    url.URL
+	restClient *resty.Client
 }
 
-// ResourceServerRepresentation represents the authorization settings for a realm client
-type ResourceServerRepresentation struct {
-	AllowRemoteResourceManagement *bool                    `json:"allowRemoteResourceManagement,omitempty"`
-	ClientID                      string                   `json:"clientID,omitempty"`
-	ID                            string                   `json:"id,omitempty"`
-	Name                          string                   `json:"name,omitempty"`
-	Policies                      []PolicyRepresentation   `json:"policies,omitempty"`
-	PolicyEnforcementMode         string                   `json:"policyEnforcementMode,omitempty"`
-	Resources                     []ResourceRepresentation `json:"resources,omitempty"`
-	Scopes                        []ScopeRepresentation    `json:"scopes,omitempty"`
+// NewClient creates a new client instance set to talk to the keycloak service
+// as well as the various services for working with specific resources
+func NewClient(u url.URL, c *http.Client) *Client {
+
+	restClient := resty.NewWithClient(c)
+
+	client := &Client{
+		BaseURL:    u,
+		restClient: restClient,
+	}
+
+	return client
 }
 
-// PolicyRepresentation represents the policies attached to the
-// resource server for a realm client
-type PolicyRepresentation struct {
-	Config           AttributeMap `json:"config,omitempty"`
-	DecisionStrategy string       `json:"decisionStrategy,omitempty"`
-	Description      string       `json:"description,omitempty"`
-	ID               string       `json:"id,omitempty"`
-	Logic            string       `json:"logic,omitempty"` //enum (POSITIVE, NEGATIVE)
-	Name             string       `json:"name,omitempty"`
-	Owner            string       `json:"owner,omitempty"`
-	Policies         []string     `json:"policies,omitempty"`
-	Resources        []string     `json:"resources,omitempty"`
-	Scopes           []string     `json:"scopes,omitempty"`
-	Type             string       `json:"type,omitempty"`
+// Debug enables debugging for requests
+func (c *Client) Debug() {
+	c.restClient.SetDebug(true)
 }
 
-// ScopeRepresentation represents scopes defined for a
-// resource server, user, or resource
-type ScopeRepresentation struct {
-	DisplayName string                   `json:"displayName,omitempty"`
-	IconURI     string                   `json:"iconURI,omitempty"`
-	ID          string                   `json:"id,omitempty"`
-	Name        string                   `json:"name,omitempty"`
-	Policies    []PolicyRepresentation   `json:"policies,omitempty"`
-	Resources   []ResourceRepresentation `json:"resources,omitempty"`
+// newRequest creates a new request
+func (c *Client) newRequest(ctx context.Context) *resty.Request {
+
+	if c.restClient == nil {
+		c.restClient = resty.NewWithClient(http.DefaultClient)
+	}
+
+	return c.restClient.
+		// Set base url per request
+		SetHostURL(c.BaseURL.String()).
+		// Set redirect policy based on host name
+		SetRedirectPolicy(resty.DomainCheckRedirectPolicy(c.BaseURL.Hostname())).
+		// Setup error handling for non <= 399 codes
+		OnAfterResponse(handleResponse).
+		R().
+		SetContext(ctx).
+		SetHeader("UserAgent", userAgent)
 }
 
-// ResourceRepresentation represents resources attached to a scope
-type ResourceRepresentation struct {
-	ID                 string                `json:"id,omitempty"`
-	Attributes         AttributeMap          `json:"attributes,omitempty"`
-	DisplayName        string                `json:"displayName,omitempty"`
-	IconURI            string                `json:"iconURI,omitempty"`
-	Name               string                `json:"name,omitempty"`
-	OwnerManagedAccess *bool                 `json:"ownerManagedAccess,omitempty"`
-	Scopes             []ScopeRepresentation `json:"scopes,omitempty"`
-	Type               string                `json:"type,omitempty"`
-	URI                string                `json:"uri,omitempty"`
-}
+// handleResponse handles 400+ http error codes
+func handleResponse(i *resty.Client, response *resty.Response) error {
+	if response.StatusCode() < 400 {
+		return nil
+	}
 
-// ProtocolMapperRepresentation represents an individual protocol mapper on a realm client
-type ProtocolMapperRepresentation struct {
-	Config         AttributeMap `json:"config,omitempty"`
-	ID             string       `json:"id,omitempty"`
-	Name           string       `json:"name,omitempty"`
-	Protocol       string       `json:"protocol,omitempty"`
-	ProtocolMapper string       `json:"protocolMapper,omitempty"`
+	return &Error{
+		Message: fmt.Sprintf("%s %s: %s", response.Request.Method, response.Request.URL, response.Status()),
+		Code:    response.StatusCode(),
+	}
 }

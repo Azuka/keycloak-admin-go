@@ -27,7 +27,6 @@ make integration-clean
 - Install CircleCI locally: https://circleci.com/docs/2.0/local-cli
 
 ## Wish List
-- [x] Add authentication integration tests
 - [ ] Attack Detection
 - [ ] Authentication Management
 - [ ] Client Attribute Certificate
@@ -41,30 +40,39 @@ make integration-clean
     - [ ] Update clients
     - [ ] Delete clients
 - [ ] Component
-- [ ] Groups
+- [ ] Groups (needs integration/unit tests)
+    - [x] Create
+    - [x] Delete
+    - [x] Get
+    - [x] AddRole
+    - [x] DeleteRole
 - [ ] Identity Providers
 - [ ] Key
 - [ ] Protocol Mappers
 - [ ] Realms Admin
-  - [x] Get realm
-  - [ ] Import realm
-  - [ ] Update realm
-  - [x] Delete realm
-  - [ ] Get admin events
-  - [ ] Delete admin events
+    - [x] Get realm
+    - [x] Create realm
+    - [ ] Import realm
+    - [ ] Update realm
+    - [x] Delete realm
+    - [ ] Get admin events
+    - [ ] Delete admin events
 - [ ] Role Mapper
-- [ ] Roles
+- [ ] Roles (needs integration/unit tests)
+    - [x] Create
+    - [x] Get
+    - [x] GetMappings
 - [ ] Roles (by ID)
 - [ ] Scope Mappings
 - [ ] User Storage Provider
 - [ ] Users
-  - [x] Get user
-  - [x] Search users
-  - [x] Create user
-  - [x] Update user
-    - [x] Profile information
-    - [x] Groups
-    - [x] Sessions, Consents
+    - [x] Get user
+    - [x] Search users
+    - [x] Create user
+    - [x] Update user
+        - [x] Profile information
+        - [x] Groups
+        - [x] Sessions, Consents
 - [ ] Root
 
 ## Thanks to

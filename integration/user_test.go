@@ -5,7 +5,7 @@ import (
 )
 
 func (suite *integrationTester) TestUserFetch() {
-	users, err := suite.client.Users.Find(suite.ctx, keycloakAdminRealm, map[string]string{
+	users, err := suite.client.Users().Find(suite.ctx, keycloakAdminRealm, map[string]string{
 		"username": keycloakAdmin,
 	})
 	suite.NotNil(users, suite.version)
@@ -18,7 +18,7 @@ func (suite *integrationTester) TestUserFetch() {
 	t := true
 	user.EmailVerified = &t
 
-	err = suite.client.Users.Update(suite.ctx, keycloakAdminRealm, &user)
+	err = suite.client.Users().Update(suite.ctx, keycloakAdminRealm, &user)
 	suite.NoError(err, suite.version)
 }
 
@@ -29,7 +29,7 @@ func (suite *integrationTester) TestUserCreate() {
 		Email:    pseudoRandString() + "@example.com",
 	}
 
-	id, err := suite.client.Users.Create(suite.ctx, keycloakAdminRealm, user)
+	id, err := suite.client.Users().Create(suite.ctx, keycloakAdminRealm, user)
 
 	suite.NotEmpty(id, suite.version)
 	suite.NoError(err, suite.version)

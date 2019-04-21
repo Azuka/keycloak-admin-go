@@ -9,9 +9,9 @@ import (
 // ClientsService interacts with all user resources
 type ClientsService service
 
-// NewClientsService returns a new user service for working with user resources
+// ClientsS returns a new client service for working with client resources
 // in a realm.
-func NewClientsService(c *Client) *ClientsService {
+func (c *Client) Clients() *ClientsService {
 	return &ClientsService{
 		client: c,
 	}
@@ -19,10 +19,10 @@ func NewClientsService(c *Client) *ClientsService {
 
 // Create creates a new client and returns the ID
 // Response is a 201 with a location redirect
-func (cs *ClientsService) Create(ctx context.Context, realm string, client *ClientRepresentation) (string, error) {
+func (s *ClientsService) Create(ctx context.Context, realm string, client *ClientRepresentation) (string, error) {
 	path := "/realms/{realm}/clients"
 
-	response, err := cs.client.newRequest(ctx).
+	response, err := s.client.newRequest(ctx).
 		SetPathParams(map[string]string{
 			"realm": realm,
 		}).
@@ -45,13 +45,13 @@ func (cs *ClientsService) Create(ctx context.Context, realm string, client *Clie
 }
 
 // List clients
-func (cs *ClientsService) List(ctx context.Context, realm string) ([]ClientRepresentation, error) {
+func (s *ClientsService) List(ctx context.Context, realm string) ([]ClientRepresentation, error) {
 
 	path := "/realms/{realm}/clients"
 
 	var clients []ClientRepresentation
 
-	_, err := cs.client.newRequest(ctx).
+	_, err := s.client.newRequest(ctx).
 		SetPathParams(map[string]string{
 			"realm": realm,
 		}).
