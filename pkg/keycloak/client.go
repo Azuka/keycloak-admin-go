@@ -18,7 +18,7 @@ const userAgent = "go/keycloak-admin"
 
 // Client is the API client for talking to keycloak admin
 type Client struct {
-	BaseURL    url.URL
+	Server     url.URL
 	restClient *resty.Client
 	Realm      string
 }
@@ -26,11 +26,11 @@ type Client struct {
 // NewClient creates a new client instance set to talk to the keycloak service
 // as well as the various services for working with specific resources
 func NewClient(u url.URL, c *http.Client, realm string) *Client {
-
+	u.Path = "/auth/admin"
 	restClient := resty.NewWithClient(c)
 
 	client := &Client{
-		BaseURL:    u,
+		Server:     u,
 		restClient: restClient,
 		Realm:      realm,
 	}
@@ -52,9 +52,9 @@ func (c *Client) newRequest(ctx context.Context) *resty.Request {
 
 	return c.restClient.
 		// Set base url per request
-		SetHostURL(c.BaseURL.String()).
+		SetHostURL(c.Server.String()).
 		// Set redirect policy based on host name
-		SetRedirectPolicy(resty.DomainCheckRedirectPolicy(c.BaseURL.Hostname())).
+		SetRedirectPolicy(resty.DomainCheckRedirectPolicy(c.Server.Hostname())).
 		// Setup error handling for non <= 399 codes
 		OnAfterResponse(handleResponse).
 		R().

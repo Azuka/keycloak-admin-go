@@ -22,7 +22,7 @@ func (suite *userServiceTests) SetupSuite() {
 	baseUserURL, err := url.Parse(fmt.Sprintf("http://keycloak.local/realms/%s/users", testRelam))
 	suite.NoError(err)
 	c := &Client{
-		BaseURL: url.URL{
+		Server: url.URL{
 			Scheme: "https",
 			Path:   "",
 			Host:   "keycloak.local",

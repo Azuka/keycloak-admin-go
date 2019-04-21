@@ -68,7 +68,7 @@ func (s *ClientService) Get(ctx context.Context, ID string) (*ClientRepresentati
 
 // Find returns clients based on query params
 // Params:
-// - clientID
+// - clientId
 func (s *ClientService) Find(ctx context.Context, params map[string]string) ([]ClientRepresentation, error) {
 
 	path := "/realms/{realm}/clients"
@@ -79,6 +79,7 @@ func (s *ClientService) Find(ctx context.Context, params map[string]string) ([]C
 		SetPathParams(map[string]string{
 			"realm": s.client.Realm,
 		}).
+		SetQueryParams(params).
 		SetResult(&clients).
 		Get(path)
 

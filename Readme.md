@@ -27,6 +27,8 @@ make integration-clean
 - Install CircleCI locally: https://circleci.com/docs/2.0/local-cli
 
 ## Wish List
+- [ ] Better logging
+- [ ] Unit tests
 - [ ] Attack Detection
 - [ ] Authentication Management
 - [ ] Client Attribute Certificate

@@ -8,10 +8,10 @@ import (
 	"testing"
 	"time"
 
+	"github.com/Azuka/keycloak-admin-go/pkg/auth"
 	"github.com/Azuka/keycloak-admin-go/pkg/keycloak"
 	"github.com/cenkalti/backoff"
 	"github.com/stretchr/testify/suite"
-	"golang.org/x/oauth2"
 )
 
 const keycloakAdmin = "keycloak-admin"
@@ -20,8 +20,8 @@ const keycloakAdminRealm = "master"
 const keycloakAdminClientID = "admin-cli"
 
 var keyCloakEndpoints = map[string]string{
-	"5.0.0": "http://127.0.0.1:9090/auth/",
-	"4.8.0": "http://127.0.0.1:9098/auth/",
+	"5.0.0": "http://127.0.0.1:9090",
+	"4.8.0": "http://127.0.0.1:9098",
 }
 
 type integrationTester struct {
@@ -34,21 +34,23 @@ type integrationTester struct {
 }
 
 func (suite *integrationTester) httpClient() *http.Client {
-	config := oauth2.Config{
-		ClientID: keycloakAdminClientID,
-		Endpoint: oauth2.Endpoint{
-			TokenURL: suite.endpoint + "realms/" + keycloakAdminRealm + "/protocol/openid-connect/token",
-		},
+	server, err := url.Parse(suite.endpoint)
+	if err != nil {
+		close(suite.ready)
+		return nil
 	}
-
-	password, err := config.PasswordCredentialsToken(suite.ctx, keycloakAdmin, keycloakPassword)
+	oauth := &auth.OAuth{
+		Server: *server,
+		ID:     keycloakAdminClientID,
+		Realm:  keycloakAdminRealm,
+	}
+	client, err := oauth.PasswordCredentialsClient(keycloakAdmin, keycloakPassword)
 	if err != nil {
 		close(suite.ready)
 		return nil
 	}
 
-	http.DefaultClient.Timeout = time.Second * 5
-	return config.Client(suite.ctx, password)
+	return client
 }
 
 func (suite *integrationTester) SetupSuite() {
@@ -69,7 +71,7 @@ func (suite *integrationTester) SetupSuite() {
 	}
 
 	// Setup test client
-	u, _ := url.Parse(suite.endpoint + "admin")
+	u, _ := url.Parse(suite.endpoint)
 	suite.client = keycloak.NewClient(*u, suite.httpClient(), keycloakAdminRealm)
 	suite.client.Debug()
 
