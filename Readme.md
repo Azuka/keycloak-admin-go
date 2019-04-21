@@ -75,6 +75,24 @@ make integration-clean
         - [x] Sessions, Consents
 - [ ] Root
 
+## API Status
+
+* Not implemented
+* Alpha: No guarantees on backward compatibility.
+* Beta: Usable in production.
+* Stable: Dependable thoroughly tested.
+
+### User
+
+Action   | Status
+-------- | -------
+
+### Roles
+
+### Clients
+
+### Groups
+
 ## Thanks to
 - https://gopkg.in/resty.v1: quick and dirty REST client
 - https://godoc.org/golang.org/x/oauth2: for the shamelessly copied authentication

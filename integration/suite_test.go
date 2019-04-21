@@ -70,7 +70,7 @@ func (suite *integrationTester) SetupSuite() {
 
 	// Setup test client
 	u, _ := url.Parse(suite.endpoint + "admin")
-	suite.client = keycloak.NewClient(*u, suite.httpClient())
+	suite.client = keycloak.NewClient(*u, suite.httpClient(), keycloakAdminRealm)
 	suite.client.Debug()
 
 	ctx, cancel := context.WithTimeout(context.Background(), time.Minute*10)

@@ -20,17 +20,19 @@ const userAgent = "go/keycloak-admin"
 type Client struct {
 	BaseURL    url.URL
 	restClient *resty.Client
+	Realm      string
 }
 
 // NewClient creates a new client instance set to talk to the keycloak service
 // as well as the various services for working with specific resources
-func NewClient(u url.URL, c *http.Client) *Client {
+func NewClient(u url.URL, c *http.Client, realm string) *Client {
 
 	restClient := resty.NewWithClient(c)
 
 	client := &Client{
 		BaseURL:    u,
 		restClient: restClient,
+		Realm:      realm,
 	}
 
 	return client
@@ -66,7 +68,7 @@ func handleResponse(i *resty.Client, response *resty.Response) error {
 		return nil
 	}
 
-	return &Error{
+	return Error{
 		Message: fmt.Sprintf("%s %s: %s", response.Request.Method, response.Request.URL, response.Status()),
 		Code:    response.StatusCode(),
 	}

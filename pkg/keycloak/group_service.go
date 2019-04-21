@@ -16,7 +16,7 @@ func (c *Client) Groups() *GroupService {
 }
 
 // Create creates a group in a realm
-func (s *GroupService) Create(ctx context.Context, realm string, groupName string) error {
+func (s *GroupService) Create(ctx context.Context, groupName string) error {
 
 	path := "/realms/{realm}/groups"
 	group := &GroupRepresentation{}
@@ -24,7 +24,7 @@ func (s *GroupService) Create(ctx context.Context, realm string, groupName strin
 
 	_, err := s.client.newRequest(ctx).
 		SetPathParams(map[string]string{
-			"realm": realm,
+			"realm": s.client.Realm,
 		}).
 		SetBody(group).
 		Post(path)
@@ -37,14 +37,14 @@ func (s *GroupService) Create(ctx context.Context, realm string, groupName strin
 }
 
 // Delete deletes a group from a realm
-func (s *GroupService) Delete(ctx context.Context, realm string, groupID string) error {
+func (s *GroupService) Delete(ctx context.Context, groupID string) error {
 
 	path := "/realms/{realm}/groups/{groupID}"
 	group := &GroupRepresentation{}
 
 	_, err := s.client.newRequest(ctx).
 		SetPathParams(map[string]string{
-			"realm":   realm,
+			"realm":   s.client.Realm,
 			"groupID": groupID,
 		}).
 		SetBody(group).
@@ -58,14 +58,14 @@ func (s *GroupService) Delete(ctx context.Context, realm string, groupID string)
 }
 
 // Get returns a group in a realm
-func (s *GroupService) Get(ctx context.Context, realm string, groupID string) (*GroupRepresentation, error) {
+func (s *GroupService) Get(ctx context.Context, groupID string) (*GroupRepresentation, error) {
 
 	path := "/realms/{realm}/groups/{id}"
 	group := &GroupRepresentation{}
 
 	_, err := s.client.newRequest(ctx).
 		SetPathParams(map[string]string{
-			"realm": realm,
+			"realm": s.client.Realm,
 			"id":    groupID,
 		}).
 		SetResult(group).
@@ -79,14 +79,14 @@ func (s *GroupService) Get(ctx context.Context, realm string, groupID string) (*
 }
 
 // AddRole adds a role to a group in a realm
-func (s *GroupService) AddRole(ctx context.Context, realm string, groupID string, role RoleRepresentation) error {
+func (s *GroupService) AddRole(ctx context.Context, groupID string, role RoleRepresentation) error {
 
 	path := "/realms/{realm}/groups/{id}/role-mappings/realm"
 	roles := &[]RoleRepresentation{role}
 
 	_, err := s.client.newRequest(ctx).
 		SetPathParams(map[string]string{
-			"realm": realm,
+			"realm": s.client.Realm,
 			"id":    groupID,
 		}).
 		SetBody(roles).
@@ -96,14 +96,14 @@ func (s *GroupService) AddRole(ctx context.Context, realm string, groupID string
 }
 
 // DeleteRole deletes a role from a group in a realm
-func (s *GroupService) DeleteRole(ctx context.Context, realm string, groupID string, role RoleRepresentation) error {
+func (s *GroupService) DeleteRole(ctx context.Context, groupID string, role RoleRepresentation) error {
 
 	path := "/realms/{realm}/groups/{id}/role-mappings/realm"
 	roles := &[]RoleRepresentation{role}
 
 	_, err := s.client.newRequest(ctx).
 		SetPathParams(map[string]string{
-			"realm": realm,
+			"realm": s.client.Realm,
 			"id":    groupID,
 		}).
 		SetBody(roles).
@@ -123,7 +123,7 @@ func (s *GroupService) ListDetail(ctx context.Context, realm string) ([]GroupRep
 	}
 
 	for _, group := range groups {
-		g, err := s.Get(ctx, realm, group.ID)
+		g, err := s.Get(ctx, group.ID)
 		if err != nil {
 			return nil, err
 		}
@@ -142,7 +142,7 @@ func (s *GroupService) List(ctx context.Context, realm string) ([]GroupRepresent
 
 	_, err := s.client.newRequest(ctx).
 		SetPathParams(map[string]string{
-			"realm": realm,
+			"realm": s.client.Realm,
 		}).
 		SetResult(&groups).
 		Get(path)
@@ -155,7 +155,7 @@ func (s *GroupService) List(ctx context.Context, realm string) ([]GroupRepresent
 }
 
 // ListMapping returns a all role mappings for group (TODO: maybe put this as a GroupRepresentation Method)
-func (s *GroupService) ListMapping(ctx context.Context, realm string, groupID string) (*MappingRepresentation, error) {
+func (s *GroupService) ListMapping(ctx context.Context, groupID string) (*MappingRepresentation, error) {
 
 	path := "/realms/{realm}/groups/{id}/role-mappings"
 
@@ -163,7 +163,7 @@ func (s *GroupService) ListMapping(ctx context.Context, realm string, groupID st
 
 	_, err := s.client.newRequest(ctx).
 		SetPathParams(map[string]string{
-			"realm": realm,
+			"realm": s.client.Realm,
 			"id":    groupID,
 		}).
 		SetResult(mappings).
