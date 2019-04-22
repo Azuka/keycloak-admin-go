@@ -2,7 +2,9 @@ package keycloak
 
 import (
 	"context"
+	"fmt"
 	"net/url"
+	"path"
 	"testing"
 
 	"github.com/stretchr/testify/suite"
@@ -13,19 +15,24 @@ import (
 type userServiceTests struct {
 	client *Client
 	suite.Suite
+	baseURL string
 }
 
 func (suite *userServiceTests) SetupSuite() {
+	baseUserURL, err := url.Parse(fmt.Sprintf("http://keycloak.local/realms/%s/users", testRelam))
+	suite.NoError(err)
 	c := &Client{
-		BaseURL: url.URL{
+		Server: url.URL{
 			Scheme: "https",
 			Path:   "",
 			Host:   "keycloak.local",
 		},
 		restClient: resty.New().OnAfterResponse(handleResponse),
+		Realm:      testRelam,
 	}
 	c.Debug()
 	suite.client = c
+	suite.baseURL = baseUserURL.Path
 }
 
 func (suite *userServiceTests) SetupTest() {
@@ -38,12 +45,12 @@ func (suite *userServiceTests) TeardownTest() {
 
 func (suite *userServiceTests) TestUserServiceCreateUser() {
 	response := httpmock.NewStringResponse(201, "")
-	response.Header.Add("Location", "https://keycloak.local/realms/my-realm/users/my-awesome-id")
+	response.Header.Add("Location", path.Join(suite.baseURL, "my-awesome-id"))
 	responder := httpmock.ResponderFromResponse(response)
 
-	httpmock.RegisterResponder("POST", "https://keycloak.local/realms/my-realm/users", responder)
+	httpmock.RegisterResponder("POST", suite.baseURL, responder)
 
-	id, err := suite.client.Users().Create(context.TODO(), "my-realm", &UserRepresentation{
+	id, err := suite.client.Users().Create(context.TODO(), &UserRepresentation{
 		Username: "me",
 	})
 	suite.NoError(err)
@@ -54,14 +61,15 @@ func (suite *userServiceTests) TestUserServiceCreateUserFailure() {
 	response := httpmock.NewStringResponse(500, "")
 	responder := httpmock.ResponderFromResponse(response)
 
-	httpmock.RegisterResponder("POST", "https://keycloak.local/realms/my-realm/users", responder)
+	httpmock.RegisterResponder("POST", suite.baseURL, responder)
 
-	_, err := suite.client.Users().Create(context.TODO(), "my-realm", &UserRepresentation{
+	_, err := suite.client.Users().Create(context.TODO(), &UserRepresentation{
 		Username: "me",
 	})
 	suite.NotNil(err)
 
-	actualError, ok := err.(*Error)
+	actualError, ok := err.(Error)
+	fmt.Println(err.Error())
 
 	suite.True(ok)
 	suite.NotNil(actualError)
@@ -70,12 +78,13 @@ func (suite *userServiceTests) TestUserServiceCreateUserFailure() {
 
 func (suite *userServiceTests) TestUserServiceUpdateUser() {
 	response := httpmock.NewStringResponse(204, "")
-	response.Header.Add("Location", "https://keycloak.local/realms/my-realm/users/my-awesome-id")
+	response.Header.Add("Location", path.Join(suite.baseURL, "my-awesome-id"))
 	responder := httpmock.ResponderFromResponse(response)
 
-	httpmock.RegisterResponder("PUT", "https://keycloak.local/realms/my-realm/users/abc", responder)
+	fmt.Println(path.Join(suite.baseURL, "abc"))
+	httpmock.RegisterResponder("PUT", path.Join(suite.baseURL, "abc"), responder)
 
-	err := suite.client.Users().Update(context.TODO(), "my-realm", &UserRepresentation{
+	err := suite.client.Users().Update(context.TODO(), &UserRepresentation{
 		Username: "me",
 		ID:       "abc",
 	})

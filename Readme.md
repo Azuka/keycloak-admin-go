@@ -27,6 +27,8 @@ make integration-clean
 - Install CircleCI locally: https://circleci.com/docs/2.0/local-cli
 
 ## Wish List
+- [ ] Better logging
+- [ ] Unit tests
 - [ ] Attack Detection
 - [ ] Authentication Management
 - [ ] Client Attribute Certificate
@@ -74,6 +76,24 @@ make integration-clean
         - [x] Groups
         - [x] Sessions, Consents
 - [ ] Root
+
+## API Status
+
+* Not implemented
+* Alpha: No guarantees on backward compatibility.
+* Beta: Usable in production.
+* Stable: Dependable thoroughly tested.
+
+### User
+
+Action   | Status
+-------- | -------
+
+### Roles
+
+### Clients
+
+### Groups
 
 ## Thanks to
 - https://gopkg.in/resty.v1: quick and dirty REST client

@@ -169,7 +169,7 @@ type AuthenticationFlowRepresentation struct {
 	BuiltIn                  *bool                                         `json:"builtIn,omitempty"`
 	Description              string                                        `json:"description,omitempty"`
 	ID                       string                                        `json:"id,omitempty"`
-	ProviderID               string                                        `json:"providerID,omitempty"`
+	ProviderID               string                                        `json:"providerId,omitempty"`
 	TopLevel                 *bool                                         `json:"topLevel,omitempty"`
 }
 
@@ -219,10 +219,10 @@ type IdentityProviderRepresentation struct {
 	DisplayName               string       `json:"displayName,omitempty"`
 	Enabled                   *bool        `json:"enabled,omitempty"`
 	FirstBrokerLoginFlowAlias string       `json:"firstBrokerLoginFlowAlias,omitempty"`
-	InternalID                string       `json:"internalID,omitempty"`
+	InternalID                string       `json:"internalId,omitempty"`
 	LinkOnly                  *bool        `json:"linkOnly,omitempty"`
 	PostBrokerLoginFlowAlias  string       `json:"postBrokerLoginFlowAlias,omitempty"`
-	ProviderID                string       `json:"providerID,omitempty"`
+	ProviderID                string       `json:"providerId,omitempty"`
 	StoreToken                *bool        `json:"storeToken,omitempty"`
 	TrustEmail                *bool        `json:"trustEmail,omitempty"`
 }
@@ -234,7 +234,7 @@ type RequiredActionProviderRepresentation struct {
 	DefaultAction *bool        `json:"defaultAction,omitempty"`
 	Enabled       *bool        `json:"enabled,omitempty"`
 	Name          string       `json:"name,omitempty"`
-	ProviderID    string       `json:"providerID,omitempty"`
+	ProviderID    string       `json:"providerId,omitempty"`
 }
 
 // RolesRepresentation Roles Representation
@@ -248,7 +248,7 @@ type RoleRepresentation struct {
 	ClientRole  *bool          `json:"clientRole,omitempty"`
 	Composite   *bool          `json:"composite,omitempty"`
 	Composites  RoleComposites `json:"composites,omitempty"`
-	ContainerID string         `json:"containerID,omitempty"`
+	ContainerID string         `json:"containerId,omitempty"`
 	Description string         `json:"description,omitempty"`
 	ID          string         `json:"id,omitempty"`
 	Name        string         `json:"name,omitempty"`
@@ -325,7 +325,7 @@ const (
 
 // ClientRepresentation represents a client's configuration in a realm
 type ClientRepresentation struct {
-	Access                             string                         `json:"access,omitempty"`
+	Access                             AttributeMap                   `json:"access,omitempty"`
 	AdminURL                           string                         `json:"adminUrl,omitempty"`
 	Attributes                         AttributeMap                   `json:"attributes,omitempty"`
 	AuthenticationFlowBindingOverrides AttributeMap                   `json:"authenticationFlowBindingOverrides,omitempty"`
@@ -334,7 +334,7 @@ type ClientRepresentation struct {
 	BaseURL                            string                         `json:"baseURL,omitempty"`
 	BearerOnly                         *bool                          `json:"bearerOnly,omitempty"`
 	ClientAuthenticatorType            string                         `json:"clientAuthenticatorType,omitempty"`
-	ClientID                           string                         `json:"clientID,omitempty"`
+	ClientID                           string                         `json:"clientId,omitempty"`
 	ConsentRequired                    *bool                          `json:"consentRequired,omitempty"`
 	DefaultClientScopes                []string                       `json:"defaultClientScopes,omitempty"`
 	DefaultRoles                       []string                       `json:"defaultRoles,omitempty"`
@@ -367,7 +367,7 @@ type ClientRepresentation struct {
 // ResourceServerRepresentation represents the authorization settings for a realm client
 type ResourceServerRepresentation struct {
 	AllowRemoteResourceManagement *bool                    `json:"allowRemoteResourceManagement,omitempty"`
-	ClientID                      string                   `json:"clientID,omitempty"`
+	ClientID                      string                   `json:"clientId,omitempty"`
 	ID                            string                   `json:"id,omitempty"`
 	Name                          string                   `json:"name,omitempty"`
 	Policies                      []PolicyRepresentation   `json:"policies,omitempty"`
@@ -490,6 +490,6 @@ type UserSessionRepresentation struct {
 	IPAddress  string       `json:"ipAddress,omitempty"`
 	LastAccess *UnixTime    `json:"lastAccess,omitempty"`
 	Start      *UnixTime    `json:"start,omitempty"`
-	UserID     string       `json:"userID,omitempty"`
+	UserID     string       `json:"userId,omitempty"`
 	UserName   string       `json:"userName,omitempty"`
 }

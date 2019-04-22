@@ -7,24 +7,24 @@ import (
 )
 
 // ClientsService interacts with all user resources
-type ClientsService service
+type ClientService service
 
 // ClientsS returns a new client service for working with client resources
 // in a realm.
-func (c *Client) Clients() *ClientsService {
-	return &ClientsService{
+func (c *Client) Clients() *ClientService {
+	return &ClientService{
 		client: c,
 	}
 }
 
 // Create creates a new client and returns the ID
 // Response is a 201 with a location redirect
-func (s *ClientsService) Create(ctx context.Context, realm string, client *ClientRepresentation) (string, error) {
+func (s *ClientService) Create(ctx context.Context, client *ClientRepresentation) (string, error) {
 	path := "/realms/{realm}/clients"
 
 	response, err := s.client.newRequest(ctx).
 		SetPathParams(map[string]string{
-			"realm": realm,
+			"realm": s.client.Realm,
 		}).
 		SetBody(client).
 		Post(path)
@@ -44,8 +44,32 @@ func (s *ClientsService) Create(ctx context.Context, realm string, client *Clien
 	return components[len(components)-1], nil
 }
 
-// List clients
-func (s *ClientsService) List(ctx context.Context, realm string) ([]ClientRepresentation, error) {
+// Get returns a client in a realm
+func (s *ClientService) Get(ctx context.Context, ID string) (*ClientRepresentation, error) {
+
+	path := "/realms/{realm}/clients/{id}"
+
+	client := &ClientRepresentation{}
+
+	_, err := s.client.newRequest(ctx).
+		SetPathParams(map[string]string{
+			"realm": s.client.Realm,
+			"id":    ID,
+		}).
+		SetResult(client).
+		Get(path)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return client, nil
+}
+
+// Find returns clients based on query params
+// Params:
+// - clientId
+func (s *ClientService) Find(ctx context.Context, params map[string]string) ([]ClientRepresentation, error) {
 
 	path := "/realms/{realm}/clients"
 
@@ -53,8 +77,9 @@ func (s *ClientsService) List(ctx context.Context, realm string) ([]ClientRepres
 
 	_, err := s.client.newRequest(ctx).
 		SetPathParams(map[string]string{
-			"realm": realm,
+			"realm": s.client.Realm,
 		}).
+		SetQueryParams(params).
 		SetResult(&clients).
 		Get(path)
 
