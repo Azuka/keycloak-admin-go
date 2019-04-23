@@ -1,8 +1,6 @@
 # keycloak-admin-go
 
 [![](https://godoc.org/github.com/thspinto/keycloak-admin-go/pkg/keycloak?status.svg)](http://godoc.org/github.com/thspinto/keycloak-admin-go/pkg/keycloak)
-[![pipeline status](https://gitlab.com/thspinto/keycloak-admin-go/badges/master/pipeline.svg)](https://gitlab.com/thspinto/keycloak-admin-go/commits/master)
-[![coverage report](https://gitlab.com/thspinto/keycloak-admin-go/badges/master/coverage.svg)](https://gitlab.com/thspinto/keycloak-admin-go/commits/master)
 [![Go Report Card](https://goreportcard.com/badge/github.com/thspinto/keycloak-admin-go)](https://goreportcard.com/report/github.com/thspinto/keycloak-admin-go)
 [![CircleCI](https://circleci.com/gh/thspinto/keycloak-admin-go.svg?style=svg)](https://circleci.com/gh/thspinto/keycloak-admin-go)
 

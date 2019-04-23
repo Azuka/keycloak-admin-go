@@ -4,7 +4,7 @@ import (
 	"context"
 )
 
-// UserService interacts with all user resources
+// GroupService interacts with all user resources
 type GroupService service
 
 // Groups returns a new group service for working with group resources
@@ -112,30 +112,8 @@ func (s *GroupService) DeleteRole(ctx context.Context, groupID string, role Role
 	return err
 }
 
-// ListDetail returns all groups in realm with details
-func (s *GroupService) ListDetail(ctx context.Context, realm string) ([]GroupRepresentation, error) {
-
-	var result []GroupRepresentation
-
-	groups, err := s.List(ctx, realm)
-	if err != nil {
-		return nil, err
-	}
-
-	for _, group := range groups {
-		g, err := s.Get(ctx, group.ID)
-		if err != nil {
-			return nil, err
-		}
-
-		result = append(result, *g)
-	}
-
-	return result, nil
-}
-
 // List returns all groups in a realm
-func (s *GroupService) List(ctx context.Context, realm string) ([]GroupRepresentation, error) {
+func (s *GroupService) List(ctx context.Context) ([]GroupRepresentation, error) {
 
 	path := "/realms/{realm}/groups"
 	var groups []GroupRepresentation

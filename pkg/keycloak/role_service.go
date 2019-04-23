@@ -13,8 +13,8 @@ func (c *Client) Roles() *RoleService {
 	}
 }
 
-// Creates a new role in realm
-func (s *RoleService) CreateRole(ctx context.Context, realm string, roleName string, description string) error {
+// Create creates a new role in realm
+func (s *RoleService) Create(ctx context.Context, roleName string, description string) error {
 
 	path := "/realms/{realm}/roles"
 
@@ -22,7 +22,7 @@ func (s *RoleService) CreateRole(ctx context.Context, realm string, roleName str
 
 	_, err := s.client.newRequest(ctx).
 		SetPathParams(map[string]string{
-			"realm": realm,
+			"realm": s.client.Realm,
 		}).
 		SetBody(&role).
 		Post(path)
@@ -31,7 +31,7 @@ func (s *RoleService) CreateRole(ctx context.Context, realm string, roleName str
 }
 
 // List returns all roles
-func (s *RoleService) List(ctx context.Context, realm string) ([]RoleRepresentation, error) {
+func (s *RoleService) List(ctx context.Context) ([]RoleRepresentation, error) {
 
 	path := "/realms/{realm}/roles"
 
@@ -39,7 +39,7 @@ func (s *RoleService) List(ctx context.Context, realm string) ([]RoleRepresentat
 
 	_, err := s.client.newRequest(ctx).
 		SetPathParams(map[string]string{
-			"realm": realm,
+			"realm": s.client.Realm,
 		}).
 		SetResult(&roles).
 		Get(path)
