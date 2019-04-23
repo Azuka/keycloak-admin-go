@@ -15,13 +15,13 @@ func (c *Client) Realms() *RealmService {
 }
 
 // Get realm with realm name (not id!)
-func (s *RealmService) Get(ctx context.Context, realm string) (*RealmRepresentation, error) {
+func (s *RealmService) Get(realm string) (*RealmRepresentation, error) {
 
 	path := "/realms/{realm}"
 
 	rr := &RealmRepresentation{}
 
-	_, err := s.client.newRequest(ctx).
+	_, err := s.client.newRequest().
 		SetPathParams(map[string]string{
 			"realm": realm,
 		}).
@@ -34,13 +34,13 @@ func (s *RealmService) Get(ctx context.Context, realm string) (*RealmRepresentat
 	return rr, nil
 }
 
-// Get returns a user in a realm
+// List returns all realms
 func (s *RealmService) List(ctx context.Context) ([]RealmRepresentation, error) {
 
 	path := "/realms"
 
 	var realms []RealmRepresentation
-	_, err := s.client.newRequest(ctx).
+	_, err := s.client.newRequest().
 		SetResult(&realms).
 		Get(path)
 
@@ -52,9 +52,9 @@ func (s *RealmService) List(ctx context.Context) ([]RealmRepresentation, error) 
 }
 
 // Create realm with realm, known in Keycloak as import
-func (s *RealmService) Create(ctx context.Context, realm *RealmRepresentation) error {
+func (s *RealmService) Create(realm *RealmRepresentation) error {
 	path := "/realms"
-	_, err := s.client.newRequest(ctx).
+	_, err := s.client.newRequest().
 		SetBody(realm).
 		Post(path)
 
@@ -62,11 +62,11 @@ func (s *RealmService) Create(ctx context.Context, realm *RealmRepresentation) e
 }
 
 // Delete realm with realm name (not id!)
-func (s *RealmService) Delete(ctx context.Context, realm string) error {
+func (s *RealmService) Delete(realm string) error {
 
 	path := "/realms/{realm}"
 
-	_, err := s.client.newRequest(ctx).
+	_, err := s.client.newRequest().
 		SetPathParams(map[string]string{
 			"realm": realm,
 		}).

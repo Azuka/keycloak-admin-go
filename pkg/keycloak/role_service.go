@@ -1,6 +1,9 @@
 package keycloak
 
-import "context"
+import (
+	"net/url"
+	"strings"
+)
 
 // RoleService interacts with all role resources
 type RoleService service
@@ -13,31 +16,62 @@ func (c *Client) Roles() *RoleService {
 	}
 }
 
-// Creates a new role in realm
-func (s *RoleService) CreateRole(ctx context.Context, realm string, roleName string, description string) error {
+// Create creates a new role in realm
+func (s *RoleService) Create(realm string, role *RoleRepresentation) (string, error) {
 
 	path := "/realms/{realm}/roles"
 
-	role := RoleRepresentation{Name: roleName, Description: description}
-
-	_, err := s.client.newRequest(ctx).
+	response, err := s.client.newRequest().
 		SetPathParams(map[string]string{
 			"realm": realm,
 		}).
-		SetBody(&role).
+		SetBody(role).
 		Post(path)
 
-	return err
+	if err != nil {
+		return "", err
+	}
+
+	location, err := url.Parse(response.Header().Get("Location"))
+
+	if err != nil {
+		return "", err
+	}
+
+	components := strings.Split(location.Path, "/")
+
+	return components[len(components)-1], nil
 }
 
-// List returns all roles
-func (s *RoleService) List(ctx context.Context, realm string) ([]RoleRepresentation, error) {
+// Get gets a roles by name returns all roles
+func (s *RoleService) Get(realm string) ([]RoleRepresentation, error) {
 
 	path := "/realms/{realm}/roles"
 
 	var roles []RoleRepresentation
 
-	_, err := s.client.newRequest(ctx).
+	_, err := s.client.newRequest().
+		SetPathParams(map[string]string{
+			"realm": realm,
+		}).
+		SetResult(&roles).
+		Get(path)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return roles, nil
+}
+
+// List returns all roles
+func (s *RoleService) List(realm string) ([]RoleRepresentation, error) {
+
+	path := "/realms/{realm}/roles"
+
+	var roles []RoleRepresentation
+
+	_, err := s.client.newRequest().
 		SetPathParams(map[string]string{
 			"realm": realm,
 		}).

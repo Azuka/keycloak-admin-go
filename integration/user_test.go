@@ -1,11 +1,11 @@
 package integration_test
 
 import (
-	"github.com/Azuka/keycloak-admin-go/pkg/keycloak"
+	"github.com/thspinto/keycloak-admin-go/pkg/keycloak"
 )
 
 func (suite *integrationTester) TestUserFetch() {
-	users, err := suite.client.Users().Find(suite.ctx, map[string]string{
+	users, err := suite.client.Users().Find(map[string]string{
 		"username": keycloakAdmin,
 	})
 	suite.NotNil(users, suite.version)
@@ -18,7 +18,7 @@ func (suite *integrationTester) TestUserFetch() {
 	t := true
 	user.EmailVerified = &t
 
-	err = suite.client.Users().Update(suite.ctx, &user)
+	err = suite.client.Users().Update(&user)
 	suite.NoError(err, suite.version)
 }
 
@@ -29,7 +29,7 @@ func (suite *integrationTester) TestUserCreate() {
 		Email:    pseudoRandString() + "@example.com",
 	}
 
-	id, err := suite.client.Users().Create(suite.ctx, user)
+	id, err := suite.client.Users().Create(user)
 
 	suite.NotEmpty(id, suite.version)
 	suite.NoError(err, suite.version)

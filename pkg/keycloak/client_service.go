@@ -1,7 +1,6 @@
 package keycloak
 
 import (
-	"context"
 	"net/url"
 	"strings"
 )
@@ -19,10 +18,10 @@ func (c *Client) Clients() *ClientService {
 
 // Create creates a new client and returns the ID
 // Response is a 201 with a location redirect
-func (s *ClientService) Create(ctx context.Context, client *ClientRepresentation) (string, error) {
+func (s *ClientService) Create(client *ClientRepresentation) (string, error) {
 	path := "/realms/{realm}/clients"
 
-	response, err := s.client.newRequest(ctx).
+	response, err := s.client.newRequest().
 		SetPathParams(map[string]string{
 			"realm": s.client.Realm,
 		}).
@@ -45,13 +44,13 @@ func (s *ClientService) Create(ctx context.Context, client *ClientRepresentation
 }
 
 // Get returns a client in a realm
-func (s *ClientService) Get(ctx context.Context, ID string) (*ClientRepresentation, error) {
+func (s *ClientService) Get(ID string) (*ClientRepresentation, error) {
 
 	path := "/realms/{realm}/clients/{id}"
 
 	client := &ClientRepresentation{}
 
-	_, err := s.client.newRequest(ctx).
+	_, err := s.client.newRequest().
 		SetPathParams(map[string]string{
 			"realm": s.client.Realm,
 			"id":    ID,
@@ -69,13 +68,13 @@ func (s *ClientService) Get(ctx context.Context, ID string) (*ClientRepresentati
 // Find returns clients based on query params
 // Params:
 // - clientId
-func (s *ClientService) Find(ctx context.Context, params map[string]string) ([]ClientRepresentation, error) {
+func (s *ClientService) Find(params map[string]string) ([]ClientRepresentation, error) {
 
 	path := "/realms/{realm}/clients"
 
 	var clients []ClientRepresentation
 
-	_, err := s.client.newRequest(ctx).
+	_, err := s.client.newRequest().
 		SetPathParams(map[string]string{
 			"realm": s.client.Realm,
 		}).

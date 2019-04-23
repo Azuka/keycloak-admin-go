@@ -8,7 +8,6 @@ import (
 	"net/http"
 	"net/url"
 
-	"context"
 	"fmt"
 
 	"gopkg.in/resty.v1"
@@ -44,7 +43,7 @@ func (c *Client) Debug() {
 }
 
 // newRequest creates a new request
-func (c *Client) newRequest(ctx context.Context) *resty.Request {
+func (c *Client) newRequest() *resty.Request {
 
 	if c.restClient == nil {
 		c.restClient = resty.NewWithClient(http.DefaultClient)
@@ -58,7 +57,6 @@ func (c *Client) newRequest(ctx context.Context) *resty.Request {
 		// Setup error handling for non <= 399 codes
 		OnAfterResponse(handleResponse).
 		R().
-		SetContext(ctx).
 		SetHeader("UserAgent", userAgent)
 }
 

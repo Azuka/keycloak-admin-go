@@ -1,7 +1,7 @@
 image: circleci/golang:1.11
 
 variables:
-  REPO_NAME: github.com/Azuka/keycloak-admin-go
+  REPO_NAME: github.com/thspinto/keycloak-admin-go
 
 cache:
   paths:
