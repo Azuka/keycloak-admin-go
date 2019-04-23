@@ -6,7 +6,7 @@ references:
   defaults: &defaults
     docker:
       - image: circleci/golang:1.9
-    working_directory: /go/src/github.com/Azuka/keycloak-admin-go
+    working_directory: /go/src/github.com/thspinto/keycloak-admin-go
     steps:
       - checkout
       - run:

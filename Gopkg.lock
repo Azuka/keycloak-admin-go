@@ -3,7 +3,7 @@
 
 [[projects]]
   digest = "1:98e286ad67f80988e5822d68977f476482b04cbc1264004553556f37471d9f67"
-  name = "github.com/Azuka/keycloak-admin-go"
+  name = "github.com/thspinto/keycloak-admin-go"
   packages = [
     "keycloak",
     "keycloak/auth",
@@ -139,8 +139,8 @@
   analyzer-name = "dep"
   analyzer-version = 1
   input-imports = [
-    "github.com/Azuka/keycloak-admin-go/keycloak",
-    "github.com/Azuka/keycloak-admin-go/keycloak/auth",
+    "github.com/thspinto/keycloak-admin-go/keycloak",
+    "github.com/thspinto/keycloak-admin-go/keycloak/auth",
     "github.com/cenkalti/backoff",
     "github.com/stretchr/testify/assert",
     "github.com/stretchr/testify/suite",
