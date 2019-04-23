@@ -1,7 +1,7 @@
 package integration_test
 
 import (
-	"github.com/Azuka/keycloak-admin-go/pkg/keycloak"
+	"github.com/thspinto/keycloak-admin-go/pkg/keycloak"
 )
 
 func (suite *integrationTester) TestUserFetch() {
