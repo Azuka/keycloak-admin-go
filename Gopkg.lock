@@ -2,153 +2,92 @@
 
 
 [[projects]]
-  digest = "1:98e286ad67f80988e5822d68977f476482b04cbc1264004553556f37471d9f67"
-  name = "github.com/thspinto/keycloak-admin-go"
-  packages = [
-    "keycloak",
-    "keycloak/auth",
-  ]
-  pruneopts = "UT"
-  revision = "d900747d81d3eed3647c45fd9f5309d092de9356"
-  version = "0.2.0"
-
-[[projects]]
-  digest = "1:2209584c0f7c9b68c23374e659357ab546e1b70eec2761f03280f69a8fd23d77"
   name = "github.com/cenkalti/backoff"
   packages = ["."]
-  pruneopts = "UT"
   revision = "2ea60e5f094469f9e65adb9cd103795b73ae743e"
   version = "v2.0.0"
 
 [[projects]]
-  digest = "1:ffe9824d294da03b391f44e1ae8281281b4afc1bdaa9588c9097785e3af10cec"
   name = "github.com/davecgh/go-spew"
   packages = ["spew"]
-  pruneopts = "UT"
   revision = "8991bc29aa16c548c550c7ff78260e27b9ab7c73"
   version = "v1.1.1"
 
 [[projects]]
-  digest = "1:97df918963298c287643883209a2c3f642e6593379f97ab400c2a2e219ab647d"
   name = "github.com/golang/protobuf"
   packages = ["proto"]
-  pruneopts = "UT"
   revision = "aa810b61a9c79d51363740d207bb46cf8e620ed5"
   version = "v1.2.0"
 
 [[projects]]
-  digest = "1:0028cb19b2e4c3112225cd871870f2d9cf49b9b4276531f03438a88e94be86fe"
+  name = "github.com/konsorten/go-windows-terminal-sequences"
+  packages = ["."]
+  revision = "f55edac94c9bbba5d6182a4be46d86a2c9b5b50e"
+  version = "v1.0.2"
+
+[[projects]]
   name = "github.com/pmezard/go-difflib"
   packages = ["difflib"]
-  pruneopts = "UT"
   revision = "792786c7400a136282c1664665ae0a8db921c6c2"
   version = "v1.0.0"
 
 [[projects]]
-  digest = "1:5110e3d4f130772fd39e6ce8208ad1955b242ccfcc8ad9d158857250579c82f4"
+  name = "github.com/sirupsen/logrus"
+  packages = ["."]
+  revision = "8bdbc7bcc01dcbb8ec23dc8a28e332258d25251f"
+  version = "v1.4.1"
+
+[[projects]]
   name = "github.com/stretchr/testify"
-  packages = [
-    "assert",
-    "require",
-    "suite",
-  ]
-  pruneopts = "UT"
+  packages = ["assert","require","suite"]
   revision = "f35b8ab0b5a2cef36673838d662e249dd9c94686"
   version = "v1.2.2"
 
 [[projects]]
   branch = "master"
-  digest = "1:ea6ed8fabeb1373bd53b9398248676eb52ec139c788450b316a078b5a06387a0"
   name = "golang.org/x/net"
-  packages = [
-    "context",
-    "context/ctxhttp",
-    "idna",
-    "publicsuffix",
-  ]
-  pruneopts = "UT"
+  packages = ["context","context/ctxhttp","idna","publicsuffix"]
   revision = "ab400d30ebde25116e68880440d31222a016f2a7"
 
 [[projects]]
   branch = "master"
-  digest = "1:81bafe9ef203750ed218e086d9930b21c086232ccc2a272e104d2af56baf6df5"
   name = "golang.org/x/oauth2"
-  packages = [
-    ".",
-    "internal",
-  ]
-  pruneopts = "UT"
+  packages = [".","internal"]
   revision = "ca4130e427c7982e64cb9b5e717ff67bdb725037"
 
 [[projects]]
-  digest = "1:a2ab62866c75542dd18d2b069fec854577a20211d7c0ea6ae746072a1dccdd18"
+  branch = "master"
+  name = "golang.org/x/sys"
+  packages = ["unix"]
+  revision = "953cdadca894cdc07be76fc99f95b40c28f06623"
+
+[[projects]]
   name = "golang.org/x/text"
-  packages = [
-    "collate",
-    "collate/build",
-    "internal/colltab",
-    "internal/gen",
-    "internal/tag",
-    "internal/triegen",
-    "internal/ucd",
-    "language",
-    "secure/bidirule",
-    "transform",
-    "unicode/bidi",
-    "unicode/cldr",
-    "unicode/norm",
-    "unicode/rangetable",
-  ]
-  pruneopts = "UT"
+  packages = ["collate","collate/build","internal/colltab","internal/gen","internal/tag","internal/triegen","internal/ucd","language","secure/bidirule","transform","unicode/bidi","unicode/cldr","unicode/norm","unicode/rangetable"]
   revision = "f21a4dfb5e38f5895301dc265a8def02365cc3d0"
   version = "v0.3.0"
 
 [[projects]]
-  digest = "1:08206298775e5b462e6c0333f4471b44e63f1a70e42952b6ede4ecc9572281eb"
   name = "google.golang.org/appengine"
-  packages = [
-    "internal",
-    "internal/base",
-    "internal/datastore",
-    "internal/log",
-    "internal/remote_api",
-    "internal/urlfetch",
-    "urlfetch",
-  ]
-  pruneopts = "UT"
+  packages = ["internal","internal/base","internal/datastore","internal/log","internal/remote_api","internal/urlfetch","urlfetch"]
   revision = "4a4468ece617fc8205e99368fa2200e9d1fad421"
   version = "v1.3.0"
 
 [[projects]]
-  branch = "v1"
-  digest = "1:e6a5421ece62f71bef4f9d957747f5837900caa2e5e343da6e124a1b88abbfd0"
   name = "gopkg.in/jarcoal/httpmock.v1"
   packages = ["."]
-  pruneopts = "UT"
-  revision = "c463961d8bfec5823f8100e620bcc73e9afdd7d4"
+  revision = "e598472b238f5d2a505e1316886da2171f86bfa4"
+  version = "v1.0.3"
 
 [[projects]]
-  digest = "1:559e4b9d3613025c3b53aff0aa15f41ed6fa82c24cd06e56932b9f0df4ba9ebb"
   name = "gopkg.in/resty.v1"
   packages = ["."]
-  pruneopts = "UT"
-  revision = "92a651cff2687ad3083767fb04b6f53d258b546c"
-  version = "v1.10.1"
+  revision = "fa5875c0caa5c260ab78acec5a244215a730247f"
+  version = "v1.12.0"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  input-imports = [
-    "github.com/thspinto/keycloak-admin-go/keycloak",
-    "github.com/thspinto/keycloak-admin-go/keycloak/auth",
-    "github.com/cenkalti/backoff",
-    "github.com/stretchr/testify/assert",
-    "github.com/stretchr/testify/suite",
-    "golang.org/x/net/context",
-    "golang.org/x/net/context/ctxhttp",
-    "golang.org/x/oauth2",
-    "gopkg.in/jarcoal/httpmock.v1",
-    "gopkg.in/resty.v1",
-  ]
+  inputs-digest = "6a342212722712ab4bd2af7d5fa07adb872b77f845e3fe7be7e37bad0e171720"
   solver-name = "gps-cdcl"
   solver-version = 1

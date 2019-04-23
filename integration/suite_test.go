@@ -8,10 +8,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/thspinto/keycloak-admin-go/pkg/auth"
-	"github.com/thspinto/keycloak-admin-go/pkg/keycloak"
 	"github.com/cenkalti/backoff"
 	"github.com/stretchr/testify/suite"
+	"github.com/thspinto/keycloak-admin-go/pkg/auth"
+	"github.com/thspinto/keycloak-admin-go/pkg/keycloak"
 )
 
 const keycloakAdmin = "keycloak-admin"
@@ -21,7 +21,7 @@ const keycloakAdminClientID = "admin-cli"
 
 var keyCloakEndpoints = map[string]string{
 	"5.0.0": "http://127.0.0.1:9090",
-	"4.8.0": "http://127.0.0.1:9098",
+	// "4.8.0": "http://127.0.0.1:9098",
 }
 
 type integrationTester struct {
