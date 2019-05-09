@@ -18,7 +18,7 @@ func ExampleConfig_Client() {
 	client := config.Client(context.Background())
 
 	// This will make an authenticated request
-	client.Get("https://keycloak.local/auth/admin/realms/master/users?username=keycloak-admin")
+	_, _ = client.Get("https://keycloak.local/auth/admin/realms/master/users?username=keycloak-admin")
 }
 
 func ExampleConfig_Client_client_credentials() {
@@ -32,5 +32,5 @@ func ExampleConfig_Client_client_credentials() {
 	client := config.Client(context.Background())
 
 	// This will make an authenticated request
-	client.Get("https://keycloak.local/auth/admin/realms/master/users?username=keycloak-admin")
+	_, _ = client.Get("https://keycloak.local/auth/admin/realms/master/users?username=keycloak-admin")
 }
