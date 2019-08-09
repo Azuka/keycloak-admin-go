@@ -46,6 +46,30 @@ func (rs *RealmService) Create(ctx context.Context, realm *RealmRepresentation) 
 	return err
 }
 
+// Clear a realm's user cache
+func (rs *RealmService) ClearUserCache(ctx context.Context, realm string) error {
+	path := "/{realm}/clear-user-cache"
+	_, err := rs.client.newRequest(ctx).
+		SetPathParams(map[string]string{
+			"realm": realm,
+		}).
+		Post(path)
+
+	return err
+}
+
+// Clear a realm's cache
+func (rs *RealmService) ClearCache(ctx context.Context, realm string) error {
+	path := "/{realm}/clear-realm-cache"
+	_, err := rs.client.newRequest(ctx).
+		SetPathParams(map[string]string{
+			"realm": realm,
+		}).
+		Post(path)
+
+	return err
+}
+
 // Delete realm with realm name (not id!)
 func (rs *RealmService) Delete(ctx context.Context, realm string) error {
 
