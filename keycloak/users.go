@@ -7,10 +7,6 @@
 
 package keycloak
 
-import (
-	"net/url"
-)
-
 // UserConsentRepresentation represents client consents
 type UserConsentRepresentation struct {
 	ClientID            string    `json:"clientId,omitempty"`
