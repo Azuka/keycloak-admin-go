@@ -7,10 +7,6 @@
 
 package keycloak
 
-import (
-	"net/url"
-)
-
 // UserConsentRepresentation represents client consents
 type UserConsentRepresentation struct {
 	ClientID            string    `json:"clientId,omitempty"`
@@ -55,7 +51,7 @@ type UserRepresentation struct {
 	EmailVerified          *bool                             `json:"emailVerified,omitempty"`
 	Enabled                *bool                             `json:"enabled,omitempty"`
 	FederatedIdentities    []FederatedIdentityRepresentation `json:"federatedIdentities,omitempty"`
-	FederationLink         *url.URL                          `json:"federationLink,omitempty"`
+	FederationLink         string                            `json:"federationLink,omitempty"`
 	FirstName              string                            `json:"firstName,omitempty"`
 	Groups                 []string                          `json:"groups,omitempty"`
 	ID                     string                            `json:"id,omitempty"`
